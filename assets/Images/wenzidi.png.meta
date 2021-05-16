@@ -1,0 +1,74 @@
+{
+  "ver": "1.0.21",
+  "importer": "image",
+  "imported": true,
+  "uuid": "a0d5d646-aee4-4f7b-88cf-abd4f4a95ecc",
+  "files": [
+    ".png",
+    ".json"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "a0d5d646-aee4-4f7b-88cf-abd4f4a95ecc@6c48a",
+      "displayName": "wenzidi",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "none",
+        "anisotropy": 1,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "a0d5d646-aee4-4f7b-88cf-abd4f4a95ecc"
+      },
+      "ver": "1.0.20",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f9941": {
+      "importer": "sprite-frame",
+      "uuid": "a0d5d646-aee4-4f7b-88cf-abd4f4a95ecc@f9941",
+      "displayName": "wenzidi",
+      "id": "f9941",
+      "name": "spriteFrame",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 0,
+        "trimY": 0,
+        "width": 599,
+        "height": 69,
+        "rawWidth": 599,
+        "rawHeight": 69,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 39,
+        "borderRight": 38,
+        "packable": true,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "a0d5d646-aee4-4f7b-88cf-abd4f4a95ecc@6c48a",
+        "atlasUuid": ""
+      },
+      "ver": "1.0.9",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "hasAlpha": true,
+    "type": "sprite-frame",
+    "redirect": "a0d5d646-aee4-4f7b-88cf-abd4f4a95ecc@f9941"
+  }
+}
