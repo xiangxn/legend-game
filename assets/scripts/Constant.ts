@@ -7,32 +7,31 @@ export const VERSION_CACHE_KEY = "version-cache-key";
 
 export const Constant = {
     version: "1.0.7",
-    // chainId: 128,
+    chainId: 128,
     // chainId: 256,
-    chainId: 1337,
-    apiUrl: "http://127.0.0.1:7545",
+    // chainId: 1337,
+    // apiUrl: "http://127.0.0.1:7545",
     // apiUrl: "https://http-testnet.hecochain.com",
-    // apiUrl: "https://http-mainnet-node.huobichain.com",
+    apiUrl: "https://http-mainnet-node.huobichain.com",
     // rpcProvider: { "256": "https://http-testnet.hecochain.com" },
     annUrl: "https://www.legendnft.com/announcement.json",
-    // rpcUrl: "https://data.legendnft.com/jsonrpc",
-    rpcUrl: "http://localhost:9090/jsonrpc",
+    rpcUrl: "https://data.legendnft.com/jsonrpc",
+    // rpcUrl: "http://localhost:9090/jsonrpc",
     address: {
-        USDT: "0x7E0dF16259505EA25c766e19cD4f0409a7F31Ec9",
-        Hero: "0xDE97675bE890bbF1a698bE924406911b66d9fFc4",
-        Equipment: "0x350904e40ebB1eb9C6B510Eef6aeDd6a5641BC59",
-        LGC: "0xb895492c775e9448B1a45519F3ba8Cd8B76304e7",
-        StakeMine: "0x7F851f3a8C7b03B095Bc007266a4FD764bDE45FB",
-        RoleMine: "0xE2645cA4bCE0088b6A0CfAb86aBd855c0FE77916",
-        ZoneMine: "0x91618b024722280FfE702bb3D09AD1DF8734365a",
-        BonusPool: "0x2A3F2beA04E47358E63F8C5Ffa09a44dC8bF98fC",
-        Fragment: "0x7e37c58aCdCBCF02e47B9e0A014257657e727721",
-        Totem: "0x2a317C82cc288f36BAf17FD5f3f085B32De7B3d2",
-        Store: "0x6F51DA21d11BB8911B445C67aC0802DF6a1E37B3",
-        Box: "0x935EfAD4DCDfa17E74D15421EcbE1583769842E7",
-        PreSale: "0x9320BfA97F2B7987b5Cd67c985fF3AFC64430331",
-        Friend: "0x54C75D1d9a338b834C3212C57e8a687DF8D6c51D",
-        Market: "0xF9A3997897d13A8F1cc4AdD95BE2eC1bf2E492fF"
+        USDT: "0xa71edc38d189767582c38a3145b5873052c3e47a",
+        Hero: "0xef349B6b61F7BEABB061ae2B0bF50F06c262d718",
+        Equipment: "0xfd52bE427836f31259D8D347AB9410Bf390c8A04",
+        LGC: "0xb7A819D170e59D79f6289b91cA1D1a9D0C788A2a",
+        StakeMine: "0x6C234aE7E4beaa7816Dfe89efa45094CCDFbA19D",
+        RoleMine: "0x672B71f169AbF20448aaC3acA6C0BAaD337C2fF5",
+        ZoneMine: "0x04017C2D0Df0cC296c3EE61d70940F3d04fcbEcb",
+        BonusPool: "0x24FE31A6b1CB4b0e5ee3C5c20a1d1f21a652D404",
+        Fragment: "0x6C5aD71809c8fA3b6dB9dcC02efe825A33869C33",
+        Totem: "0x49De5A35ee679Ea1BF9C27a2CFF85AA220be1527",
+        Store: "0xB4BE2df64ca360F0aA5cf6EDFbB58bF5F39182D1",
+        Box: "0xAEe308fAb21D185691Fe4ec7dd503a601383586E",
+        PreSale: "0x275eeC0aF74F3c5c0562807E57D4cC4625F9a7b9",
+        Friend: "0x8C6492E2d9D5404D2b46ffc9f7E6342ADE4602a1"
     },
     paymode: {
         "0xb895492c775e9448B1a45519F3ba8Cd8B76304e7": "LGC",
@@ -66,7 +65,8 @@ export const Constant = {
     totems: {
         1: ["祖玛图腾", "兑换奖池专用,每期一个", "可合成祖玛图腾,图腾可兑换奖池奖金,往期图腾及碎片只能销毁获得LGC"],
         2: ["沃玛图腾", "兑换奖池专用,每期二个", "可合成沃玛图腾,图腾可兑换奖池奖金,往期图腾及碎片只能销毁获得LGC"],
-        3: ["尸王图腾", "兑换奖池专用,每期五个", "可合成尸王图腾,图腾可兑换奖池奖金,往期图腾及碎片只能销毁获得LGC"]
+        3: ["尸王图腾", "兑换奖池专用,每期五个", "可合成尸王图腾,图腾可兑换奖池奖金,往期图腾及碎片只能销毁获得LGC"],
+        4: ["血骷髅图腾", "兑换奖池专用,每期五个", "可合成血骷髅图腾,图腾可兑换奖池奖金,往期图腾及碎片只能销毁获得LGC"]
     },
     boxs: {
         1: "入门武器箱",
