@@ -116,13 +116,14 @@ export class Mine extends BaseComponent {
             let prefab = instantiate(this.preStakingItem);
             if (!!prefab) {
                 let logic = prefab.getComponent(StakingItem);
-                this.callContract("StakeMine", "getMineInfo", config.address, this.api?.curAccount)
+                this.callContract(config.abi, "getMineInfo", config.address, this.api?.curAccount)
                     .then(data => {
                         logic?.setConfig(config, data);
                         this.poolList.addChild(prefab);
                         this._calcTotal();
                     })
                     .catch(reason => {
+                        // console.log(reason);
                         this.showErr(reason);
                     });
             }
@@ -265,6 +266,7 @@ export class Mine extends BaseComponent {
         let rd = fromWei(reward, "ether");
         return rd.substr(0, rd.indexOf(".") + 5);
     }
+    
     private _calcApy(pool: any) {
         // console.log(pool)
         let totalAmount = toBN(pool.totalAmount);

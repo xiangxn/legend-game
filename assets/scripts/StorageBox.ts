@@ -11,6 +11,7 @@ import { AmountConfirm } from './AmountConfirm';
 import { EQUIPMENT_CACHE_KEY, TOTEM_CACHE_KEY, CONSUMABLES_CACHE_KEY, BOX_CACHE_KEY } from './Constant';
 import { FragmentCard } from './FragmentCard';
 import { TotemCard } from './TotemCard';
+import { FriendChoose } from './FriendChoose';
 
 const { ccclass, type } = _decorator;
 const { toBN, padLeft, toHex, fromWei } = Web3.utils;
@@ -167,7 +168,15 @@ export class StorageBox extends BaseComponent {
         }
         let allP: Promise<any>[] = [];
         //获取碎片id
-        let fIds = await this.callContract("Fragment", "tokensOf", this.api?.curAccount, 0, 0);
+        let curNumber = await this.callContract("BonusPool", "number");
+        // let fIds = await this.callContract("Fragment", "tokensOf", this.api?.curAccount, 0, 0); //TODO 新版本合约改用此方法
+        let fIds: any[] = [];
+        let minNumber = curNumber >= 3 ? curNumber - 3 : 0;
+        for (let i = curNumber; i > minNumber; i--) {
+            fIds.push(toBN(padLeft(toHex(1), 2) + padLeft(toHex(1), 16).substr(2) + padLeft(toHex(i), 8).substr(2) + padLeft("0", 38)).toString());
+            fIds.push(toBN(padLeft(toHex(1), 2) + padLeft(toHex(2), 16).substr(2) + padLeft(toHex(i), 8).substr(2) + padLeft("0", 38)).toString());
+            fIds.push(toBN(padLeft(toHex(1), 2) + padLeft(toHex(3), 16).substr(2) + padLeft(toHex(i), 8).substr(2) + padLeft("0", 38)).toString());
+        }
         let fs: Promise<any>[] = [];
         fIds.forEach((fId: string) => {
             let p = this.callContract("Fragment", "getInfo", fId, this.api?.curAccount);
@@ -239,13 +248,17 @@ export class StorageBox extends BaseComponent {
     }
 
     _onEquipClick(item: Props) {
-        // console.log(item);
+        console.log(item);
         // console.log(this.currentList.currentChoose.size)
         let node = this.node.getChildByPath("box/bottom0/BtnIntensify");
-        if (!node) return;
+        let btnBurn = this.node.getChildByPath("box/bottom0/BtnBurn");
+        //BtnBurn
+        if (!node || !btnBurn) return;
         if (this.currentList.currentChoose.size > 1) {
             node.active = false;
+            btnBurn.active = false;
         } else {
+            btnBurn.active = true;
             if (item.info.increaseCount == item.info.increaseMax) {
                 node.active = false;
             } else {
@@ -257,14 +270,17 @@ export class StorageBox extends BaseComponent {
     _onTotemClick(item: Props) {
         let node = this.node.getChildByPath("box/bottom3/BtnMake");
         let nodeBrun = this.node.getChildByPath("box/bottom3/BtnBurn");
-        if (!node || !nodeBrun) return;
+        let nodeHandsel = this.node.getChildByPath("box/bottom3/BtnHandsel");
+        if (!node || !nodeBrun || !nodeHandsel) return;
         // console.log(item,item.img?.indexOf("T"));
         if ((item.img?.indexOf("T") ?? -1) > -1) {
             node.active = false;
             nodeBrun.active = true;
+            nodeHandsel.active = false;
         } else {
             node.active = true;
             nodeBrun.active = false;
+            nodeHandsel.active = true;
         }
     }
 
@@ -272,7 +288,7 @@ export class StorageBox extends BaseComponent {
     onBrunTotem() {
         let arr = Array.from(this.currentList.currentChoose);
         let props = arr[0];
-        console.log(props);
+        // console.log(props);
         this.showConfirm("确认要销毁这个" + props.name + "吗?", () => {
             let data = padLeft(toHex(2), 2);
             this.sendContract("Totem", "safeTransferFrom", this.api?.curAccount, Constant.address.BonusPool, props.id, data, { from: this.api?.curAccount })
@@ -378,7 +394,7 @@ export class StorageBox extends BaseComponent {
     onConsumablesBurn() {
         let arr = Array.from(this.currentList.currentChoose);
         if (arr.length > 0) {
-            AmountConfirm.show(arr[0].amount, "销毁" + arr[0].name, (value: string) => {
+            AmountConfirm.show(arr[0].amount, "销毁" + arr[0].name, (value: number) => {
                 this.sendContract("Fragment", "burn", this.api?.curAccount, arr[0].id, value, { from: this.api?.curAccount })
                     .then(result => {
                         localStorage.removeItem(CONSUMABLES_CACHE_KEY);
@@ -430,7 +446,7 @@ export class StorageBox extends BaseComponent {
 
     onOpenClick() {
         let arr = Array.from(this.currentList.currentChoose);
-        // console.log("arr: ", arr);
+        console.log("arr: ", arr);
         let ids: string[] = [];
         arr.forEach((item: Props) => {
             ids.push(item.info);
@@ -453,19 +469,20 @@ export class StorageBox extends BaseComponent {
 
     onMakeClick() {
         let arr = Array.from(this.currentList.currentChoose);
+        // console.log("arr: ", arr);
         if (arr.length == 1) {
             let props = arr[0];
             this.callContract("BonusPool", "getInfo").then(result => {
                 let info = result[6].awardsInfos.find((item: any) => item.types == props.info.smallType)
                 let amount = Math.floor(parseInt(info.fragmentCount) / parseInt(info.count));
                 if (props.amount < amount) {
-                    this.showAlert("要合成[" + props.name?.replace("碎片", "") + "]至少要" + amount + "个碎片!");
+                    this.showAlert("要合成[" + props.name?.replace("碎片", "图腾") + "]至少要" + amount + "个碎片!");
                     return;
                 }
                 let data = padLeft(toHex(1), 2);
                 this.sendContract("Fragment", "safeTransferFrom", this.api?.curAccount, Constant.address.BonusPool, props.id, amount, data, { from: this.api?.curAccount })
                     .then(val => {
-                        this.showAlert("成功组合一个[" + props.name + "]");
+                        this.showAlert("成功组合一个[" + props.name?.replace("碎片", "图腾") + "]");
                         localStorage.removeItem(TOTEM_CACHE_KEY);
                         this._loadTotem();
                     });
@@ -475,6 +492,65 @@ export class StorageBox extends BaseComponent {
 
     onRoleCancelClick() {
         alert("取消");
+    }
+
+    onHandsel() {
+        FriendChoose.show().then(win => {
+            win.onChooseEvent = this.doHandsel.bind(this);
+        });
+    }
+
+    doHandsel(data: any) {
+        let arr = Array.from(this.currentList.currentChoose).map((val) => val.id);
+        this.showConfirm("你的装备将发生转移!\r\n请确认转移地址安全!\r\n你确认要赠送吗?", () => {
+            // console.log(arr, data);
+            let dm = this.api?.dataApi.eth.abi.encodeParameters(["uint256", "address", "uint256[]"], [9, data.user, arr]);
+            console.log("dm: ", dm);
+            // this.sendContract("Equipment", "handsel", data.user, arr, { from: this.api?.curAccount }).then((val) => {
+            this.sendContract("LGC", "transferAndCall", Constant.address.Equipment, 0, dm, { from: this.api?.curAccount }).then((val) => {
+                if (!!val) {
+                    localStorage.removeItem(EQUIPMENT_CACHE_KEY);
+                    this._loadEquipments();
+                }
+            });
+        }, () => { });
+    }
+
+    onFragmentHandsel() {
+        let arr = Array.from(this.currentList.currentChoose)
+        let item = arr[0];
+        if (!(item.img?.indexOf("T") == 0)) {
+            FriendChoose.show().then(win => {
+                win.onChooseEvent = this.doFragmentHandsel.bind(this);
+            });
+        }
+    }
+
+    doFragmentHandsel(data: any) {
+        let arr = Array.from(this.currentList.currentChoose)
+        let item = arr[0];
+        AmountConfirm.show(item.amount, "选择赠送数量", (value: number) => {
+            this.showConfirm("你的碎片将发生转移!\r\n请确认转移地址安全!\r\n你确认要赠送吗?", () => {
+                // console.log(item, data, value, this.api?.curAccount);
+                this.callContract("Friend", "contains", this.api?.curAccount, data.user).then((isFriend) => {
+                    if (true == isFriend) {
+                        this._sendFragment(this.api?.curAccount, data.user, item.id, value.toString());
+                    } else {
+                        this.showAlert("赠送只限于好友之间!");
+                    }
+                });
+            });
+        }, true);
+    }
+
+    _sendFragment(from: any, to: any, tokenId: any, amount: any) {
+        // console.log("params: ", from, to, tokenId, amount);
+        this.sendContract("Fragment", "safeTransferFrom", from, to, tokenId, amount, "0x", { from: this.api?.curAccount })
+            .then(result => {
+                this.showAlert("赠送成功!");
+                localStorage.removeItem(TOTEM_CACHE_KEY);
+                this._loadTotem();
+            });
     }
 }
 

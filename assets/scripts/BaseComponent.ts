@@ -5,7 +5,7 @@ import { DataNode } from './DataNode';
 import { AlertWin } from './AlertWin';
 import Web3 from "web3/dist/web3.min.js";
 import { Props } from './entitys/Props';
-import { Constant, EQUIPMENT_CACHE_KEY } from './Constant';
+import { Constant, EQUIPMENT_CACHE_KEY, FRIEND_CACHE_KEY } from './Constant';
 const { ccclass } = _decorator;
 
 @ccclass('BaseComponent')
@@ -60,9 +60,9 @@ export class BaseComponent extends Component {
 
     showAlert(msg: string, callback: Function | null = null) {
         if (callback == null) {
-            AlertWin.show(this.node, msg);
+            AlertWin.show(this.getTopNode(), msg);
         } else {
-            AlertWin.show(this.node, msg, "提示", () => {
+            AlertWin.show(this.getTopNode(), msg, "提示", () => {
                 callback()
             });
         }
@@ -76,7 +76,7 @@ export class BaseComponent extends Component {
     }
 
     showErr(err: any) {
-        AlertWin.show(this.node, this.getErr(err));
+        AlertWin.show(this.getTopNode(), this.getErr(err));
     }
 
     async callContract(contract: string, method: string, ...params: any[]) {
@@ -164,6 +164,8 @@ export class BaseComponent extends Component {
                     resolve(result);
                 })
                 .catch(reason => {
+                    console.log("reason: ");
+                    console.log(reason);
                     loading.close();
                 });
         });
@@ -333,6 +335,15 @@ export class BaseComponent extends Component {
                 node = this.node;
         }
         return node;
+    }
+
+    loadFriends(): any[] {
+        let list: any[] = [];
+        let cache = localStorage.getItem(FRIEND_CACHE_KEY);
+        if (!!cache) {
+            list = JSON.parse(cache);
+        }
+        return list;
     }
 }
 

@@ -75,9 +75,9 @@ export class PropsList extends BaseComponent {
         for (let i = 0; i < items.length; i++) {
             let eItem = items[i].getComponent(PropsItem);
             if (item == eItem) continue;
-            if (eItem)
-                eItem.setIsSelect(false);
-
+            if (eItem && eItem.data){
+                eItem.setSelect(false);
+            }
         }
     }
 
@@ -86,14 +86,14 @@ export class PropsList extends BaseComponent {
         if (eItem && eItem.data) {
             if (this.isSingleChoice) {
                 this._clearChoose(eItem);
-                eItem.setIsSelect(!eItem.isSelect);
+                eItem.setSelect(!eItem.data.isSelect);
                 this.currentChoose.clear();
-                if (eItem.isSelect)
+                if (eItem.data.isSelect)
                     this.currentChoose.add(eItem.data);
                 if (this.onChooseEvent) this.onChooseEvent(eItem.data);
             } else {
-                eItem.setIsSelect(!eItem.isSelect);
-                if (!eItem.isSelect) {
+                eItem.setSelect(!eItem.data.isSelect);
+                if (!eItem.data.isSelect) {
                     this.currentChoose.delete(eItem.data);
                 } else {
                     this.currentChoose.add(eItem.data);

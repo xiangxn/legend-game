@@ -53,6 +53,7 @@ export class ScrollInfo extends Component {
     }
 
     pushItem(item: OpenInfo) {
+        // console.log("item: ", item);
         if (this.infos.length > 20) {
             let info = this.infos.shift();
             if (!!info) {

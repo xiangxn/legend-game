@@ -179,9 +179,11 @@ export class Role extends BaseComponent {
         ChooseWin.show(this.node, true, "储物箱没有符合目前角色等级、部位或职业的装备!").then((cw: ChooseWin) => {
             cw.onChooseEvent = this.onChoose.bind(this);
             let data = this.allEquipment.filter((item: Props) => {
-                return item.info.category == this.equipConfig[this.equipIndex] && parseInt(this.heroAttr.level) >= parseInt(item.info.level)
-                    && (item.info.profession.toString() == "0" || item.info.profession == this.heroAttr.profession
-                        && (item.info.isEquip == false || item.info.isEquip == "false"));
+                // console.log("item.info.isEquip: ", typeof item.info.isEquip)
+                return item.info.category == this.equipConfig[this.equipIndex]
+                    && parseInt(this.heroAttr.level) >= parseInt(item.info.level)
+                    && (item.info.profession.toString() == "0" || item.info.profession == this.heroAttr.profession)
+                    && item.info.isEquip == false;
             });
             // data.forEach(item => {
             //     if (item.img?.indexOf("icon/") == -1)
@@ -214,7 +216,7 @@ export class Role extends BaseComponent {
                 // loading.close();
                 this._checkRole();
                 localStorage.removeItem(EQUIPMENT_CACHE_KEY);
-                
+                this.api?.syncPower(this.api.curAccount);
             });
     }
 

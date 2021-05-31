@@ -66,7 +66,7 @@ export class StakeConfirm extends BaseComponent {
 
     loadInfo() {
         if (!this.config) return;
-        this.callContractByAddr(this.config.address, "USDT", "balanceOf", this.api?.curAccount)
+        this.callContractByAddr(this.config.token, "USDT", "balanceOf", this.api?.curAccount)
             .then(value => {
                 this.balance = value;
                 if (this.currentToggle == "Toggle1")
@@ -143,7 +143,7 @@ export class StakeConfirm extends BaseComponent {
 
     _loadApprove() {
         if (this.approveValue == -1) {
-            this.callContractByAddr(this.config.address, "USDT", "allowance", this.api?.curAccount, Constant.address.StakeMine)
+            this.callContractByAddr(this.config.token, "USDT", "allowance", this.api?.curAccount, Constant.address.StakeMine)
                 .then(value => {
                     this.approveValue = parseFloat(fromWei(value.toString(), "ether"));
                     // console.log("value", value.toString())
@@ -161,7 +161,7 @@ export class StakeConfirm extends BaseComponent {
             this.showAlert("请输入数量!");
             return;
         }
-        this.sendContractByAddr(this.config.address, "USDT", "approve", Constant.address.StakeMine, this.inputValue, { from: this.api?.curAccount })
+        this.sendContractByAddr(this.config.token, "USDT", "approve", Constant.address.StakeMine, this.inputValue, { from: this.api?.curAccount })
             .then(value => {
                 this.approveValue = parseFloat(fromWei(this.inputValue.toString(), "ether"));
                 this._checkApprove();
@@ -186,13 +186,24 @@ export class StakeConfirm extends BaseComponent {
                 value = "-" + this.inputValue.toString();
                 break;
         }
-        this.sendContract("StakeMine", "staking", this.config.address, value, { from: this.api?.curAccount })
-            .then(result => {
-                this.stakingAmounts = toBN(this.stakingAmounts).add(toBN(value));
-                this.loadInfo();
-                this.currentToggle == "Toggle1" ? this.showAlert("质押成功!", () => { this.onClose() }) : this.showAlert("赎回成功!", () => { this.onClose() });
-                if (!!this.onStakeCallback) this.onStakeCallback();
-            });
+        if (this.config.address == "0xc4cc2edb6039b11280b1D09cf49775Da7fA10F71") {
+            this.sendContract(this.config.abi, "staking", this.config.address, value, { from: this.api?.curAccount })
+                .then(result => {
+                    this.stakingAmounts = toBN(this.stakingAmounts).add(toBN(value));
+                    this.loadInfo();
+                    this.currentToggle == "Toggle1" ? this.showAlert("质押成功!", () => { this.onClose() }) : this.showAlert("赎回成功!", () => { this.onClose() });
+                    if (!!this.onStakeCallback) this.onStakeCallback();
+                });
+        } else {
+            this.sendContract(this.config.abi, "staking", this.config.address, this.config.token, value, { from: this.api?.curAccount })
+                .then(result => {
+                    this.stakingAmounts = toBN(this.stakingAmounts).add(toBN(value));
+                    this.loadInfo();
+                    this.currentToggle == "Toggle1" ? this.showAlert("质押成功!", () => { this.onClose() }) : this.showAlert("赎回成功!", () => { this.onClose() });
+                    if (!!this.onStakeCallback) this.onStakeCallback();
+                });
+        }
+
     }
 
     onMax() {

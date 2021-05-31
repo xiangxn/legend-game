@@ -1,5 +1,5 @@
 
-import { _decorator, Node, director, Label, game, resources, setDisplayStats, assetManager, JsonAsset } from 'cc';
+import { _decorator, Node, director, Label, game, resources, setDisplayStats, assetManager, JsonAsset, Sprite } from 'cc';
 import Web3 from "web3/dist/web3.min.js";
 import { BaseComponent } from './BaseComponent';
 import { Constant } from './Constant';
@@ -25,6 +25,9 @@ export class Main extends BaseComponent {
     @type(Label)
     bonusLab: Label;
 
+    @type(Node)
+    viewTopTen: Node;
+
     curUser: string = "选择钱包";
     prevBlock: string = "latest";
 
@@ -32,6 +35,7 @@ export class Main extends BaseComponent {
         super();
         this.totalLab = new Label();
         this.bonusLab = new Label();
+        this.viewTopTen = new Node();
         // setDisplayStats(true)
     }
 
@@ -123,6 +127,7 @@ export class Main extends BaseComponent {
 
     start() {
         this._getData();
+
     }
 
     selectWallet() {
@@ -149,11 +154,22 @@ export class Main extends BaseComponent {
 
     async _getData() {
         let accounts = await this.api?.getUsers();
+
         if (accounts && accounts.length > 0) {
             this.curUser = accounts[0];
         }
         this._showUser();
         this._showBonusPool();
+        this._checkChainId();
+    }
+
+    private _checkChainId() {
+        this.api?.walletApi.eth.getChainId((err, version) => {
+            if (version != Constant.chainId) {
+                this.api?.removeCache();
+                this.showAlert("你钱包网络不正确!");
+            }
+        });
     }
 
     async _showBonusPool() {
@@ -195,12 +211,17 @@ export class Main extends BaseComponent {
         this.showAlert("暂未开放，敬请期待！");
     }
 
-    onFriend(){
-        this.showAlert("好友")
+    onFriend() {
+        this.loadScene("Friend");
     }
 
     onAnnouncementClick() {
-        this.loadScene("Announcement");
+        // this.loadScene("Announcement");
+        this.loadScene("Market");
+    }
+
+    onTopTenClick() {
+        this.viewTopTen.active = true;
     }
 }
 

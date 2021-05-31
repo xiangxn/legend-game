@@ -6,6 +6,7 @@ export class Props {
     img: string | null = null;
     amount: number = 0;
     info: any | null = null;
+    isSelect: boolean = false;
 }
 
 export class OpenInfo {

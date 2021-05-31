@@ -1,9 +1,10 @@
 
-import { _decorator, Component, Node, Label, find } from 'cc';
+import { _decorator, Component, Node, Label, find, sys } from 'cc';
 import { StakeConfirm } from './StakeConfirm';
 import { BaseComponent } from './BaseComponent';
 import Web3 from "web3/dist/web3.min.js";
 import { WithdrawConfirm } from './WithdrawConfirm';
+import { Constant } from './Constant';
 
 
 const { ccclass, type } = _decorator;
@@ -75,7 +76,7 @@ export class StakingItem extends BaseComponent {
     }
 
     private _updatePool() {
-        this.callContract("StakeMine", "getMineInfo", this.config.address, this.api?.curAccount)
+        this.callContract(this.config.abi, "getMineInfo", this.config.address, this.api?.curAccount)
             .then(data => {
                 this.data = data;
                 this._showPool();
@@ -90,7 +91,7 @@ export class StakingItem extends BaseComponent {
         let minute = Math.floor(timespan % 3600 / 60);
         let second = timespan % 3600 - (minute * 60);
         this.labEndTime.string = hour + " 时 " + minute + " 分 " + second + " 秒";
-        if (hour >= 0 || minute >= 0 || second >= 0) {
+        if (_now < this.endTime) {
             this.scheduleOnce((dt: any) => this._showTime(), 1);
         } else {
             this.labEndTime.string = "已经结束";
@@ -111,6 +112,10 @@ export class StakingItem extends BaseComponent {
         }
         return "0";
 
+    }
+
+    openURL() {
+        sys.openURL(this.config.url);
     }
 }
 

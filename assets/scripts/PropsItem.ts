@@ -48,14 +48,6 @@ export class PropsItem extends BaseItem {
         this._show();
     }
 
-    setIsSelect(val: boolean) {
-        this.isSelect = val;
-        if (this.isSelect)
-            this.background.color = (new Color()).fromHEX("#1ebf88");
-        else
-            this.background.color = (new Color()).fromHEX("#414141");
-    }
-
     onClick(event: Event) {
         if (this.eventListener.onItemClick) this.eventListener.onItemClick(this);
     }
@@ -90,8 +82,17 @@ export class PropsItem extends BaseItem {
         super.init(eventListener);
     }
 
+    setSelect(isSelect: boolean) {
+        this.data.isSelect = isSelect;
+        if (this.data.isSelect)
+            this.background.color = (new Color()).fromHEX("#1ebf88");
+        else
+            this.background.color = (new Color()).fromHEX("#414141");
+    }
+
     _show() {
         if (!this.data) return;
+        this.background.color = (new Color()).fromHEX("#414141");
         this.loadSprite(this.data.img, this.img);
         this.labName.string = this.data?.name ?? "";
         let count = this.data?.amount ?? 0;

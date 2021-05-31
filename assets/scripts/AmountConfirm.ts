@@ -51,7 +51,13 @@ export class AmountConfirm extends Component {
     }
 
     onOK() {
-        if (!!this.onOKCallback) this.onOKCallback(this.editValue.string);
+        if (!!this.onOKCallback) {
+            let val = 0;
+            try {
+                val = parseInt(this.editValue.string);
+            } catch { }
+            this.onOKCallback(val);
+        }
         this.onClose();
     }
 

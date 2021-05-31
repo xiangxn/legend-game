@@ -1,7 +1,7 @@
 
 import { _decorator, Component, Node, Label, Button, EditBox } from 'cc';
 import { BaseComponent } from './BaseComponent';
-import { Constant } from './Constant';
+import { BOX_CACHE_KEY, Constant } from './Constant';
 import Web3 from "web3/dist/web3.min.js";
 
 const { ccclass, type } = _decorator;
@@ -27,6 +27,9 @@ export class PreSale extends BaseComponent {
     @type(Label)
     labBalance: Label;
 
+    @type(Node)
+    floatBox: Node;
+
     approveAmount: any = 0;
     balanceAmount: any = 0;
     limit: number = 0;
@@ -42,11 +45,13 @@ export class PreSale extends BaseComponent {
         this.editCount = new EditBox();
         this.labUse = new Label();
         this.labBalance = new Label();
+        this.floatBox = new Node();
     }
 
     onLoad() {
         super.onLoad();
         this.editCount.string = this.inputValue.toString();
+        this.floatBox.active = false;
     }
 
     start() {
@@ -56,7 +61,15 @@ export class PreSale extends BaseComponent {
     private async _getPreSaleInfo() {
         this.callContract("PreSale", "getInfo").then(value => {
             // console.log("getInfo: ", value);
+            if (parseInt(value.count) > 0) {
+                this.node.active = false;
+                this.floatBox.active = true;
+            } else {
+                this.node.active = true;
+                this.floatBox.active = false;
+            }
             this.labMyCount.string = value.count + "/" + value.limit;
+
             this.limit = parseInt(value.limit) - parseInt(value.count);
             this.inputValue = Math.min(1, this.limit);
             this.endTime = parseInt(value.time);
@@ -171,6 +184,11 @@ export class PreSale extends BaseComponent {
     }
 
     onBuy() {
+        let start = this.endTime - 86400;
+        if (Math.floor(Date.now() / 1000) < start) {
+            this.showAlert("别抢跑，到时候再来!");
+            return;
+        }
         if (this.limit < 1) {
             this.showAlert("你购买的数量已经超限!");
             return;
@@ -184,12 +202,13 @@ export class PreSale extends BaseComponent {
             this.showAlert("请先授权足够的USDT!");
             return;
         }
-        if(this.balanceAmount.lt(toBN(amount))){
+        if (this.balanceAmount.lt(toBN(amount))) {
             this.showAlert("USDT余额不足!");
             return;
         }
         this.sendContract("PreSale", "buy", 10, this.inputValue, { from: this.api?.curAccount })
             .then(value => {
+                localStorage.removeItem(BOX_CACHE_KEY);
                 this.showAlert("购买成功!\r\n请预售结束时在储物箱中查看。");
                 this._getUsers();
             });
@@ -200,6 +219,16 @@ export class PreSale extends BaseComponent {
             this.inputValue = Number.parseInt(value);
             this._showUse();
         }
+    }
+
+    showPS() {
+        this.node.active = true;
+        this.floatBox.active = false;
+    }
+
+    closePS() {
+        this.node.active = false;
+        this.floatBox.active = true;
     }
 }
 

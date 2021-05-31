@@ -2,26 +2,41 @@ export const EQUIPMENT_CACHE_KEY = "Legend-Equipment-cache";
 export const TOTEM_CACHE_KEY = "Legend-Totem-cache";
 export const CONSUMABLES_CACHE_KEY = "Legend-Consumables-cache";
 export const BOX_CACHE_KEY = "Legend-Box-cache";
+export const FRIEND_CACHE_KEY = "Legend-friend-cache";
+export const VERSION_CACHE_KEY = "version-cache-key";
 
 export const Constant = {
+    version: "1.0.7",
+    // chainId: 128,
+    // chainId: 256,
+    chainId: 1337,
     apiUrl: "http://127.0.0.1:7545",
     // apiUrl: "https://http-testnet.hecochain.com",
+    // apiUrl: "https://http-mainnet-node.huobichain.com",
     // rpcProvider: { "256": "https://http-testnet.hecochain.com" },
     annUrl: "https://www.legendnft.com/announcement.json",
+    // rpcUrl: "https://data.legendnft.com/jsonrpc",
+    rpcUrl: "http://localhost:9090/jsonrpc",
     address: {
-        USDT: "0x7c48BD3F32a3dEbAb19060456B317DDcd39c1960",
-        Hero: "0x1Ae8B00C661d35ae0488605225E071aF261ADb09",
-        Equipment: "0xeD0b34bb247AB9f6b55229900E85b5f770dDcF6f",
-        LGC: "0x1344864269e1d5bD15FC5DF21BdE153802bbe328",
-        StakeMine: "0xF92539f8612aaEd853825196Be9888a9C1048285",
-        RoleMine: "0xE66e4707b4d99A09F4b6Fe65532Ff2dE484De75B",
-        ZoneMine: "0x580C41FB5511566B839037a8b924AF890Fc15705",
-        BonusPool: "0xAB192a09920253992eb893e8a98BD2e1D7c76e45",
-        Fragment: "0x175f0cA59Fd6EF6e46b167C2AFda8C1Ef28Bc1d4",
-        Totem: "0xEF54d33E9a0ab379219cB28F94B60936EE174B4c",
-        Store: "0xaE593eF4A648be14A2bf09DF3d4CECAb429989b5",
-        Box: "0x588d6fa0E0f747f54908f1526f1D98D34EF583e5",
-        PreSale:"0x6ad98bF0E7Ec78680Aa55540C42A3535d06d5b66"
+        USDT: "0x7E0dF16259505EA25c766e19cD4f0409a7F31Ec9",
+        Hero: "0xDE97675bE890bbF1a698bE924406911b66d9fFc4",
+        Equipment: "0x350904e40ebB1eb9C6B510Eef6aeDd6a5641BC59",
+        LGC: "0xb895492c775e9448B1a45519F3ba8Cd8B76304e7",
+        StakeMine: "0x7F851f3a8C7b03B095Bc007266a4FD764bDE45FB",
+        RoleMine: "0xE2645cA4bCE0088b6A0CfAb86aBd855c0FE77916",
+        ZoneMine: "0x91618b024722280FfE702bb3D09AD1DF8734365a",
+        BonusPool: "0x2A3F2beA04E47358E63F8C5Ffa09a44dC8bF98fC",
+        Fragment: "0x7e37c58aCdCBCF02e47B9e0A014257657e727721",
+        Totem: "0x2a317C82cc288f36BAf17FD5f3f085B32De7B3d2",
+        Store: "0x6F51DA21d11BB8911B445C67aC0802DF6a1E37B3",
+        Box: "0x935EfAD4DCDfa17E74D15421EcbE1583769842E7",
+        PreSale: "0x9320BfA97F2B7987b5Cd67c985fF3AFC64430331",
+        Friend: "0x54C75D1d9a338b834C3212C57e8a687DF8D6c51D",
+        Market: "0xF9A3997897d13A8F1cc4AdD95BE2eC1bf2E492fF"
+    },
+    paymode: {
+        "0xb895492c775e9448B1a45519F3ba8Cd8B76304e7": "LGC",
+        "0x7E0dF16259505EA25c766e19cD4f0409a7F31Ec9": "USDT"
     },
     intRegExp: new RegExp("^[0-9]*$"),
     lockDuration: 3600 * 24 * 2,
@@ -59,7 +74,8 @@ export const Constant = {
         3: "稀有武器箱",
         4: "入门甲胄箱",
         5: "普通甲胄箱",
-        6: "稀有甲胄箱"
+        6: "稀有甲胄箱",
+        7: "预售宝箱"
     },
     equipments: {
         "10001": "黑铁剑", "10002": "斩马刀", "10003": "阿修罗斧", "10004": "凝霜重剑", "10005": "炼狱战斧",
@@ -85,13 +101,23 @@ export const Constant = {
     mainAttrs: { attack: "物理攻击", taoism: "道术攻击", magic: "魔法攻击", defense: "物理防御", magicDefense: "魔法防御", physicalPower: "体力值", magicPower: "魔力值" },
     stakePool: [
         {
-            title: "USDT",
-            address: "0x7c48BD3F32a3dEbAb19060456B317DDcd39c1960",
+            title: "LGC/USDT",
+            address: "0x0000000000000000000000000000000000000001",
+            token: "0xc4cc2edb6039b11280b1D09cf49775Da7fA10F71",
+            abi: "StakeMine",
             decimals: 18,
-            url: "https://info.mdex.com/#/pair/",
+            url: "https://info.mdex.com/#/pair/0xc4cc2edb6039b11280b1D09cf49775Da7fA10F71",
             priceUrl: "https://info.mdex.com",
             isCalc: false
         }
+        // {
+        //     title: "USDT",
+        //     address: "0x0C1f227a661063b5013856B8dadA923369e18768",
+        //     decimals: 18,
+        //     url: "https://info.mdex.com/#/pair/",
+        //     priceUrl: "https://info.mdex.com",
+        //     isCalc: false
+        // }
     ],
     zones: [{ id: 1001, banner: "zone1banner", bg: "zone1bg", equip: "1-10" },
     { id: 1002, banner: "zone2banner", bg: "zone2bg", equip: "11-20" },

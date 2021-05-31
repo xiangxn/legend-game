@@ -49,7 +49,7 @@ export class FixedScrollView extends Component {
         super();
         this.itemTemplate = new Prefab();
         this.scrollView = new ScrollView();
-        this.content = new Node();
+        this.content = new Node("TEMP");
     }
 
     _getUIT(node: Node | null = null): UITransform {
@@ -60,6 +60,7 @@ export class FixedScrollView extends Component {
     }
 
     onLoad() {
+        // console.log("this.scrollView.content:",this.scrollView.content)
         this.content = this.scrollView.content ?? new Node();
         this.itemHeight = this._getUIT(this.itemTemplate.data).height;
         let layout = this.content.getComponent(Layout);
@@ -185,7 +186,7 @@ export class FixedScrollView extends Component {
         this._getUIT(this.content).height = this.contentHeight;
         // this.content.getComponent(Layout)?.updateLayout(true);
         // 清空父节点
-        // this.content.removeAllChildren();
+        this.content.removeAllChildren();
 
         // 有可能数据比活跃节点少... 那就用小的那个
         let number = Math.min(this.dataSet.length, this.activeItemCount);

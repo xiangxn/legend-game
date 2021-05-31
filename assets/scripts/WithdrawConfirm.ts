@@ -55,7 +55,7 @@ export class WithdrawConfirm extends BaseComponent {
     }
 
     onWithdraw() {
-        this.sendContract("StakeMine", "withdraw", this.config.address, { from: this.api?.curAccount })
+        this.sendContract(this.config.abi, "withdraw", this.config.address, { from: this.api?.curAccount })
             .then(value => {
                 this.onClose();
                 if (!!this.onOkCallback) this.onOkCallback();

@@ -2,7 +2,8 @@
 import { _decorator, Component, resources, game, log } from 'cc';
 const { ccclass, property } = _decorator;
 import Web3 from "web3/dist/web3.min.js";
-import { BOX_CACHE_KEY, Constant, CONSUMABLES_CACHE_KEY, EQUIPMENT_CACHE_KEY, TOTEM_CACHE_KEY } from "./Constant";
+import { JSONRPC } from "./JSONRPC";
+import { BOX_CACHE_KEY, Constant, CONSUMABLES_CACHE_KEY, EQUIPMENT_CACHE_KEY, FRIEND_CACHE_KEY, TOTEM_CACHE_KEY, VERSION_CACHE_KEY } from "./Constant";
 // import WalletConnectProvider from "@walletconnect/web3-provider";
 
 const LS_ACCOUNT_KEY = "legend_account";
@@ -15,26 +16,38 @@ export class DataNode extends Component {
     walletApi: Web3;
     //数据读取api
     dataApi: Web3 = new Web3(Constant.apiUrl);
+    rpcApi: JSONRPC;
 
     accountsChanged: Function | null = null;
 
     constructor() {
         super();
         this.walletApi = this.dataApi;
+        this.rpcApi = new JSONRPC(Constant.rpcUrl);
     }
 
     onLoad() {
         console.log("DataNode onLoad......");
+        this._checkVersion();
         game.addPersistRootNode(this.node);
         game.setFrameRate(30);
         this._initAPI();
     }
 
-    private removeCache() {
+    removeCache() {
         localStorage.removeItem(EQUIPMENT_CACHE_KEY);
         localStorage.removeItem(CONSUMABLES_CACHE_KEY);
         localStorage.removeItem(BOX_CACHE_KEY);
         localStorage.removeItem(TOTEM_CACHE_KEY);
+        localStorage.removeItem(FRIEND_CACHE_KEY);
+    }
+
+    private _checkVersion() {
+        let ver = localStorage.getItem(VERSION_CACHE_KEY);
+        if (ver != Constant.version) {
+            this.removeCache();
+        }
+        localStorage.setItem(VERSION_CACHE_KEY, Constant.version);
     }
 
     private async _initAPI() {
@@ -67,14 +80,22 @@ export class DataNode extends Component {
         // console.log("从网络获取数据。。。。");
         this.accounts = await this.walletApi.eth.getAccounts();
         if (this.accounts && this.accounts.length > 0) {
-            if (this.accounts[0] != this.curAccount) {
-                this.removeCache();
-            }
             this.curAccount = this.accounts[0];
             this.dataApi.eth.defaultAccount = this.curAccount;
             this.walletApi.eth.defaultAccount = this.curAccount;
+            this._checkUser();
         }
         return this.accounts;
+    }
+
+    private _checkUser() {
+        let sU = localStorage.getItem("legend-user-address");
+        if (sU != this.curAccount) {
+            this.removeCache();
+        }
+        if (!!this.curAccount) {
+            localStorage.setItem("legend-user-address", this.curAccount);
+        }
     }
 
     setCurrentUser(account: string) {
@@ -153,5 +174,21 @@ export class DataNode extends Component {
 
     onDestroy() {
         console.log("DataNode destroy...");
+    }
+
+    async getTopTen() {
+        let result = await this.rpcApi.request({ method: "topTen" });
+        // console.log(result);
+        result = result ?? [];
+        return result;
+    }
+
+    syncPower(address: string) {
+        this.rpcApi.request({ method: "updatePower", params: [address] });
+    }
+
+    async searchGoods(gclass: number, profession: number, category: number, page: number, pageSize: number) {
+        let result = await this.rpcApi.request({ method: "searchGoods", params: [gclass, profession, category, page, pageSize] });
+        return result;
     }
 }
