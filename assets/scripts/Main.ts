@@ -217,7 +217,11 @@ export class Main extends BaseComponent {
 
     onAnnouncementClick() {
         this.loadScene("Announcement");
-        // this.loadScene("Market");    //TODO
+
+    }
+
+    onMarket() {
+        this.loadScene("Market");
     }
 
     onTopTenClick() {

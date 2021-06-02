@@ -176,6 +176,7 @@ export class StorageBox extends BaseComponent {
             fIds.push(toBN(padLeft(toHex(1), 2) + padLeft(toHex(1), 16).substr(2) + padLeft(toHex(i), 8).substr(2) + padLeft("0", 38)).toString());
             fIds.push(toBN(padLeft(toHex(1), 2) + padLeft(toHex(2), 16).substr(2) + padLeft(toHex(i), 8).substr(2) + padLeft("0", 38)).toString());
             fIds.push(toBN(padLeft(toHex(1), 2) + padLeft(toHex(3), 16).substr(2) + padLeft(toHex(i), 8).substr(2) + padLeft("0", 38)).toString());
+            fIds.push(toBN(padLeft(toHex(1), 2) + padLeft(toHex(4), 16).substr(2) + padLeft(toHex(i), 8).substr(2) + padLeft("0", 38)).toString());
         }
         let fs: Promise<any>[] = [];
         fIds.forEach((fId: string) => {
