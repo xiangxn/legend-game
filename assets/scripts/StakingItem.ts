@@ -64,7 +64,17 @@ export class StakingItem extends BaseComponent {
     }
 
     openStake() {
-        StakeConfirm.show(this.config, this.data, this.onStakeCallback.bind(this));
+        if (this._checkStart())
+            StakeConfirm.show(this.config, this.data, this.onStakeCallback.bind(this));
+    }
+
+    _checkStart() {
+        let _now = Date.now() / 1000;
+        if (_now < parseInt(this.data.startTime)) {
+            this.showAlert("尚未开始");
+            return false;
+        }
+        return true;
     }
 
     onStakeCallback() {
@@ -72,7 +82,8 @@ export class StakingItem extends BaseComponent {
     }
 
     openWithdraw() {
-        WithdrawConfirm.show(this.config, this.data, this.onStakeCallback.bind(this));
+        if (this._checkStart())
+            WithdrawConfirm.show(this.config, this.data, this.onStakeCallback.bind(this));
     }
 
     private _updatePool() {
@@ -91,7 +102,9 @@ export class StakingItem extends BaseComponent {
         let minute = Math.floor(timespan % 3600 / 60);
         let second = timespan % 3600 - (minute * 60);
         this.labEndTime.string = hour + " 时 " + minute + " 分 " + second + " 秒";
-        if (_now < this.endTime) {
+        if (_now < parseInt(this.data.startTime)) {
+            this.labEndTime.string = "尚未开始";
+        } else if (_now < this.endTime) {
             this.scheduleOnce((dt: any) => this._showTime(), 1);
         } else {
             this.labEndTime.string = "已经结束";

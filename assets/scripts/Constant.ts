@@ -25,7 +25,7 @@ export const Constant = {
         StakeMine: "0x6C234aE7E4beaa7816Dfe89efa45094CCDFbA19D",
         RoleMine: "0x672B71f169AbF20448aaC3acA6C0BAaD337C2fF5",
         ZoneMine: "0x04017C2D0Df0cC296c3EE61d70940F3d04fcbEcb",
-        BonusPool: "0x24FE31A6b1CB4b0e5ee3C5c20a1d1f21a652D404",
+        BonusPool: "0x13368543dc96195Dc564048DFd598F12AbbC7662",
         Fragment: "0x6C5aD71809c8fA3b6dB9dcC02efe825A33869C33",
         Totem: "0x49De5A35ee679Ea1BF9C27a2CFF85AA220be1527",
         Store: "0xB4BE2df64ca360F0aA5cf6EDFbB58bF5F39182D1",
@@ -100,6 +100,16 @@ export const Constant = {
     },
     mainAttrs: { attack: "物理攻击", taoism: "道术攻击", magic: "魔法攻击", defense: "物理防御", magicDefense: "魔法防御", physicalPower: "体力值", magicPower: "魔力值" },
     stakePool: [
+        {
+            title: "LGC/USDT 2",
+            address: "0x0000000000000000000000000000000000000002",
+            token: "0xc4cc2edb6039b11280b1D09cf49775Da7fA10F71",
+            abi: "StakeMine",
+            decimals: 18,
+            url: "https://info.mdex.com/#/pair/0xc4cc2edb6039b11280b1D09cf49775Da7fA10F71",
+            priceUrl: "https://info.mdex.com",
+            isCalc: false
+        },
         {
             title: "LGC/USDT",
             address: "0x0000000000000000000000000000000000000001",
