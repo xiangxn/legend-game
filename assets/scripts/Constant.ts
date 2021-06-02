@@ -7,16 +7,16 @@ export const VERSION_CACHE_KEY = "version-cache-key";
 
 export const Constant = {
     version: "1.0.7",
-    // chainId: 128,
-    chainId: 256,
+    chainId: 128,
+    // chainId: 256,
     // chainId: 1337,
     // apiUrl: "http://127.0.0.1:7545",
-    apiUrl: "https://http-testnet.hecochain.com",
-    // apiUrl: "https://http-mainnet-node.huobichain.com",
+    // apiUrl: "https://http-testnet.hecochain.com",
+    apiUrl: "https://http-mainnet-node.huobichain.com",
     // rpcProvider: { "256": "https://http-testnet.hecochain.com" },
     annUrl: "https://www.legendnft.com/announcement.json",
-    // rpcUrl: "https://data.legendnft.com/jsonrpc",
-    rpcUrl: "http://localhost:9090/jsonrpc",
+    rpcUrl: "https://data.legendnft.com/jsonrpc",
+    // rpcUrl: "http://localhost:9090/jsonrpc",
     address: {
         USDT: "0xa71edc38d189767582c38a3145b5873052c3e47a",
         Hero: "0xef349B6b61F7BEABB061ae2B0bF50F06c262d718",
