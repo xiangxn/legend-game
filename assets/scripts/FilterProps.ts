@@ -32,7 +32,7 @@ export class FilterProps extends Component {
         this.cbType.curTxt = "分类";
         this.cbType.data.push({ name: this.cbType.curTxt, value: -1 });
         this.cbType.data.push({ name: "艺术品", value: 3 });
-        this.cbType.data.push({ name: "图腾", value: 2 });
+        this.cbType.data.push({ name: "碎片", value: 2 });
         this.cbType.data.push({ name: "装备", value: 1 });
         this.selected.push(this.cbType.data[0])
 
@@ -66,6 +66,10 @@ export class FilterProps extends Component {
         this.onSelected = null;
     }
 
+    bindOnSelected(onselected: Function) {
+        this.onSelected = onselected;
+    }
+
     onCbTypeChanage(data: any) {
         if (data.value == 1) {
             this.cbProfession.node.active = true;
@@ -79,7 +83,7 @@ export class FilterProps extends Component {
             this.selected[2] = this.cbEquipType.selected
         }
         this.selected[0] = data;
-        // console.log(this.selected)
+        // console.log(this.selected, this.onSelected)
         if (!!this.onSelected) this.onSelected(this.selected);
     }
 
