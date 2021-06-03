@@ -50,9 +50,10 @@ export class Card extends BaseComponent {
 
     onLoad() {
         super.onLoad();
+        // console.log("this.props.info.quality",this.props.info.quality)
         let name = "General";
         let color = Constant.qualityColor[parseInt(this.props.info.quality.toString())];
-        switch (this.props.info.quality) {
+        switch (this.props.info.quality.toString()) {
             case "0":
                 name = "General";
                 this.particle.node.active = false;

@@ -208,22 +208,32 @@ export class Market extends BaseComponent {
     }
 
     onPullOff(data: any) {
-        console.log(data);
+        // console.log(data);
         this.showConfirm("是否将该道具下架?", () => {
-            console.log("user: ", this.api?.curAccount)
-            this.sendContract("Market", "pullOff", data._id, { from: this.api?.curAccount }).then(value => {
-                this.getPastEvents("Market", "PullOff", { filter: { seller: this.api?.curAccount } })
-                    .then((events: any) => {
-                        // console.log(events);
-                        if (events.length > 0) {
-                            let goodsId = parseInt(events[0].returnValues.goodsId)
-                            this.api?.rpcApi.request({ method: "delGoods", params: [goodsId] })
-                                .then(value => {
-                                    // console.log(value, this.currentTabIndex);
-                                    this.onFilterProps(this.filterProps.selected);
-                                });
-                        }
-                    });
+            this.sendContract("Market", "pullOff", data._id, { from: this.api?.curAccount }).then((value: any) => {
+                // console.log(value);
+                let goodsId = 0;
+                if ("PullOff" in value.events) {
+                    goodsId = parseInt(value.events.PullOff.returnValues.goodsId)
+                    this.api?.rpcApi.request({ method: "delGoods", params: [goodsId] })
+                        .then(value => {
+                            // console.log(value);
+                            this.onFilterProps(this.filterProps.selected);
+                        });
+                } else {
+                    this.getPastEvents("Market", "PullOff", { filter: { seller: this.api?.curAccount } })
+                        .then((events: any) => {
+                            // console.log(events);
+                            if (events.length > 0) {
+                                goodsId = parseInt(events[0].returnValues.goodsId)
+                                this.api?.rpcApi.request({ method: "delGoods", params: [goodsId] })
+                                    .then(value => {
+                                        // console.log(value, this.currentTabIndex);
+                                        this.onFilterProps(this.filterProps.selected);
+                                    });
+                            }
+                        });
+                }
             });
         }, () => { });
     }
@@ -336,22 +346,33 @@ export class Market extends BaseComponent {
                 }]);
             this.sendContract("Equipment", "safeTransferFrom", this.api?.curAccount, Constant.address.Market, this.selectProps.id, dm)
                 .then((value: any) => {
-                    console.log(value);
+                    // console.log(value);
                     localStorage.removeItem(EQUIPMENT_CACHE_KEY);
-                    this.getPastEvents("Market", "PutOn", { filter: { seller: this.api?.curAccount }, toBlock: value.blockNumber })
-                        .then((events: any) => {
-                            // console.log(events);
-                            if (events.length > 0) {
-                                let goodsId = parseInt(events[0].returnValues.goodsId)
-                                this.api?.rpcApi.request({ method: "syncGoods", params: [goodsId] })
-                                    .then(value => {
-                                        // console.log(value);
-                                        this.showAlert("上架成功!");
-                                        this.onPutOnWinClose();
-                                        this.onFilterProps(this.filterProps.selected);
-                                    });
-                            }
-                        });
+                    let goodsId = 0;
+                    if ("0" in value.events) {
+                        goodsId = toBN(value.events["0"].raw.data).toNumber();
+                        this.api?.rpcApi.request({ method: "syncGoods", params: [goodsId] })
+                            .then(value => {
+                                // console.log(value);
+                                this.showAlert("上架成功!");
+                                this.onPutOnWinClose();
+                                this.onFilterProps(this.filterProps.selected);
+                            });
+                    } else {
+                        this.getPastEvents("Market", "PutOn", { filter: { seller: this.api?.curAccount }, toBlock: value.blockNumber })
+                            .then((events: any) => {
+                                if (events.length > 0) {
+                                    goodsId = parseInt(events[0].returnValues.goodsId)
+                                    this.api?.rpcApi.request({ method: "syncGoods", params: [goodsId] })
+                                        .then(value => {
+                                            // console.log(value);
+                                            this.showAlert("上架成功!");
+                                            this.onPutOnWinClose();
+                                            this.onFilterProps(this.filterProps.selected);
+                                        });
+                                }
+                            });
+                    }
                 });
         } else {
             //碎片
@@ -366,20 +387,32 @@ export class Market extends BaseComponent {
             this.sendContract("Fragment", "safeTransferFrom", this.api?.curAccount, Constant.address.Market, this.selectProps.id, parseInt(this.txtAmount.string), dm)
                 .then((value: any) => {
                     // console.log(value);
-                    this.getPastEvents("Market", "PutOn", { filter: { seller: this.api?.curAccount }, toBlock: value.blockNumber })
-                        .then((events: any) => {
-                            // console.log(events);
-                            if (events.length > 0) {
-                                let goodsId = parseInt(events[0].returnValues.goodsId)
-                                this.api?.rpcApi.request({ method: "syncGoods", params: [goodsId] })
-                                    .then(value => {
-                                        // console.log(value);
-                                        this.showAlert("上架成功!");
-                                        this.onPutOnWinClose();
-                                        this.onFilterProps(this.filterProps.selected);
-                                    });
-                            }
-                        });
+                    let goodsId = 0;
+                    if ("0" in value.events) {
+                        goodsId = toBN(value.events["0"].raw.data).toNumber();
+                        this.api?.rpcApi.request({ method: "syncGoods", params: [goodsId] })
+                            .then(value => {
+                                // console.log(value);
+                                this.showAlert("上架成功!");
+                                this.onPutOnWinClose();
+                                this.onFilterProps(this.filterProps.selected);
+                            });
+                    } else {
+                        this.getPastEvents("Market", "PutOn", { filter: { seller: this.api?.curAccount }, toBlock: value.blockNumber })
+                            .then((events: any) => {
+                                // console.log(events);
+                                if (events.length > 0) {
+                                    goodsId = parseInt(events[0].returnValues.goodsId)
+                                    this.api?.rpcApi.request({ method: "syncGoods", params: [goodsId] })
+                                        .then(value => {
+                                            // console.log(value);
+                                            this.showAlert("上架成功!");
+                                            this.onPutOnWinClose();
+                                            this.onFilterProps(this.filterProps.selected);
+                                        });
+                                }
+                            });
+                    }
                 });
         }
     }
