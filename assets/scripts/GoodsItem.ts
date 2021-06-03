@@ -22,6 +22,8 @@ export class GoodsItem extends BaseItem {
     btnPullOff: Node;
     @type(Node)
     btnDetail: Node;
+    @type(Node)
+    btnBuy: Node
 
     constructor() {
         super();
@@ -30,6 +32,12 @@ export class GoodsItem extends BaseItem {
         this.labPrice = new Label();
         this.btnPullOff = new Node();
         this.btnDetail = new Node();
+        this.btnBuy = new Node();
+    }
+
+    onLoad(){
+        super.onLoad();
+        this._show();
     }
 
     setItem(data: any) {
@@ -50,13 +58,20 @@ export class GoodsItem extends BaseItem {
                 this.labName.string = (Constant.totems as any)[smallType][0].replace("图腾", "碎片");
                 break
             case 3:
+                //TODO: 艺术品
                 break
         }
         this.labPrice.string = fromWei(this.data.price, "ether") + " " + (Constant.paymode as any)[this.data.payContract];
         if (!!this.data.showPullOff) {
             this.btnPullOff.active = true;
+            this.btnBuy.active = false;
         } else {
             this.btnPullOff.active = false;
+            if (this.data.seller == this.api?.curAccount) {
+                this.btnBuy.active = false;
+            } else {
+                this.btnBuy.active = true;
+            }
         }
     }
 
@@ -66,6 +81,10 @@ export class GoodsItem extends BaseItem {
 
     onDetail() {
         if (!!this.eventListener && !!this.eventListener.onDetail) this.eventListener.onDetail(this.data);
+    }
+
+    onBuy() {
+        if (!!this.eventListener && !!this.eventListener.onBuy) this.eventListener.onBuy(this.data);
     }
 }
 

@@ -18,25 +18,25 @@ export const Constant = {
     // rpcUrl: "https://data.legendnft.com/jsonrpc",
     rpcUrl: "http://localhost:9090/jsonrpc",
     address: {
-        USDT: "0x7E0dF16259505EA25c766e19cD4f0409a7F31Ec9",
-        Hero: "0xDE97675bE890bbF1a698bE924406911b66d9fFc4",
-        Equipment: "0x350904e40ebB1eb9C6B510Eef6aeDd6a5641BC59",
-        LGC: "0xb895492c775e9448B1a45519F3ba8Cd8B76304e7",
-        StakeMine: "0x7F851f3a8C7b03B095Bc007266a4FD764bDE45FB",
-        RoleMine: "0xE2645cA4bCE0088b6A0CfAb86aBd855c0FE77916",
-        ZoneMine: "0x91618b024722280FfE702bb3D09AD1DF8734365a",
-        BonusPool: "0x2A3F2beA04E47358E63F8C5Ffa09a44dC8bF98fC",
-        Fragment: "0x7e37c58aCdCBCF02e47B9e0A014257657e727721",
-        Totem: "0x2a317C82cc288f36BAf17FD5f3f085B32De7B3d2",
-        Store: "0x6F51DA21d11BB8911B445C67aC0802DF6a1E37B3",
-        Box: "0x935EfAD4DCDfa17E74D15421EcbE1583769842E7",
-        PreSale: "0x9320BfA97F2B7987b5Cd67c985fF3AFC64430331",
-        Friend: "0x54C75D1d9a338b834C3212C57e8a687DF8D6c51D",
-        Market: "0xF9A3997897d13A8F1cc4AdD95BE2eC1bf2E492fF"
+        USDT: "0x2A6D7bbf9449FdE2E424CA391BFEfcdb5AFEf180",
+        Hero: "0xD009705868Ebc9A24162EA76a6422AFDd2A02514",
+        Equipment: "0x758C06509BB2d3343d4901fEFeE77765a9d0F31e",
+        LGC: "0x2b87F1f0943f28084216C914C50074544bC7b147",
+        StakeMine: "0xa841b6C348E5E3f6BC2D6D40e84E797107fa6F84",
+        RoleMine: "0x26134cd64fE3885BC39Afc20217eb2A625195d04",
+        ZoneMine: "0x1DeEaC6EF4C0FdcBAB5b5D2a6c436ccA6D7Fcc71",
+        BonusPool: "0xC31Ab0AE78d2d85F6A92393D47E10A0Fd9Bb47e8",
+        Fragment: "0x331430e923537A5B71e6867AC3b6C2F47F8294CE",
+        Totem: "0x2b031d6836767f8220Bb3663a399819D1a1870fa",
+        Store: "0x37A3d0AADD50aD634b401aA8b5cc9d3A58A3FB57",
+        Box: "0x74a7873b9A66c0Af89ec3f086E6dE5C96E298a39",
+        PreSale: "0xB6452Eedbe1ae3Ea97A30197f1Ef245e22eC8308",
+        Friend: "0x38ed3dE9409C89f91821522E5355e098915Ccc27",
+        Market: "0xf400fbcBd89c9C94608666B2904A615Da60313dD"
     },
     paymode: {
-        "0xb895492c775e9448B1a45519F3ba8Cd8B76304e7": "LGC",
-        "0x7E0dF16259505EA25c766e19cD4f0409a7F31Ec9": "USDT"
+        "0x2b87F1f0943f28084216C914C50074544bC7b147": "LGC",
+        "0x2A6D7bbf9449FdE2E424CA391BFEfcdb5AFEf180": "USDT"
     },
     intRegExp: new RegExp("^[0-9]*$"),
     lockDuration: 3600 * 24 * 2,
@@ -67,7 +67,7 @@ export const Constant = {
         1: ["祖玛图腾", "兑换奖池专用,每期一个", "可合成祖玛图腾,图腾可兑换奖池奖金,往期图腾及碎片只能销毁获得LGC"],
         2: ["沃玛图腾", "兑换奖池专用,每期二个", "可合成沃玛图腾,图腾可兑换奖池奖金,往期图腾及碎片只能销毁获得LGC"],
         3: ["尸王图腾", "兑换奖池专用,每期五个", "可合成尸王图腾,图腾可兑换奖池奖金,往期图腾及碎片只能销毁获得LGC"],
-        4: ["血骷髅图腾", "兑换奖池专用,每期五个", "可合成血骷髅图腾,图腾可兑换奖池奖金,往期图腾及碎片只能销毁获得LGC"]
+        4: ["血骷髅图腾", "兑换奖池专用,每期20个", "可合成血骷髅图腾,图腾可兑换奖池奖金,往期图腾及碎片只能销毁获得LGC"]
     },
     boxs: {
         1: "入门武器箱",
@@ -103,7 +103,7 @@ export const Constant = {
     stakePool: [
         {
             title: "USDT",
-            address: "0x7E0dF16259505EA25c766e19cD4f0409a7F31Ec9",
+            address: "0x2A6D7bbf9449FdE2E424CA391BFEfcdb5AFEf180",
             decimals: 18,
             url: "https://info.mdex.com/#/pair/",
             priceUrl: "https://info.mdex.com",

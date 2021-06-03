@@ -28,6 +28,8 @@ export class PropsChooseWin extends BaseComponent {
         this.propsList.isSingleChoice = true;
         this.propsList.onChooseEvent = this.onChooseItem.bind(this);
         this.filterProps.onSelected = this.onFilterProps.bind(this);
+        this.scheduleOnce(() => { this._loadProps() }, 1);
+        // this._loadProps();
     }
 
     onDestroy() {
@@ -36,11 +38,11 @@ export class PropsChooseWin extends BaseComponent {
     }
 
     onChooseItem(data: Props) {
+        // console.log(data);
         if (data) {
-            if (this.onChooseEvent) {
-                if (this.onChooseEvent(data))
-                    this.node.active = false;
-            }
+            this.node.active = false;
+            if (this.onChooseEvent)
+                this.onChooseEvent(data)
         }
     }
 
@@ -56,9 +58,24 @@ export class PropsChooseWin extends BaseComponent {
     }
 
     async onFilterProps(data: any[]) {
+        this._loadProps(data);
+    }
+
+    async _loadProps(data: any[] = [{ value: -1 }, { value: -1 }, { value: -1 }]) {
+        // console.log(data);
         let list: Props[] = [];
         if (data[0].value == 1) {   //加载装备
             list = await this.loadEquips(data[1].value, data[2].value);
+        } else if (data[0].value == 2) {    //加载碎片
+            list = await this.getFragment();
+        } else if (data[0].value == 2) {    //加载艺术品
+        } else if (data[0].value == -1) {
+            //加载碎片
+            let fragments = await this.getFragment();
+            list = list.concat(fragments);
+            //加载装备
+            let equips = await this.loadEquips();
+            list = list.concat(equips);
         }
         this.propsList.setData(list);
     }
@@ -67,7 +84,9 @@ export class PropsChooseWin extends BaseComponent {
         let list: Props[] = await this.loadEquipments();
         list = list.filter((item) => {
             return (profession == -1 || parseInt(item.info.profession) == profession) &&
-                (category == -1 || parseInt(item.info.category) == category);
+                (category == -1 || parseInt(item.info.category) == category) &&
+                item.info.isEquip == false &&
+                item.info.locked == false;
         });
         return list;
     }

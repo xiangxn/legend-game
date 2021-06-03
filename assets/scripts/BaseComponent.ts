@@ -7,6 +7,7 @@ import Web3 from "web3/dist/web3.min.js";
 import { Props } from './entitys/Props';
 import { Constant, EQUIPMENT_CACHE_KEY, FRIEND_CACHE_KEY } from './Constant';
 const { ccclass } = _decorator;
+const { toBN, padLeft, toHex, fromWei } = Web3.utils;
 
 @ccclass('BaseComponent')
 export class BaseComponent extends Component {
@@ -265,13 +266,14 @@ export class BaseComponent extends Component {
         }
     }
 
-    async getPastEvents(contractName: string, eventName: string, filter: any) {
-        let option = { toBlock: 'latest' };
+    async getPastEvents(contractName: string, eventName: string, filter: any, block: number | string = "latest") {
+        let option = { toBlock: block };
         if (!!filter) option = filter;
         let contract = await this.api?.getContract(contractName);
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             contract?.getPastEvents(eventName, option, (err, eventData) => {
                 if (!!err) {
+                    reject(err);
                     return;
                 }
                 resolve(eventData);
@@ -344,6 +346,60 @@ export class BaseComponent extends Component {
             list = JSON.parse(cache);
         }
         return list;
+    }
+
+    async getFragment(isPast: boolean = false) {
+        let data: Props[] = [];
+        let allP: Promise<any>[] = [];
+        let curNumber = await this.callContract("BonusPool", "number");
+        let fIds: any[] = [];
+        if (isPast) {
+            let minNumber = curNumber >= 3 ? curNumber - 3 : 0;
+            for (let i = curNumber; i > minNumber; i--) {
+                fIds.push(toBN(padLeft(toHex(1), 2) + padLeft(toHex(1), 16).substr(2) + padLeft(toHex(i), 8).substr(2) + padLeft("0", 38)).toString());
+                fIds.push(toBN(padLeft(toHex(1), 2) + padLeft(toHex(2), 16).substr(2) + padLeft(toHex(i), 8).substr(2) + padLeft("0", 38)).toString());
+                fIds.push(toBN(padLeft(toHex(1), 2) + padLeft(toHex(3), 16).substr(2) + padLeft(toHex(i), 8).substr(2) + padLeft("0", 38)).toString());
+                fIds.push(toBN(padLeft(toHex(1), 2) + padLeft(toHex(4), 16).substr(2) + padLeft(toHex(i), 8).substr(2) + padLeft("0", 38)).toString());
+            }
+        } else {
+            fIds.push(toBN(padLeft(toHex(1), 2) + padLeft(toHex(1), 16).substr(2) + padLeft(toHex(curNumber), 8).substr(2) + padLeft("0", 38)).toString());
+            fIds.push(toBN(padLeft(toHex(1), 2) + padLeft(toHex(2), 16).substr(2) + padLeft(toHex(curNumber), 8).substr(2) + padLeft("0", 38)).toString());
+            fIds.push(toBN(padLeft(toHex(1), 2) + padLeft(toHex(3), 16).substr(2) + padLeft(toHex(curNumber), 8).substr(2) + padLeft("0", 38)).toString());
+            fIds.push(toBN(padLeft(toHex(1), 2) + padLeft(toHex(4), 16).substr(2) + padLeft(toHex(curNumber), 8).substr(2) + padLeft("0", 38)).toString());
+        }
+        let fs: Promise<any>[] = [];
+        fIds.forEach((fId: string) => {
+            let p = this.callContract("Fragment", "getInfo", fId, this.api?.curAccount);
+            // let p = this.callContract("Fragment", "balanceOf", this.api?.curAccount, fId);
+            fs.push(p);
+        });
+        //获取碎片
+        allP.push(
+            Promise.all(fs).then((values) => {
+                for (let i = 0; i < values.length; i++) {
+                    let bigType = toBN(fIds[i]).shrn(248).toNumber();
+                    if (bigType < 3) {
+                        // console.log("values: ",values)
+                        let count = parseInt(values[i].balance.toString());
+                        // let count = parseInt(values[i].toString());
+                        if (count > 0) {
+                            let smallType = toBN("0x" + padLeft(toHex(fIds[i]), 64).substr(4, 16)).toNumber();
+                            let num = toBN("0x" + padLeft(toHex(fIds[i]), 64).substr(20, 8)).toNumber();
+                            let e = new Props();
+                            e.id = fIds[i];
+                            e.name = (Constant.totems as any)[smallType][0].replace("图腾", "碎片");
+                            e.img = bigType + "-" + smallType;
+                            e.amount = count;
+                            e.info = { quality: 2, bigType: bigType, smallType: smallType, tokens: values[i].tokens, number: num };
+                            // e.info = { quality: 2, bigType: bigType, smallType: smallType, tokens: 0, number: num };
+                            data.push(e);
+                        }
+                    }
+                }
+            }));
+        await Promise.all(allP);
+        // return JSON.parse(JSON.stringify(data));
+        return data;
     }
 }
 

@@ -72,10 +72,13 @@ export class PropsItem extends BaseItem {
     }
 
     onDestroy() {
-        this.eventListener.onItemClick = null;
-        this.eventListener.onItemDoubleClick = null;
-        this.eventListener.onItemLongTouch = null;
-        this.img.spriteFrame = null;
+        if (!!this.eventListener) {
+            this.eventListener.onItemClick = null;
+            this.eventListener.onItemDoubleClick = null;
+            this.eventListener.onItemLongTouch = null;
+        }
+        if (!!this.img)
+            this.img.spriteFrame = null;
     }
 
     init(eventListener: any) {

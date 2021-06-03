@@ -74,6 +74,8 @@ export class FilterProps extends Component {
         if (data.value == 1) {
             this.cbProfession.node.active = true;
             this.cbEquipType.node.active = true;
+            this.cbProfession.setCurTxt("职业");
+            this.cbEquipType.setCurTxt("部位");
         } else {
             this.cbProfession.node.active = false;
             this.cbEquipType.node.active = false;

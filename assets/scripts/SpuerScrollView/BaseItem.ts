@@ -9,6 +9,10 @@ export class BaseItem extends BaseComponent {
     eventListener: any;
     data: any;
 
+    onLoad(){
+        super.onLoad();
+    }
+
     init(eventListener: any) {
         this.eventListener = eventListener;
     }
