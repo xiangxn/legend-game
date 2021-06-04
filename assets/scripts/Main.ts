@@ -175,7 +175,7 @@ export class Main extends BaseComponent {
     async _showBonusPool() {
         this.callContract("BonusPool", "getInfo")
             .then(result => {
-                if (!!result) {
+                if (!!result && !!this.totalLab && !!this.bonusLab) {
                     this.totalLab.string = "$ " + fromWei(result[0], "ether");
                     this.bonusLab.string = "$ " + fromWei(result[1], "ether");
                 }

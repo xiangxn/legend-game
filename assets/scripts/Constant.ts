@@ -33,7 +33,7 @@ export const Constant = {
         Box: "0x23Ad2898ACD93AFBab43b24679B5fF6FBacD9976",
         PreSale: "0x90834f1e7CAcB5200a714d7394BfF482b525353A",
         Friend: "0x022A52330aEBC38735F72c4aE07E5588251494B0",
-        Market: "0xC23e0de5E892ff1deA4D30c6Bbd01301fd0d01aC"
+        Market: "0xFcbD99A497C4ebeC62dA06d8beeB94Be737bb7C3"
     },
     paymode: {
         "0x51857e3111eEF80429445F32A8cc341B735e2a52": "LGC",
