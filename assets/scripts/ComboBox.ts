@@ -18,6 +18,7 @@ export class ComboBox extends Component {
 
     @type(String)
     curTxt: string = "";
+
     data: any[] = [];
 
     selected: any;
@@ -48,6 +49,11 @@ export class ComboBox extends Component {
                 this.btnList.addChild(btn);
             }
         }
+    }
+
+    setCurTxt(name: string) {
+        this.curTxt = name;
+        this.labCurTxt.string = this.curTxt;
     }
 
     closeList() {

@@ -106,6 +106,7 @@ export class FixedScrollView extends Component {
 
     //滚动监听
     onScrolling(arg0: string, onScrolling: any, arg2: this) {
+        if (this.content.children.length < 1) return;
         // 判断上滑/下滑
         let scrollUp = this.content.getPosition().y > this.contentNodeLastY;
         this.contentNodeLastY = this.content.getPosition().y;

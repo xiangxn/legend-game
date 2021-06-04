@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, Sprite, Label } from 'cc';
+import { _decorator, Component, Node, Sprite, Label, Color } from 'cc';
 import Web3 from "web3/dist/web3.min.js";
 import { Constant } from './Constant';
 import { BaseItem } from './SpuerScrollView/BaseItem';
@@ -10,10 +10,13 @@ const { ccclass, type } = _decorator;
 export class GoodsItem extends BaseItem {
 
     @type(Sprite)
-    img: Sprite
+    img: Sprite;
 
     @type(Label)
-    labName: Label
+    labName: Label;
+
+    @type(Sprite)
+    sprNameBG: Sprite;
 
     @type(Label)
     labPrice: Label
@@ -22,6 +25,8 @@ export class GoodsItem extends BaseItem {
     btnPullOff: Node;
     @type(Node)
     btnDetail: Node;
+    @type(Node)
+    btnBuy: Node
 
     constructor() {
         super();
@@ -30,6 +35,13 @@ export class GoodsItem extends BaseItem {
         this.labPrice = new Label();
         this.btnPullOff = new Node();
         this.btnDetail = new Node();
+        this.btnBuy = new Node();
+        this.sprNameBG = new Sprite();
+    }
+
+    onLoad() {
+        super.onLoad();
+        this._show();
     }
 
     setItem(data: any) {
@@ -42,21 +54,30 @@ export class GoodsItem extends BaseItem {
             case 1:
                 this.loadSprite(this.data.content.number, this.img);
                 this.labName.string = (Constant.equipments as any)[this.data.content.number.toString()];
+                this.sprNameBG.color = new Color().fromHEX(Constant.qualityColor[parseInt(this.data.content.quality)]);
                 break
             case 2:
                 let bigType = toBN(this.data.contentId).shrn(248);
                 let smallType = toBN("0x" + padLeft(toHex(this.data.contentId), 64).substr(4, 16)).toNumber();
                 this.loadSprite(bigType + "-" + smallType, this.img);
                 this.labName.string = (Constant.totems as any)[smallType][0].replace("图腾", "碎片");
+                this.sprNameBG.color = new Color().fromHEX(Constant.qualityColor[2]);
                 break
             case 3:
+                //TODO: 艺术品
                 break
         }
         this.labPrice.string = fromWei(this.data.price, "ether") + " " + (Constant.paymode as any)[this.data.payContract];
         if (!!this.data.showPullOff) {
             this.btnPullOff.active = true;
+            this.btnBuy.active = false;
         } else {
             this.btnPullOff.active = false;
+            if (this.data.seller == this.api?.curAccount) {
+                this.btnBuy.active = false;
+            } else {
+                this.btnBuy.active = true;
+            }
         }
     }
 
@@ -66,6 +87,10 @@ export class GoodsItem extends BaseItem {
 
     onDetail() {
         if (!!this.eventListener && !!this.eventListener.onDetail) this.eventListener.onDetail(this.data);
+    }
+
+    onBuy() {
+        if (!!this.eventListener && !!this.eventListener.onBuy) this.eventListener.onBuy(this.data);
     }
 }
 
