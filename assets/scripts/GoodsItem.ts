@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, Sprite, Label } from 'cc';
+import { _decorator, Component, Node, Sprite, Label, Color } from 'cc';
 import Web3 from "web3/dist/web3.min.js";
 import { Constant } from './Constant';
 import { BaseItem } from './SpuerScrollView/BaseItem';
@@ -10,10 +10,13 @@ const { ccclass, type } = _decorator;
 export class GoodsItem extends BaseItem {
 
     @type(Sprite)
-    img: Sprite
+    img: Sprite;
 
     @type(Label)
-    labName: Label
+    labName: Label;
+
+    @type(Sprite)
+    sprNameBG: Sprite;
 
     @type(Label)
     labPrice: Label
@@ -33,9 +36,10 @@ export class GoodsItem extends BaseItem {
         this.btnPullOff = new Node();
         this.btnDetail = new Node();
         this.btnBuy = new Node();
+        this.sprNameBG = new Sprite();
     }
 
-    onLoad(){
+    onLoad() {
         super.onLoad();
         this._show();
     }
@@ -50,12 +54,14 @@ export class GoodsItem extends BaseItem {
             case 1:
                 this.loadSprite(this.data.content.number, this.img);
                 this.labName.string = (Constant.equipments as any)[this.data.content.number.toString()];
+                this.sprNameBG.color = new Color().fromHEX(Constant.qualityColor[parseInt(this.data.content.quality)]);
                 break
             case 2:
                 let bigType = toBN(this.data.contentId).shrn(248);
                 let smallType = toBN("0x" + padLeft(toHex(this.data.contentId), 64).substr(4, 16)).toNumber();
                 this.loadSprite(bigType + "-" + smallType, this.img);
                 this.labName.string = (Constant.totems as any)[smallType][0].replace("图腾", "碎片");
+                this.sprNameBG.color = new Color().fromHEX(Constant.qualityColor[2]);
                 break
             case 3:
                 //TODO: 艺术品

@@ -1024,13 +1024,13 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 0,
+      "g": 0,
+      "b": 0,
       "a": 255
     },
     "_string": "装备武器大",
-    "_horizontalAlign": 0,
+    "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 46,
     "_fontSize": 45,
@@ -2753,6 +2753,9 @@
     },
     "labName": {
       "__id__": 44
+    },
+    "sprNameBG": {
+      "__id__": 36
     },
     "labPrice": {
       "__id__": 58
