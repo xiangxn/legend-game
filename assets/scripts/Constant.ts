@@ -31,7 +31,8 @@ export const Constant = {
         Store: "0xB4BE2df64ca360F0aA5cf6EDFbB58bF5F39182D1",
         Box: "0xAEe308fAb21D185691Fe4ec7dd503a601383586E",
         PreSale: "0x275eeC0aF74F3c5c0562807E57D4cC4625F9a7b9",
-        Friend: "0x8C6492E2d9D5404D2b46ffc9f7E6342ADE4602a1"
+        Friend: "0x8C6492E2d9D5404D2b46ffc9f7E6342ADE4602a1",
+        Market: "0x18Beb70Ec025fdDc084C3c0E6d6cB30615dE3113"
     },
     paymode: {
         "0xb895492c775e9448B1a45519F3ba8Cd8B76304e7": "LGC",
@@ -120,14 +121,6 @@ export const Constant = {
             priceUrl: "https://info.mdex.com",
             isCalc: false
         }
-        // {
-        //     title: "USDT",
-        //     address: "0x0C1f227a661063b5013856B8dadA923369e18768",
-        //     decimals: 18,
-        //     url: "https://info.mdex.com/#/pair/",
-        //     priceUrl: "https://info.mdex.com",
-        //     isCalc: false
-        // }
     ],
     zones: [{ id: 1001, banner: "zone1banner", bg: "zone1bg", equip: "1-10" },
     { id: 1002, banner: "zone2banner", bg: "zone2bg", equip: "11-20" },
