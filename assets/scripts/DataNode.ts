@@ -141,7 +141,7 @@ export class DataNode extends Component {
     }
 
     async _loadAbi(name: string): Promise<any> {
-        console.log("name: ", name);
+        // console.log("name: ", name);
         return new Promise((resolve, reject) => {
             resources.load("abi/" + name, (err, data) => {
                 if (err) {

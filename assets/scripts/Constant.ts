@@ -104,7 +104,9 @@ export const Constant = {
     stakePool: [
         {
             title: "USDT",
-            address: "0xEB5a311D4c3bE8bFa307e3DaD0C8873A3E42B354",
+            address: "0x0000000000000000000000000000000000000001",
+            token: "0xEB5a311D4c3bE8bFa307e3DaD0C8873A3E42B354",
+            abi: "StakeMine",
             decimals: 18,
             url: "https://info.mdex.com/#/pair/",
             priceUrl: "https://info.mdex.com",
