@@ -35,8 +35,8 @@ export const Constant = {
         Market: "0x18Beb70Ec025fdDc084C3c0E6d6cB30615dE3113"
     },
     paymode: {
-        "0xb895492c775e9448B1a45519F3ba8Cd8B76304e7": "LGC",
-        "0x7E0dF16259505EA25c766e19cD4f0409a7F31Ec9": "USDT"
+        "0xb7A819D170e59D79f6289b91cA1D1a9D0C788A2a": "LGC",
+        "0xa71edc38d189767582c38a3145b5873052c3e47a": "USDT"
     },
     intRegExp: new RegExp("^[0-9]*$"),
     lockDuration: 3600 * 24 * 2,
