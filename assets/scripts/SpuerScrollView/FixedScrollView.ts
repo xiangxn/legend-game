@@ -43,7 +43,11 @@ export class FixedScrollView extends Component {
     //每行的列数
     constraintNum: number = 1;
 
-    eventListener: Function | null = null;
+    eventListener: any;
+    //数据状态0为正常，1为加载中
+    dataStatus: number = 0;
+    //上滑加载事件
+    eventSlideUp: Function | null = null;
 
     constructor() {
         super();
@@ -133,6 +137,10 @@ export class FixedScrollView extends Component {
                         this.setItemNode(headNode, this.activeTailIndex);
                     }
                 }
+            } else if (this.activeTailIndex == this.dataSet.length - 2 && this.dataStatus == 0) {   //触发上拉加载
+                this.dataStatus = 1;
+                // console.log("上拉加载...", this.activeTailIndex);
+                if (!!this.eventSlideUp) this.eventSlideUp();
             }
         } else {
             // 下滑 判断是否需要把尾节点移动到头部
@@ -172,6 +180,22 @@ export class FixedScrollView extends Component {
     init(eventListener: any) {
         // 传递事件监听器
         this.eventListener = eventListener;
+    }
+
+    reset() {
+        this.scrollView.scrollToTop();
+        this.dataStatus = 0;
+    }
+
+    addData(data: any[]) {
+        this.dataSet = this.dataSet.concat(data);
+        // 重新计算父节点的高度
+        let lines = Math.floor(this.dataSet.length / this.constraintNum) + (this.dataSet.length % this.constraintNum > 0 ? 1 : 0);
+        this.contentHeight = lines * (this.lineHeight);
+        // 设置高度
+        this._getUIT(this.content).height = this.contentHeight;
+        // this.scrollView.scrollToOffset(offset, 1);
+        this.dataStatus = 0;
     }
 
     setData(dataSet: any[]) {

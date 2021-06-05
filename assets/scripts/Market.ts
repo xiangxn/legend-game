@@ -55,6 +55,7 @@ export class Market extends BaseComponent {
     //交易手续费
     marketFee: number = 20;
     currentTabIndex = 0;
+    totalPage: number = 0;
 
     constructor() {
         super();
@@ -77,11 +78,30 @@ export class Market extends BaseComponent {
         this.btnPutOn.active = false;
         this.tabBar.onChanage = this.onTabBarChanage.bind(this);
         this.fixedScrollView.init({ onPullOff: this.onPullOff.bind(this), onDetail: this.onDetail.bind(this), onBuy: this.onBuy.bind(this) })
+        this.fixedScrollView.eventSlideUp = this.onSlideUp.bind(this);
         this.filterProps.onSelected = this.onFilterProps.bind(this);
         this.btnCombo.onChanage = this.onComboBoxChange.bind(this);
         this._showNoData("加载中...");
         this.loadData();
         this.loadMarketFee();
+    }
+
+    async onSlideUp() {
+        // console.log("上滑加载。。。。");
+        if (this.page + 1 <= this.totalPage) {
+            this.page++;
+            let list = [];
+            let data = this.filterProps.selected;
+            switch (this.currentTabIndex) {
+                case 0:
+                    list = await this._loadData(data[0].value, data[1].value, data[2].value, data[3].value);
+                    break;
+                case 1:
+                    list = await this._loadMyData(data[0].value, data[1].value, data[2].value, data[3].value);
+                    break;
+            }
+            this.fixedScrollView.addData(list);
+        }
     }
 
     async loadMarketFee() {
@@ -100,13 +120,12 @@ export class Market extends BaseComponent {
     onFilterProps(data: any[]) {
         switch (this.currentTabIndex) {
             case 0:
-                this.loadData(data[0].value, data[1].value, data[2].value);
+                this.loadData(data[0].value, data[1].value, data[2].value, data[3].value);
                 break;
             case 1:
-                this.loadMyData(data[0].value, data[1].value, data[2].value);
+                this.loadMyData(data[0].value, data[1].value, data[2].value, data[3].value);
                 break;
         }
-
     }
 
     async onDetail(data: any) {
@@ -162,40 +181,64 @@ export class Market extends BaseComponent {
                 let buyPars = this.api?.dataApi.eth.abi.encodeParameters(["uint8", "uint256"], [2, data._id]);
                 this.sendContract("LGC", "transferAndCall", Constant.address.Market, data.price, buyPars)
                     .then((value: any) => {
+                        // console.log(value);
                         localStorage.removeItem(EQUIPMENT_CACHE_KEY);
-                        this.getPastEvents("Market", "BuyGoods", { filter: { buyer: this.api?.curAccount }, toBlock: value.blockNumber })
-                            .then((events: any) => {
-                                // console.log(events);
-                                if (events.length > 0) {
-                                    let goodsId = parseInt(events[0].returnValues.goodsId)
-                                    this.api?.rpcApi.request({ method: "delGoods", params: [goodsId] })
-                                        .then(value => {
-                                            // console.log(value);
-                                            this.showAlert("兑换成功!");
-                                            this.onFilterProps(this.filterProps.selected);
-                                        });
-                                }
-                            });
+                        let goodsId = 0;
+                        if ("1" in value.events) {
+                            goodsId = toBN(value.events["1"].raw.data).toNumber();
+                            this.api?.rpcApi.request({ method: "delGoods", params: [goodsId] })
+                                .then(value => {
+                                    // console.log(value);
+                                    this.showAlert("兑换成功!");
+                                    this.onFilterProps(this.filterProps.selected);
+                                });
+                        } else {
+                            this.getPastEvents("Market", "BuyGoods", { filter: { buyer: this.api?.curAccount }, toBlock: value.blockNumber })
+                                .then((events: any) => {
+                                    // console.log(events);
+                                    if (events.length > 0) {
+                                        goodsId = parseInt(events[0].returnValues.goodsId)
+                                        this.api?.rpcApi.request({ method: "delGoods", params: [goodsId] })
+                                            .then(value => {
+                                                // console.log(value);
+                                                this.showAlert("兑换成功!");
+                                                this.onFilterProps(this.filterProps.selected);
+                                            });
+                                    }
+                                });
+                        }
                     });
             });
         } else {
             AlertWin.showRichText(find("Canvas") ?? this.node, msg, "兑换", () => {
                 this.sendContract("Market", "buy", data._id, { from: this.api?.curAccount })
                     .then((value: any) => {
+                        // console.log(value);
                         localStorage.removeItem(EQUIPMENT_CACHE_KEY);
-                        this.getPastEvents("Market", "BuyGoods", { filter: { buyer: this.api?.curAccount }, toBlock: value.blockNumber })
-                            .then((events: any) => {
-                                // console.log(events);
-                                if (events.length > 0) {
-                                    let goodsId = parseInt(events[0].returnValues.goodsId)
-                                    this.api?.rpcApi.request({ method: "delGoods", params: [goodsId] })
-                                        .then(value => {
-                                            // console.log(value);
-                                            this.showAlert("兑换成功!");
-                                            this.onFilterProps(this.filterProps.selected);
-                                        });
-                                }
-                            });
+                        let goodsId = 0;
+                        if ("BuyGoods" in value.events) {
+                            goodsId = parseInt(value.events.BuyGoods.returnValues.goodsId)
+                            this.api?.rpcApi.request({ method: "delGoods", params: [goodsId] })
+                                .then(value => {
+                                    // console.log(value);
+                                    this.showAlert("兑换成功!");
+                                    this.onFilterProps(this.filterProps.selected);
+                                });
+                        } else {
+                            this.getPastEvents("Market", "BuyGoods", { filter: { buyer: this.api?.curAccount }, toBlock: value.blockNumber })
+                                .then((events: any) => {
+                                    // console.log(events);
+                                    if (events.length > 0) {
+                                        let goodsId = parseInt(events[0].returnValues.goodsId)
+                                        this.api?.rpcApi.request({ method: "delGoods", params: [goodsId] })
+                                            .then(value => {
+                                                // console.log(value);
+                                                this.showAlert("兑换成功!");
+                                                this.onFilterProps(this.filterProps.selected);
+                                            });
+                                    }
+                                });
+                        }
                     });
             }, () => {
                 this.sendContractByAddr(data.payContract, "USDT", "approve", Constant.address.Market, data.price, { from: this.api?.curAccount })
@@ -238,48 +281,65 @@ export class Market extends BaseComponent {
         }, () => { });
     }
 
-    async loadData(gclass: number = -1, profession: number = -1, category: number = -1) {
-        let result: any = await this.api?.searchGoods(gclass, profession, category, this.page, this.pageSize);
+    async _loadData(gclass: number = -1, profession: number = -1, category: number = -1, level: number = -1) {
+        let result: any = await this.api?.searchGoods(gclass, profession, category, level, this.page, this.pageSize);
         // console.log(result)
         let list = [];
         if (!!result) {
+            this.totalPage = result.totalPage;
             if (result.list.indexOf("[") == 0) {
                 list = JSON.parse(result.list);
                 list = list.map((item: any) => {
                     item.showPullOff = false;
                     return item;
                 });
-                this.fixedScrollView.setData(list);
-                if (list.length > 0)
-                    this._showNoData("");
-                else
-                    this._showNoData();
             }
+        } else {
+            this.totalPage = 0;
         }
+        return list;
     }
 
-    async loadMyData(gclass: number = -1, profession: number = -1, category: number = -1) {
-        let result: any = await this.api?.searchGoods(gclass, profession, category, this.page, this.pageSize, this.api.curAccount);
-        // console.log(result)
+    async loadData(gclass: number = -1, profession: number = -1, category: number = -1, level: number = -1) {
+        let list = await this._loadData(gclass, profession, category, level);
+        this.fixedScrollView.setData(list);
+        if (list.length > 0)
+            this._showNoData("");
+        else
+            this._showNoData();
+    }
+
+    async _loadMyData(gclass: number = -1, profession: number = -1, category: number = -1, level: number = -1) {
+        let result: any = await this.api?.searchGoods(gclass, profession, category, level, this.page, this.pageSize, this.api.curAccount);
         let list = [];
         if (!!result) {
+            this.totalPage = result.totalPage;
             if (result.list.indexOf("[") == 0) {
                 list = JSON.parse(result.list);
                 list = list.map((item: any) => {
                     item.showPullOff = true;
                     return item;
                 });
-                this.fixedScrollView.setData(list);
-                if (list.length > 0)
-                    this._showNoData("");
-                else
-                    this._showNoData();
             }
+        } else {
+            this.totalPage = 0;
         }
+        return list;
+    }
+
+    async loadMyData(gclass: number = -1, profession: number = -1, category: number = -1, level: number = -1) {
+        let list = await this._loadMyData(gclass, profession, category, level);
+        this.fixedScrollView.setData(list);
+        if (list.length > 0)
+            this._showNoData("");
+        else
+            this._showNoData();
     }
 
     onTabBarChanage(index: number) {
         this.currentTabIndex = index;
+        this.fixedScrollView.reset();
+        this.page = 1;
         switch (index) {
             case 0:
                 this.btnPutOn.active = false;
@@ -297,6 +357,9 @@ export class Market extends BaseComponent {
 
     onDestroy() {
         this.tabBar.onChanage = null;
+        this.fixedScrollView.eventSlideUp = null;
+        this.filterProps.onSelected = null;
+        this.btnCombo.onChanage = null;
     }
 
     onPutOn() {
@@ -425,7 +488,7 @@ export class Market extends BaseComponent {
     }
 
     onPriceChange(data: any) {
-        let value = parseInt(data);
+        let value = parseFloat(data);
         if (value < 1) value = 1;
         if (value.toString() == "NaN") value = 0;
         this.txtPrice.string = value.toString();

@@ -447,7 +447,7 @@ export class StorageBox extends BaseComponent {
 
     onOpenClick() {
         let arr = Array.from(this.currentList.currentChoose);
-        console.log("arr: ", arr);
+        // console.log("arr: ", arr);
         let ids: string[] = [];
         arr.forEach((item: Props) => {
             ids.push(item.info);
