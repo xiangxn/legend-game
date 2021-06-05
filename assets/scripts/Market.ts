@@ -94,10 +94,10 @@ export class Market extends BaseComponent {
             let data = this.filterProps.selected;
             switch (this.currentTabIndex) {
                 case 0:
-                    list = await this._loadData(data[0].value, data[1].value, data[2].value);
+                    list = await this._loadData(data[0].value, data[1].value, data[2].value, data[3].value);
                     break;
                 case 1:
-                    list = await this._loadMyData(data[0].value, data[1].value, data[2].value);
+                    list = await this._loadMyData(data[0].value, data[1].value, data[2].value, data[3].value);
                     break;
             }
             this.fixedScrollView.addData(list);
@@ -120,10 +120,10 @@ export class Market extends BaseComponent {
     onFilterProps(data: any[]) {
         switch (this.currentTabIndex) {
             case 0:
-                this.loadData(data[0].value, data[1].value, data[2].value);
+                this.loadData(data[0].value, data[1].value, data[2].value, data[3].value);
                 break;
             case 1:
-                this.loadMyData(data[0].value, data[1].value, data[2].value);
+                this.loadMyData(data[0].value, data[1].value, data[2].value, data[3].value);
                 break;
         }
     }
@@ -281,8 +281,8 @@ export class Market extends BaseComponent {
         }, () => { });
     }
 
-    async _loadData(gclass: number = -1, profession: number = -1, category: number = -1) {
-        let result: any = await this.api?.searchGoods(gclass, profession, category, this.page, this.pageSize);
+    async _loadData(gclass: number = -1, profession: number = -1, category: number = -1, level: number = -1) {
+        let result: any = await this.api?.searchGoods(gclass, profession, category, level, this.page, this.pageSize);
         // console.log(result)
         let list = [];
         if (!!result) {
@@ -300,8 +300,8 @@ export class Market extends BaseComponent {
         return list;
     }
 
-    async loadData(gclass: number = -1, profession: number = -1, category: number = -1) {
-        let list = await this._loadData(gclass, profession, category);
+    async loadData(gclass: number = -1, profession: number = -1, category: number = -1, level: number = -1) {
+        let list = await this._loadData(gclass, profession, category, level);
         this.fixedScrollView.setData(list);
         if (list.length > 0)
             this._showNoData("");
@@ -309,8 +309,8 @@ export class Market extends BaseComponent {
             this._showNoData();
     }
 
-    async _loadMyData(gclass: number = -1, profession: number = -1, category: number = -1) {
-        let result: any = await this.api?.searchGoods(gclass, profession, category, this.page, this.pageSize, this.api.curAccount);
+    async _loadMyData(gclass: number = -1, profession: number = -1, category: number = -1, level: number = -1) {
+        let result: any = await this.api?.searchGoods(gclass, profession, category, level, this.page, this.pageSize, this.api.curAccount);
         let list = [];
         if (!!result) {
             this.totalPage = result.totalPage;
@@ -327,8 +327,8 @@ export class Market extends BaseComponent {
         return list;
     }
 
-    async loadMyData(gclass: number = -1, profession: number = -1, category: number = -1) {
-        let list = await this._loadMyData(gclass, profession, category);
+    async loadMyData(gclass: number = -1, profession: number = -1, category: number = -1, level: number = -1) {
+        let list = await this._loadMyData(gclass, profession, category, level);
         this.fixedScrollView.setData(list);
         if (list.length > 0)
             this._showNoData("");

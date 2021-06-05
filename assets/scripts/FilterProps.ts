@@ -9,12 +9,12 @@ export class FilterProps extends Component {
 
     @type(ComboBox)
     cbType: ComboBox;
-
     @type(ComboBox)
     cbProfession: ComboBox;
-
     @type(ComboBox)
     cbEquipType: ComboBox;
+    @type(ComboBox)
+    cbEquipLevel: ComboBox;
 
     selected: any[] = [];
     onSelected: Function | null = null;
@@ -24,6 +24,7 @@ export class FilterProps extends Component {
         this.cbType = new ComboBox();
         this.cbProfession = new ComboBox();
         this.cbEquipType = new ComboBox();
+        this.cbEquipLevel = new ComboBox();
     }
 
     onLoad() {
@@ -57,12 +58,24 @@ export class FilterProps extends Component {
         this.cbEquipType.data.push({ name: "头盔", value: 1 });
         this.cbEquipType.data.push({ name: "武器", value: 0 });
         this.selected.push(this.cbEquipType.data[0])
+
+        this.cbEquipLevel.data = [];
+        this.cbEquipLevel.onChanage = this.onEquipLevelChanage.bind(this);
+        this.cbEquipLevel.curTxt = "等级";
+        this.cbEquipLevel.data.push({ name: this.cbEquipLevel.curTxt, value: -1 });
+        this.cbEquipLevel.data.push({ name: "41-50", value: 4 });
+        this.cbEquipLevel.data.push({ name: "31-40", value: 3 });
+        this.cbEquipLevel.data.push({ name: "21-30", value: 2 });
+        this.cbEquipLevel.data.push({ name: "11-20", value: 1 });
+        this.cbEquipLevel.data.push({ name: "1-10", value: 0 });
+        this.selected.push(this.cbEquipLevel.data[0])
     }
 
     onDestroy() {
         this.cbType.onChanage = null;
         this.cbProfession.onChanage = null;
         this.cbEquipType.onChanage = null;
+        this.cbEquipLevel.onChanage = null;
         this.onSelected = null;
     }
 
@@ -74,15 +87,20 @@ export class FilterProps extends Component {
         if (data.value == 1) {
             this.cbProfession.node.active = true;
             this.cbEquipType.node.active = true;
+            this.cbEquipLevel.node.active = true;
             this.cbProfession.setCurTxt("职业");
             this.cbEquipType.setCurTxt("部位");
+            this.cbEquipLevel.setCurTxt("等级");
         } else {
             this.cbProfession.node.active = false;
             this.cbEquipType.node.active = false;
+            this.cbEquipLevel.node.active = false;
             this.cbProfession.selected = this.cbProfession.data[0];
             this.cbEquipType.selected = this.cbEquipType.data[0];
-            this.selected[1] = this.cbProfession.selected
-            this.selected[2] = this.cbEquipType.selected
+            this.cbEquipLevel.selected = this.cbEquipLevel.data[0];
+            this.selected[1] = this.cbProfession.selected;
+            this.selected[2] = this.cbEquipType.selected;
+            this.selected[3] = this.cbEquipLevel.selected;
         }
         this.selected[0] = data;
         // console.log(this.selected, this.onSelected)
@@ -98,6 +116,11 @@ export class FilterProps extends Component {
     onEquipTypeChanage(data: any) {
         this.selected[2] = data;
         // console.log(this.selected)
+        if (!!this.onSelected) this.onSelected(this.selected);
+    }
+
+    onEquipLevelChanage(data: any) {
+        this.selected[3] = data;
         if (!!this.onSelected) this.onSelected(this.selected);
     }
 }

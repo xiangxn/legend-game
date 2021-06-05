@@ -141,7 +141,7 @@ export class DataNode extends Component {
     }
 
     async _loadAbi(name: string): Promise<any> {
-        // console.log("name: ", name);
+        console.log("name: ", name);
         return new Promise((resolve, reject) => {
             resources.load("abi/" + name, (err, data) => {
                 if (err) {
@@ -187,12 +187,12 @@ export class DataNode extends Component {
         this.rpcApi.request({ method: "updatePower", params: [address] });
     }
 
-    async searchGoods(gclass: number, profession: number, category: number, page: number, pageSize: number, seller?: string) {
+    async searchGoods(gclass: number, profession: number, category: number, level: number, page: number, pageSize: number, seller?: string) {
         let result: any = {};
         if (!!seller) {
-            result = await this.rpcApi.request({ method: "searchGoods", params: [gclass, profession, category, page, pageSize, seller] });
+            result = await this.rpcApi.request({ method: "searchGoods", params: [gclass, profession, category, level, page, pageSize, seller] });
         } else {
-            result = await this.rpcApi.request({ method: "searchGoods", params: [gclass, profession, category, page, pageSize] });
+            result = await this.rpcApi.request({ method: "searchGoods", params: [gclass, profession, category, level, page, pageSize] });
         }
         return result;
     }

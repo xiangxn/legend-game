@@ -6,7 +6,7 @@ export const FRIEND_CACHE_KEY = "Legend-friend-cache";
 export const VERSION_CACHE_KEY = "version-cache-key";
 
 export const Constant = {
-    version: "1.0.8",
+    version: "1.1.0",
     // chainId: 128,
     chainId: 256,
     // chainId: 1337,
