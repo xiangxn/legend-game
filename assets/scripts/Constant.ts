@@ -6,7 +6,7 @@ export const FRIEND_CACHE_KEY = "Legend-friend-cache";
 export const VERSION_CACHE_KEY = "version-cache-key";
 
 export const Constant = {
-    version: "1.3.0",
+    version: "1.3.1",
     chainId: 128,
     // chainId: 256,
     // chainId: 1337,
@@ -18,7 +18,7 @@ export const Constant = {
     rpcUrl: "https://data.legendnft.com/jsonrpc",
     // rpcUrl: "http://localhost:9090/jsonrpc",
     address: {
-        USDT: "0xa71edc38d189767582c38a3145b5873052c3e47a",
+        USDT: "0xa71EdC38d189767582C38A3145b5873052c3e47a",
         Hero: "0xef349B6b61F7BEABB061ae2B0bF50F06c262d718",
         Equipment: "0xfd52bE427836f31259D8D347AB9410Bf390c8A04",
         LGC: "0xb7A819D170e59D79f6289b91cA1D1a9D0C788A2a",
@@ -36,7 +36,7 @@ export const Constant = {
     },
     paymode: {
         "0xb7A819D170e59D79f6289b91cA1D1a9D0C788A2a": "LGC",
-        "0xa71edc38d189767582c38a3145b5873052c3e47a": "USDT"
+        "0xa71EdC38d189767582C38A3145b5873052c3e47a": "USDT"
     },
     intRegExp: new RegExp("^[0-9]*$"),
     lockDuration: 3600 * 24 * 2,
