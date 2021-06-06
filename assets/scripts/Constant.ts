@@ -18,25 +18,25 @@ export const Constant = {
     // rpcUrl: "https://data.legendnft.com/jsonrpc",
     rpcUrl: "http://localhost:9090/jsonrpc",
     address: {
-        USDT: "0x7E0dF16259505EA25c766e19cD4f0409a7F31Ec9",
-        Hero: "0xDE97675bE890bbF1a698bE924406911b66d9fFc4",
-        Equipment: "0x350904e40ebB1eb9C6B510Eef6aeDd6a5641BC59",
-        LGC: "0xb895492c775e9448B1a45519F3ba8Cd8B76304e7",
-        StakeMine: "0x7F851f3a8C7b03B095Bc007266a4FD764bDE45FB",
-        RoleMine: "0xE2645cA4bCE0088b6A0CfAb86aBd855c0FE77916",
-        ZoneMine: "0x8B2A89DEee164340FC92ee46d8b87bc822551811",
-        BonusPool: "0x2A3F2beA04E47358E63F8C5Ffa09a44dC8bF98fC",
-        Fragment: "0x7e37c58aCdCBCF02e47B9e0A014257657e727721",
-        Totem: "0x2a317C82cc288f36BAf17FD5f3f085B32De7B3d2",
-        Store: "0x6F51DA21d11BB8911B445C67aC0802DF6a1E37B3",
-        Box: "0x935EfAD4DCDfa17E74D15421EcbE1583769842E7",
-        PreSale: "0x9320BfA97F2B7987b5Cd67c985fF3AFC64430331",
-        Friend: "0x54C75D1d9a338b834C3212C57e8a687DF8D6c51D",
-        Market: "0x97944124699Eb723860f1Cd288577F3671D1605C"
+        USDT: "0x79Cb0Ef35Cb7c1ae503b151aB9881B07Bf4285bd",
+        Hero: "0x690dc0C346eC7383d96Bd196a45d512EBFC248B4",
+        Equipment: "0xE54851E0EaC0DECccE0F6eeE59AE051c28C89491",
+        LGC: "0x33A51564b8Ae4546eAD1673E6CDB2d31518A7e5E",
+        StakeMine: "0x9FcfF1AfFc676BE3D085f17DBF4314616c9d172d",
+        RoleMine: "0x96474a61fD54cbCd26497e423Ff4993611b3ab56",
+        ZoneMine: "0x5724595Be54617AE989479628a7b123118691ed6",
+        BonusPool: "0x2BA211242bdFd2205e3b6Aae86fa1aa46c3FBa6A",
+        Fragment: "0x6A0beaf5aaAe5A66282788f5e44552B3Dd3eB0F9",
+        Totem: "0x0c91c0Ad6204e5e551A703e7bdCE60712619657e",
+        Store: "0xc3826119150B035eC9171B5A5fbf9C484Adb460E",
+        Box: "0x733BE9e827723ec33CeF00956E19a05e3bd0C07a",
+        PreSale: "0xAe1674205056e7FA0C45197E82290570859A4F49",
+        Friend: "0x9d7d52DA48e7ee2a3e608F9607561524451E00C8",
+        Market: "0xdA816F2e628E3e0d261445282C6ce582C5E48147"
     },
     paymode: {
-        "0xb895492c775e9448B1a45519F3ba8Cd8B76304e7": "LGC",
-        "0x7E0dF16259505EA25c766e19cD4f0409a7F31Ec9": "USDT"
+        "0x33A51564b8Ae4546eAD1673E6CDB2d31518A7e5E": "LGC",
+        "0x79Cb0Ef35Cb7c1ae503b151aB9881B07Bf4285bd": "USDT"
     },
     intRegExp: new RegExp("^[0-9]*$"),
     lockDuration: 3600 * 24 * 2,
@@ -48,7 +48,8 @@ export const Constant = {
             { goodsId: 6, name: "入门甲胄箱", coin: "LGC", img: "box4", desc: "概率开出1-10级各职业除武器外所有装备。", note: "注意: 购买成功后，可以在储物箱-未开箱查看" },
             { goodsId: 7, name: "普通甲胄箱", coin: "LGC", img: "box5", desc: "概率开出11-20级各职业除武器外所有装备。", note: "注意: 购买成功后，可以在储物箱-未开箱查看" },
             { goodsId: 8, name: "稀有甲胄箱", coin: "LGC", img: "box6", desc: "概率开出21-30级各职业除武器外所有装备。", note: "注意: 购买成功后，可以在储物箱-未开箱查看" },
-            { goodsId: 9, name: "经验丹", coin: "LGC", img: "3-3", desc: "角色面板使用，可增加角色经验。", note: "" }
+            { goodsId: 9, name: "经验丹", coin: "LGC", img: "3-3", desc: "角色面板使用，可增加角色经验。", note: "" },
+            { goodsId: 11, name: "金疮药", coin: "LGC", img: "3-4", desc: "进入副本[比奇森林]探险的必需品，根据时间消耗。", note: "" }
         ],
         USDT: [
             { goodsId: 3, name: "入门武器箱", coin: "USDT", img: "box1", desc: "概率开出1-10级各职业武器装备。", note: "注意: 购买成功后，可以在储物箱-未开箱查看" },
@@ -105,7 +106,7 @@ export const Constant = {
         {
             title: "USDT",
             address: "0x0000000000000000000000000000000000000001",
-            token: "0x7E0dF16259505EA25c766e19cD4f0409a7F31Ec9",
+            token: "0x79Cb0Ef35Cb7c1ae503b151aB9881B07Bf4285bd",
             abi: "StakeMine",
             decimals: 18,
             url: "https://info.mdex.com/#/pair/",
@@ -113,7 +114,11 @@ export const Constant = {
             isCalc: false
         }
     ],
-    zones: [{ id: 1001, banner: "zone1banner", bg: "zone1bg", equip: "1-10" },
-    { id: 1002, banner: "zone2banner", bg: "zone2bg", equip: "11-20" },
-    { id: 1003, banner: "zone3banner", bg: "zone3bg", equip: "21-30" }]
+    zones: [{ id: 1000, banner: "zone0banner", bg: "zone0bg", equip: "1-10", stype: 4 },
+    { id: 1001, banner: "zone1banner", bg: "zone1bg", equip: "1-10", stype: 2 },
+    { id: 1002, banner: "zone2banner", bg: "zone2bg", equip: "11-20", stype: 2 },
+    { id: 1003, banner: "zone3banner", bg: "zone3bg", equip: "21-30", stype: 2 },
+    { id: 1004, banner: "zone4banner", bg: "zone4bg", equip: "31-40", stype: 2 },
+    { id: 1005, banner: "zone5banner", bg: "zone5bg", equip: "41-50", stype: 2 }
+    ]
 };

@@ -24,9 +24,14 @@ export class Zone extends BaseComponent {
 
     selectedZone: any;
     fragmentBalance: number = 0;
-    coinId = (Constant.consumables as any)[2][1];
-    fragmentName: string = (Constant.consumables as any)[2][0];
+    
+    get coinId(){
+        return (Constant.consumables as any)[this.selectedZone.config.stype][1];
+    }
 
+    get fragmentName(): string {
+        return (Constant.consumables as any)[this.selectedZone.config.stype][0];
+    }
 
     constructor() {
         super();
@@ -50,7 +55,10 @@ export class Zone extends BaseComponent {
                 this.fragmentBalance = parseInt(value.toString());
                 this._showFragmentInfo(zoneInfo);
             })
-            .catch(reason => { this.showErr(reason); });
+            .catch(reason => {
+                // console.log(reason);
+                this.showErr(reason);
+            });
     }
 
     private _showFragmentInfo(zoneInfo: any) {
@@ -99,6 +107,7 @@ export class Zone extends BaseComponent {
     }
 
     openZone(zoneInfo: any, roleInfo: any, status: number, config: any) {
+        this.selectedZone = Object.assign({ config: config }, zoneInfo);
         // console.log("zoneInfo: ", zoneInfo);
         this._loadBalance(zoneInfo);
         //检查角色状态
@@ -111,12 +120,13 @@ export class Zone extends BaseComponent {
                             let status = parseInt(info.hero.status);
                             if (status == 0) {
                                 //可以进入副本
-                                this._inZone(zoneInfo, info);
+                                this._inZone(zoneInfo, info, config);
                             } else {
                                 status == 1 ? this.showAlert("角色正在矿洞挖矿!") : this.showAlert("角色正在其他副本冒险!");
                             }
                         })
                         .catch(reason => {
+                            // console.log(reason);
                             loading.close();
                             this.showErr(reason);
                         });
@@ -160,8 +170,7 @@ export class Zone extends BaseComponent {
             });
     }
 
-    private _inZone(zoneInfo: any, roleInfo: any) {
-        this.selectedZone = zoneInfo;
+    private _inZone(zoneInfo: any, roleInfo: any, config: any) {
         //检查副本战力要求
         if (parseInt(zoneInfo.minPower) > parseInt(roleInfo.attrs.power)) {
             this.showAlert("你的战力还不能进入该副本!");
