@@ -7,36 +7,36 @@ export const VERSION_CACHE_KEY = "version-cache-key";
 
 export const Constant = {
     version: "1.3.1",
-    chainId: 128,
+    // chainId: 128,
     // chainId: 256,
-    // chainId: 1337,
-    // apiUrl: "http://127.0.0.1:7545",
+    chainId: 1337,
+    apiUrl: "http://127.0.0.1:7545",
     // apiUrl: "https://http-testnet.hecochain.com",
-    apiUrl: "https://http-mainnet-node.huobichain.com",
+    // apiUrl: "https://http-mainnet-node.huobichain.com",
     // rpcProvider: { "256": "https://http-testnet.hecochain.com" },
     annUrl: "https://www.legendnft.com/announcement.json",
-    rpcUrl: "https://data.legendnft.com/jsonrpc",
-    // rpcUrl: "http://localhost:9090/jsonrpc",
+    // rpcUrl: "https://data.legendnft.com/jsonrpc",
+    rpcUrl: "http://localhost:9090/jsonrpc",
     address: {
-        USDT: "0xa71EdC38d189767582C38A3145b5873052c3e47a",
-        Hero: "0xef349B6b61F7BEABB061ae2B0bF50F06c262d718",
-        Equipment: "0xfd52bE427836f31259D8D347AB9410Bf390c8A04",
-        LGC: "0xb7A819D170e59D79f6289b91cA1D1a9D0C788A2a",
-        StakeMine: "0x6C234aE7E4beaa7816Dfe89efa45094CCDFbA19D",
-        RoleMine: "0x672B71f169AbF20448aaC3acA6C0BAaD337C2fF5",
-        ZoneMine: "0x04017C2D0Df0cC296c3EE61d70940F3d04fcbEcb",
-        BonusPool: "0x13368543dc96195Dc564048DFd598F12AbbC7662",
-        Fragment: "0x6C5aD71809c8fA3b6dB9dcC02efe825A33869C33",
-        Totem: "0x49De5A35ee679Ea1BF9C27a2CFF85AA220be1527",
-        Store: "0xB4BE2df64ca360F0aA5cf6EDFbB58bF5F39182D1",
-        Box: "0xAEe308fAb21D185691Fe4ec7dd503a601383586E",
-        PreSale: "0x275eeC0aF74F3c5c0562807E57D4cC4625F9a7b9",
-        Friend: "0x8C6492E2d9D5404D2b46ffc9f7E6342ADE4602a1",
-        Market: "0x18Beb70Ec025fdDc084C3c0E6d6cB30615dE3113"
+        USDT: "0x7E0dF16259505EA25c766e19cD4f0409a7F31Ec9",
+        Hero: "0xDE97675bE890bbF1a698bE924406911b66d9fFc4",
+        Equipment: "0x350904e40ebB1eb9C6B510Eef6aeDd6a5641BC59",
+        LGC: "0xb895492c775e9448B1a45519F3ba8Cd8B76304e7",
+        StakeMine: "0x7F851f3a8C7b03B095Bc007266a4FD764bDE45FB",
+        RoleMine: "0xE2645cA4bCE0088b6A0CfAb86aBd855c0FE77916",
+        ZoneMine: "0x8B2A89DEee164340FC92ee46d8b87bc822551811",
+        BonusPool: "0x2A3F2beA04E47358E63F8C5Ffa09a44dC8bF98fC",
+        Fragment: "0x7e37c58aCdCBCF02e47B9e0A014257657e727721",
+        Totem: "0x2a317C82cc288f36BAf17FD5f3f085B32De7B3d2",
+        Store: "0x6F51DA21d11BB8911B445C67aC0802DF6a1E37B3",
+        Box: "0x935EfAD4DCDfa17E74D15421EcbE1583769842E7",
+        PreSale: "0x9320BfA97F2B7987b5Cd67c985fF3AFC64430331",
+        Friend: "0x54C75D1d9a338b834C3212C57e8a687DF8D6c51D",
+        Market: "0x97944124699Eb723860f1Cd288577F3671D1605C"
     },
     paymode: {
-        "0xb7A819D170e59D79f6289b91cA1D1a9D0C788A2a": "LGC",
-        "0xa71EdC38d189767582C38A3145b5873052c3e47a": "USDT"
+        "0xb895492c775e9448B1a45519F3ba8Cd8B76304e7": "LGC",
+        "0x7E0dF16259505EA25c766e19cD4f0409a7F31Ec9": "USDT"
     },
     intRegExp: new RegExp("^[0-9]*$"),
     lockDuration: 3600 * 24 * 2,
@@ -61,7 +61,8 @@ export const Constant = {
     consumables: {
         1: ["鹤嘴锄", "1356938545749799165144492409224415641889241185234880306775293388547669622784"],
         2: ["疗伤药", "1356938545749799165169012337878269863622974737669285253713193214502607257600"],
-        3: ["经验丹", "1356938545749799165193532266532124085356708290103690200651093040457544892416"]
+        3: ["经验丹", "1356938545749799165193532266532124085356708290103690200651093040457544892416"],
+        4: ["金疮药", "1356938545749799165218052195185978307090441842538095147588992866412482527232"]
     },
     totems: {
         1: ["祖玛图腾", "兑换奖池专用,每期一个", "可合成祖玛图腾,图腾可兑换奖池奖金,往期图腾及碎片只能销毁获得LGC"],
@@ -102,22 +103,12 @@ export const Constant = {
     mainAttrs: { attack: "物理攻击", taoism: "道术攻击", magic: "魔法攻击", defense: "物理防御", magicDefense: "魔法防御", physicalPower: "体力值", magicPower: "魔力值" },
     stakePool: [
         {
-            title: "LGC/USDT 2",
-            address: "0x0000000000000000000000000000000000000002",
-            token: "0xc4cc2edb6039b11280b1D09cf49775Da7fA10F71",
-            abi: "StakeMine",
-            decimals: 18,
-            url: "https://info.mdex.com/#/pair/0xc4cc2edb6039b11280b1D09cf49775Da7fA10F71",
-            priceUrl: "https://info.mdex.com",
-            isCalc: false
-        },
-        {
-            title: "LGC/USDT",
+            title: "USDT",
             address: "0x0000000000000000000000000000000000000001",
-            token: "0xc4cc2edb6039b11280b1D09cf49775Da7fA10F71",
+            token: "0x7E0dF16259505EA25c766e19cD4f0409a7F31Ec9",
             abi: "StakeMine",
             decimals: 18,
-            url: "https://info.mdex.com/#/pair/0xc4cc2edb6039b11280b1D09cf49775Da7fA10F71",
+            url: "https://info.mdex.com/#/pair/",
             priceUrl: "https://info.mdex.com",
             isCalc: false
         }
