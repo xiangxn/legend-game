@@ -52,7 +52,7 @@ export class ZoneItem extends BaseComponent {
         this.labExps.string = this.zoneInfo.baseExp;
         this.labPower.string = this.zoneInfo.minPower;
         this.labLevel.string = this.zoneInfo.level;
-        this.labWeights.string = this.zoneInfo.fragmentWeight + "%";
+        this.labWeights.string = this.zoneConfig.weight + "%";
         this.labStatus.string = "";
         this.callContract("ZoneMine", "getRoleByAddr", this.api?.curAccount)
             .then(info => {
