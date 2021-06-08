@@ -415,7 +415,20 @@ export class StorageBox extends BaseComponent {
         ChooseWin.show(false).then((cw: ChooseWin) => {
             cw.onChooseEvent = this._onChooseEquip.bind(this);
             let data = this.currentList.fixedScrollView.dataSet.filter((item: Props) => {
-                return item.info.number == arr[0].info.number && item.id != arr[0].id && item.info.isEquip == false;
+                let max = parseInt(arr[0].info.level);
+                let min = 0;
+                if (item.info.category == "0") {
+                    min = max - 6;
+                } else {
+                    min = max - 11;
+                }
+                min = min < 0 ? 0 : min;
+                let level = parseInt(item.info.level);
+
+                // return item.info.number == arr[0].info.number && item.id != arr[0].id && item.info.isEquip == false;
+                return item.id != arr[0].id && item.info.isEquip == false
+                    && (arr[0].info.profession == item.info.profession && arr[0].info.category == item.info.category)
+                    && (level <= max && level >= min);
             });
             cw.setData(data);
         });
