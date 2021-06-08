@@ -102,6 +102,16 @@ export const Constant = {
     mainAttrs: { attack: "物理攻击", taoism: "道术攻击", magic: "魔法攻击", defense: "物理防御", magicDefense: "魔法防御", physicalPower: "体力值", magicPower: "魔力值" },
     stakePool: [
         {
+            title: "LGC/USDT 3",
+            address: "0x0000000000000000000000000000000000000003",
+            token: "0xc4cc2edb6039b11280b1D09cf49775Da7fA10F71",
+            abi: "StakeMine",
+            decimals: 18,
+            url: "https://info.mdex.com/#/pair/0xc4cc2edb6039b11280b1D09cf49775Da7fA10F71",
+            priceUrl: "https://info.mdex.com",
+            isCalc: false
+        },
+        {
             title: "LGC/USDT 2",
             address: "0x0000000000000000000000000000000000000002",
             token: "0xc4cc2edb6039b11280b1D09cf49775Da7fA10F71",
