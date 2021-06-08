@@ -11,7 +11,7 @@ export const Constant = {
     chainId: 256,
     // chainId: 1337,
     // apiUrl: "http://127.0.0.1:7545",
-    apiUrl: "https://http-testnet.hecochain.com",
+    apiUrl: "https://http-testnet.huobichain.com",
     // apiUrl: "https://http-mainnet-node.huobichain.com",
     // rpcProvider: { "256": "https://http-testnet.hecochain.com" },
     annUrl: "https://www.legendnft.com/announcement.json",
@@ -25,7 +25,7 @@ export const Constant = {
         LGC: "0x51857e3111eEF80429445F32A8cc341B735e2a52",
         StakeMine: "0x51A70b92879D1BC5EA388b10B3385C78C5BD1C46",
         RoleMine: "0xEd7CD4bE790038Df8be95Db37A62AA9656B826BB",
-        ZoneMine: "0xd6C10A624A217Da98B95082F58A5AbB003FC0223",
+        ZoneMine: "0xB9B1Dfb5A6FA4B78e58842d86cA1e05fDDAbaCb1",
         BonusPool: "0x745Ae5D363B939Dd4A19E032273d881AAa35e726",
         Fragment: "0x49c77052fF4BfBB6532A9172c5DD6D045c1C7493",
         Totem: "0xE3eBaAB7C8550b511dE47ac7D73b4b24f7Ed647F",
@@ -49,7 +49,8 @@ export const Constant = {
             { goodsId: 6, name: "入门甲胄箱", coin: "LGC", img: "box4", desc: "概率开出1-10级各职业除武器外所有装备。", note: "注意: 购买成功后，可以在储物箱-未开箱查看" },
             { goodsId: 7, name: "普通甲胄箱", coin: "LGC", img: "box5", desc: "概率开出11-20级各职业除武器外所有装备。", note: "注意: 购买成功后，可以在储物箱-未开箱查看" },
             { goodsId: 8, name: "稀有甲胄箱", coin: "LGC", img: "box6", desc: "概率开出21-30级各职业除武器外所有装备。", note: "注意: 购买成功后，可以在储物箱-未开箱查看" },
-            { goodsId: 9, name: "经验丹", coin: "LGC", img: "3-3", desc: "角色面板使用，可增加角色经验。", note: "" }
+            { goodsId: 9, name: "经验丹", coin: "LGC", img: "3-3", desc: "角色面板使用，可增加角色经验。", note: "" },
+            { goodsId: 11, name: "金疮药", coin: "LGC", img: "3-4", desc: "进入副本[比奇森林]探险的必需品，根据时间消耗。", note: "" }
         ],
         USDT: [
             { goodsId: 3, name: "入门武器箱", coin: "USDT", img: "box1", desc: "概率开出1-10级各职业武器装备。", note: "注意: 购买成功后，可以在储物箱-未开箱查看" },
@@ -62,13 +63,14 @@ export const Constant = {
     consumables: {
         1: ["鹤嘴锄", "1356938545749799165144492409224415641889241185234880306775293388547669622784"],
         2: ["疗伤药", "1356938545749799165169012337878269863622974737669285253713193214502607257600"],
-        3: ["经验丹", "1356938545749799165193532266532124085356708290103690200651093040457544892416"]
+        3: ["经验丹", "1356938545749799165193532266532124085356708290103690200651093040457544892416"],
+        4: ["金疮药", "1356938545749799165218052195185978307090441842538095147588992866412482527232"]
     },
     totems: {
         1: ["祖玛图腾", "兑换奖池专用,每期一个", "可合成祖玛图腾,图腾可兑换奖池奖金,往期图腾及碎片只能销毁获得LGC"],
         2: ["沃玛图腾", "兑换奖池专用,每期二个", "可合成沃玛图腾,图腾可兑换奖池奖金,往期图腾及碎片只能销毁获得LGC"],
         3: ["尸王图腾", "兑换奖池专用,每期五个", "可合成尸王图腾,图腾可兑换奖池奖金,往期图腾及碎片只能销毁获得LGC"],
-        4: ["血骷髅图腾", "兑换奖池专用,每期20个", "可合成血骷髅图腾,图腾可兑换奖池奖金,往期图腾及碎片只能销毁获得LGC"]
+        4: ["血骷髅图腾", "兑换奖池专用,每期五个", "可合成血骷髅图腾,图腾可兑换奖池奖金,往期图腾及碎片只能销毁获得LGC"]
     },
     boxs: {
         1: "入门武器箱",
@@ -105,7 +107,7 @@ export const Constant = {
         {
             title: "USDT",
             address: "0x0000000000000000000000000000000000000001",
-            token: "0xEB5a311D4c3bE8bFa307e3DaD0C8873A3E42B354",
+            token: "0x79Cb0Ef35Cb7c1ae503b151aB9881B07Bf4285bd",
             abi: "StakeMine",
             decimals: 18,
             url: "https://info.mdex.com/#/pair/",
@@ -113,7 +115,11 @@ export const Constant = {
             isCalc: false
         }
     ],
-    zones: [{ id: 1001, banner: "zone1banner", bg: "zone1bg", equip: "1-10" },
-    { id: 1002, banner: "zone2banner", bg: "zone2bg", equip: "11-20" },
-    { id: 1003, banner: "zone3banner", bg: "zone3bg", equip: "21-30" }]
+    zones: [{ id: 1000, banner: "zone0banner", bg: "zone0bg", equip: "1-10", stype: 4, weight: 0 },
+    { id: 1001, banner: "zone1banner", bg: "zone1bg", equip: "1-10", stype: 2, weight: 20 },
+    { id: 1002, banner: "zone2banner", bg: "zone2bg", equip: "11-20", stype: 2, weight: 20 },
+    { id: 1003, banner: "zone3banner", bg: "zone3bg", equip: "21-30", stype: 2, weight: 20 },
+    { id: 1004, banner: "zone4banner", bg: "zone4bg", equip: "31-40", stype: 2, weight: 20 },
+    { id: 1005, banner: "zone5banner", bg: "zone5bg", equip: "41-50", stype: 2, weight: 20 }
+    ]
 };
