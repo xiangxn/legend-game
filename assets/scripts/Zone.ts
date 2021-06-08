@@ -1,9 +1,12 @@
 
-import { _decorator, Component, Node, director, Prefab, resources, instantiate, Label, Sprite } from 'cc';
+import { _decorator, Component, Node, director, Prefab, resources, instantiate, Label, Sprite, ScrollView, size, find, ValueType } from 'cc';
 import { BaseComponent } from './BaseComponent';
 import { Constant, CONSUMABLES_CACHE_KEY, EQUIPMENT_CACHE_KEY, TOTEM_CACHE_KEY } from './Constant';
 import { ZoneItem } from './ZoneItem';
 import Web3 from "web3/dist/web3.min.js";
+import { Props } from './entitys/Props';
+import { PropsItem } from './PropsItem';
+import { ChooseWin } from './ChooseWin';
 
 const { ccclass, property, type } = _decorator;
 const { toBN, padLeft, toHex } = Web3.utils;
@@ -22,10 +25,13 @@ export class Zone extends BaseComponent {
     @type(Node)
     zoneList: Node;
 
+    @type(Prefab)
+    propsItemTmp: Prefab;
+
     selectedZone: any;
     fragmentBalance: number = 0;
-    
-    get coinId(){
+
+    get coinId() {
         return (Constant.consumables as any)[this.selectedZone.config.stype][1];
     }
 
@@ -39,6 +45,7 @@ export class Zone extends BaseComponent {
         this.zoneInfo = new Node();
         this.zoneItem = new Prefab();
         this.zoneList = new Node();
+        this.propsItemTmp = new Prefab();
     }
 
     onLoad() {
@@ -152,6 +159,7 @@ export class Zone extends BaseComponent {
         let equipLevel = this.zoneInfo.getChildByPath("topInfo/Layout-001/Layout/EquipLevel")?.getComponent(Label);
         let zoneTime = this.zoneInfo.getChildByPath("topInfo/Layout-001/Layout-001/ZoneTime")?.getComponent(Label);
         let bg = this.node.getChildByPath("ZoneInfo/ZoneBG")?.getComponent(Sprite);
+        let outList = this.node.getChildByPath("ZoneInfo/Node-props/ScrollView/view/content");
         this.loadSpriteUrl("img/" + config.bg, bg);
         if (!!title) title.string = zoneInfo.name;
         if (!!zonePower) zonePower.string = zoneInfo.dropRateBase;
@@ -168,17 +176,37 @@ export class Zone extends BaseComponent {
             .catch(reason => {
                 this.showErr(reason);
             });
+        if (!!outList) {
+            outList.removeAllChildren();
+            for (let index in zoneInfo.equipmentNumber) {
+                let item = zoneInfo.equipmentNumber[index];
+                let node = instantiate(this.propsItemTmp);
+                if (!!node) {
+                    let pi = node.getComponent(PropsItem);
+                    if (!!pi) {
+                        let props = new Props();
+                        props.name = (Constant.equipments as any)[item];
+                        props.img = item;
+                        pi.setItem(props);
+                        outList.addChild(node);
+                    }
+                }
+            }
+            let uit = this.getUIT(outList)
+            uit.setContentSize(size(zoneInfo.equipmentNumber.length * 300, uit.height));
+        }
+        // console.log(zoneInfo.equipmentNumber);
     }
 
     private _inZone(zoneInfo: any, roleInfo: any, config: any) {
         //检查副本战力要求
         if (parseInt(zoneInfo.minPower) > parseInt(roleInfo.attrs.power)) {
-            this.showAlert("你的战力还不能进入该副本!");
+            this.showAlert("你的战力还不能进入[" + zoneInfo.name + "]副本!");
             return;
         }
         //检查副本角色等级要求
         if (parseInt(zoneInfo.level) > parseInt(roleInfo.attrs.level)) {
-            this.showAlert("你的等级还不能进入该副本!");
+            this.showAlert("你的等级还不能进入" + zoneInfo.name + "副本!");
             return;
         }
         //检查角色战力是否为0
@@ -224,7 +252,12 @@ export class Zone extends BaseComponent {
                 this.onCloseZoneInfo();
                 this.zoneList.removeAllChildren();
                 this._loadZones();
-                this.showAlert("恭喜你完成本次探险!\r\n获取的宝物将直接进入储物箱。");
+                // this.showAlert("恭喜你完成本次探险!\r\n获取的宝物将直接进入储物箱。");
+                ChooseWin.show(true, "", "获得物品").then((cw: ChooseWin) => {
+                    let data = this.getEventProps(val);
+                    // console.log(data);
+                    cw.setData(data);
+                });
             })
     }
 

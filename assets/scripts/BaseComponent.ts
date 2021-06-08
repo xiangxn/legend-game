@@ -401,5 +401,42 @@ export class BaseComponent extends Component {
         // return JSON.parse(JSON.stringify(data));
         return data;
     }
+
+    getEventProps(val: any) {
+        // console.log(val);
+        let data: Props[] = [];
+        if ("Gain" in val.events) {
+            if (val.events.Gain instanceof Array) {
+                for (let i in val.events.Gain) {
+                    let gain = val.events.Gain[i].returnValues;
+                    let props = new Props();
+                    if (parseInt(gain.class) == 0) {//装备
+                        props.name = (Constant.equipments as any)[gain.number];
+                        props.img = gain.number.toString();
+                        props.info = { quality: gain.quality.toString() };
+                    } else {
+                        props.name = (Constant.totems as any)[parseInt(gain.number)][0].replace("图腾", "碎片");
+                        props.img = gain.quality + "-" + gain.number;
+                        props.info = { quality: "2", bigType: gain.quality, smallType: gain.number }
+                    }
+                    data.push(props);
+                }
+            } else {
+                let gain = val.events.Gain.returnValues;
+                let props = new Props();
+                if (parseInt(gain.class) == 0) {//装备
+                    props.name = (Constant.equipments as any)[gain.number];
+                    props.img = gain.number.toString();
+                    props.info = { quality: gain.quality.toString() };
+                } else {
+                    props.name = (Constant.totems as any)[parseInt(gain.number)][0].replace("图腾", "碎片");
+                    props.img = gain.quality + "-" + gain.number;
+                    props.info = { quality: "2", bigType: gain.quality, smallType: gain.number }
+                }
+                data.push(props);
+            }
+        }
+        return data;
+    }
 }
 

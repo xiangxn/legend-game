@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, Label, Prefab, Layout, instantiate, resources } from 'cc';
+import { _decorator, Component, Node, Label, Prefab, Layout, instantiate, resources, find } from 'cc';
 const { ccclass, type } = _decorator;
 import { Props } from './entitys/Props';
 import { PropsList } from './PropsList';
@@ -77,24 +77,23 @@ export class ChooseWin extends Component {
         if (this.onChooseEvent) this.onChooseEvent(Array.from(this.propsList.currentChoose));
     }
 
-    static show(parent: Node, isSingleChoice: boolean = true, noDataMsg: string = "没有数据"): Promise<ChooseWin> {
-        if (parent) {
-            return new Promise((resolve, reject) => {
-                resources.load("component/chooseWin", Prefab, (err, prefab) => {
-                    let win = instantiate(prefab);
-                    let cw = win.getComponent(ChooseWin);
-                    if (cw) {
-                        cw.isSingleChoice = isSingleChoice;
-                        cw.setNoDataMsg(noDataMsg);
-                        parent.addChild(win);
-                        resolve(cw);
-                    } else {
-                        reject(err);
-                    }
-                });
+    static show(isSingleChoice: boolean = true, noDataMsg: string = "没有数据", title: string = ""): Promise<ChooseWin> {
+        let parent = find("Canvas") ?? new Node();
+        return new Promise((resolve, reject) => {
+            resources.load("component/chooseWin", Prefab, (err, prefab) => {
+                let win = instantiate(prefab);
+                let cw = win.getComponent(ChooseWin);
+                if (cw) {
+                    if (!!title) cw.title = title;
+                    cw.isSingleChoice = isSingleChoice;
+                    cw.setNoDataMsg(noDataMsg);
+                    parent?.addChild(win);
+                    resolve(cw);
+                } else {
+                    reject(err);
+                }
             });
-        }
-        return Promise.reject();
+        });
     }
 
 }

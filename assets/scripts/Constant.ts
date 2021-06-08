@@ -24,7 +24,7 @@ export const Constant = {
         LGC: "0x33A51564b8Ae4546eAD1673E6CDB2d31518A7e5E",
         StakeMine: "0x9FcfF1AfFc676BE3D085f17DBF4314616c9d172d",
         RoleMine: "0x96474a61fD54cbCd26497e423Ff4993611b3ab56",
-        ZoneMine: "0x5724595Be54617AE989479628a7b123118691ed6",
+        ZoneMine: "0xf4bF522F2Fdd02522eFd996A1cEcF56891B2BF62",
         BonusPool: "0x2BA211242bdFd2205e3b6Aae86fa1aa46c3FBa6A",
         Fragment: "0x6A0beaf5aaAe5A66282788f5e44552B3Dd3eB0F9",
         Totem: "0x0c91c0Ad6204e5e551A703e7bdCE60712619657e",
@@ -114,11 +114,11 @@ export const Constant = {
             isCalc: false
         }
     ],
-    zones: [{ id: 1000, banner: "zone0banner", bg: "zone0bg", equip: "1-10", stype: 4 },
-    { id: 1001, banner: "zone1banner", bg: "zone1bg", equip: "1-10", stype: 2 },
-    { id: 1002, banner: "zone2banner", bg: "zone2bg", equip: "11-20", stype: 2 },
-    { id: 1003, banner: "zone3banner", bg: "zone3bg", equip: "21-30", stype: 2 },
-    { id: 1004, banner: "zone4banner", bg: "zone4bg", equip: "31-40", stype: 2 },
-    { id: 1005, banner: "zone5banner", bg: "zone5bg", equip: "41-50", stype: 2 }
+    zones: [{ id: 1000, banner: "zone0banner", bg: "zone0bg", equip: "1-10", stype: 4, weight: 0 },
+    { id: 1001, banner: "zone1banner", bg: "zone1bg", equip: "1-10", stype: 2, weight: 20 },
+    { id: 1002, banner: "zone2banner", bg: "zone2bg", equip: "11-20", stype: 2, weight: 20 },
+    { id: 1003, banner: "zone3banner", bg: "zone3bg", equip: "21-30", stype: 2, weight: 20 },
+    { id: 1004, banner: "zone4banner", bg: "zone4bg", equip: "31-40", stype: 2, weight: 20 },
+    { id: 1005, banner: "zone5banner", bg: "zone5bg", equip: "41-50", stype: 2, weight: 20 }
     ]
 };
