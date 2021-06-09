@@ -3580,7 +3580,7 @@
       "b": 93,
       "a": 255
     },
-    "_string": "普通矿洞",
+    "_string": "角色矿洞",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 40,
@@ -5678,7 +5678,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "普通矿洞",
+    "_string": "角色矿洞",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 78,

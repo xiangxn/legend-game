@@ -43,10 +43,10 @@
         "rotated": false,
         "offsetX": 0,
         "offsetY": 0,
-        "trimX": 1,
-        "trimY": 1,
-        "width": 821,
-        "height": 325,
+        "trimX": 0,
+        "trimY": 0,
+        "width": 823,
+        "height": 327,
         "rawWidth": 823,
         "rawHeight": 327,
         "borderTop": 0,
@@ -67,7 +67,7 @@
     }
   },
   "userData": {
-    "hasAlpha": true,
+    "hasAlpha": false,
     "type": "sprite-frame",
     "redirect": "f17a61a4-10ae-492e-a01b-52c1a3b4f3af@f9941"
   }

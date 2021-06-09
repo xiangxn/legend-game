@@ -41,11 +41,11 @@
         "trimType": "auto",
         "trimThreshold": 1,
         "rotated": false,
-        "offsetX": -3,
+        "offsetX": 0,
         "offsetY": 0,
-        "trimX": 2,
+        "trimX": 0,
         "trimY": 0,
-        "width": 866,
+        "width": 876,
         "height": 1289,
         "rawWidth": 876,
         "rawHeight": 1289,
@@ -67,7 +67,7 @@
     }
   },
   "userData": {
-    "hasAlpha": true,
+    "hasAlpha": false,
     "type": "sprite-frame",
     "redirect": "ec2193a5-8417-40ee-a5eb-7b65f3ef1346@f9941"
   }
