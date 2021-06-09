@@ -184,7 +184,7 @@ export class Role extends BaseComponent {
                 return item.info.category == this.equipConfig[this.equipIndex]
                     && parseInt(this.heroAttr.level) >= parseInt(item.info.level)
                     && (item.info.profession.toString() == "0" || item.info.profession == this.heroAttr.profession)
-                // && item.info.isEquip == false;
+                    && item.info.isEquip == false;
             });
             // data.forEach(item => {
             //     if (item.img?.indexOf("icon/") == -1)
