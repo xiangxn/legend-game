@@ -94,13 +94,14 @@ export class Role extends BaseComponent {
             this.heroAttr = { profession: 0 };
         } else {
             await this._loadEquipments();
-            this.createRole.node.active = false;
+            if (!!this.createRole)
+                this.createRole.node.active = false;
             this.heroAttr = info.attrs;
             this.heroStatus = info.hero;
             for (let i = 0; i < this.heroAttr.equipmentSlot.length; i++) {
                 this.equipmentSlot[i] = this.heroAttr.equipmentSlot[i];
             }
-            console.log("hero info: ", info);
+            // console.log("hero info: ", info);
             this._showRoleData();
         }
     }
