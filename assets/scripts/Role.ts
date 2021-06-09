@@ -94,13 +94,14 @@ export class Role extends BaseComponent {
             this.heroAttr = { profession: 0 };
         } else {
             await this._loadEquipments();
-            this.createRole.node.active = false;
+            if (!!this.createRole)
+                this.createRole.node.active = false;
             this.heroAttr = info.attrs;
             this.heroStatus = info.hero;
             for (let i = 0; i < this.heroAttr.equipmentSlot.length; i++) {
                 this.equipmentSlot[i] = this.heroAttr.equipmentSlot[i];
             }
-            console.log("hero info: ", info);
+            // console.log("hero info: ", info);
             this._showRoleData();
         }
     }
@@ -183,7 +184,7 @@ export class Role extends BaseComponent {
                 return item.info.category == this.equipConfig[this.equipIndex]
                     && parseInt(this.heroAttr.level) >= parseInt(item.info.level)
                     && (item.info.profession.toString() == "0" || item.info.profession == this.heroAttr.profession)
-                    && item.info.isEquip == false;
+                // && item.info.isEquip == false;
             });
             // data.forEach(item => {
             //     if (item.img?.indexOf("icon/") == -1)

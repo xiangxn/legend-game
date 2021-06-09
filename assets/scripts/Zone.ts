@@ -249,6 +249,7 @@ export class Zone extends BaseComponent {
         localStorage.removeItem(EQUIPMENT_CACHE_KEY);
         this.sendContract("ZoneMine", "withdraw", { from: this.api?.curAccount })
             .then(val => {
+                console.log(val);
                 this.onCloseZoneInfo();
                 this.zoneList.removeAllChildren();
                 this._loadZones();

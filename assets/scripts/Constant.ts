@@ -24,7 +24,7 @@ export const Constant = {
         LGC: "0x33A51564b8Ae4546eAD1673E6CDB2d31518A7e5E",
         StakeMine: "0x9FcfF1AfFc676BE3D085f17DBF4314616c9d172d",
         RoleMine: "0x96474a61fD54cbCd26497e423Ff4993611b3ab56",
-        ZoneMine: "0xf4bF522F2Fdd02522eFd996A1cEcF56891B2BF62",
+        ZoneMine: "0xFE3dF1c7d1663956968602051ad849eC76231fe5",
         BonusPool: "0x2BA211242bdFd2205e3b6Aae86fa1aa46c3FBa6A",
         Fragment: "0x6A0beaf5aaAe5A66282788f5e44552B3Dd3eB0F9",
         Totem: "0x0c91c0Ad6204e5e551A703e7bdCE60712619657e",
