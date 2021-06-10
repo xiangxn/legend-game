@@ -112,21 +112,22 @@ export class Mine extends BaseComponent {
 
     private _loadPools() {
         this.poolList.removeAllChildren();
+        let list: Promise<any>[] = [];
         Constant.stakePool.forEach((config: any) => {
-            let prefab = instantiate(this.preStakingItem);
-            if (!!prefab) {
-                let logic = prefab.getComponent(StakingItem);
-                this.callContract(config.abi, "getMineInfo", config.address, this.api?.curAccount)
-                    .then(data => {
-                        logic?.setConfig(config, data);
-                        this.poolList.addChild(prefab);
-                        this._calcTotal();
-                    })
-                    .catch(reason => {
-                        // console.log(reason);
-                        this.showErr(reason);
-                    });
+            list.push(this.callContract(config.abi, "getMineInfo", config.address, this.api?.curAccount).catch(reason => { this.showErr(reason); }));
+        });
+        Promise.all(list).then(infos => {
+            for (let i = 0; i < infos.length; i++) {
+                let prefab = instantiate(this.preStakingItem);
+                let config = Constant.stakePool[i];
+                let data = infos[i];
+                if (!!prefab) {
+                    let logic = prefab.getComponent(StakingItem);
+                    logic?.setConfig(config, data);
+                    this.poolList.addChild(prefab);
+                }
             }
+            this._calcTotal();
         });
     }
 
@@ -266,7 +267,7 @@ export class Mine extends BaseComponent {
         let rd = fromWei(reward, "ether");
         return rd.substr(0, rd.indexOf(".") + 5);
     }
-    
+
     private _calcApy(pool: any) {
         // console.log(pool)
         let totalAmount = toBN(pool.totalAmount);
