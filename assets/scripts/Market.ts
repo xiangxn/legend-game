@@ -118,6 +118,7 @@ export class Market extends BaseComponent {
     }
 
     onFilterProps(data: any[]) {
+        this.page = 1;
         switch (this.currentTabIndex) {
             case 0:
                 this.loadData(data[0].value, data[1].value, data[2].value, data[3].value);
