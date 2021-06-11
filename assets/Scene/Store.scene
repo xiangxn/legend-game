@@ -2641,7 +2641,7 @@
         "__id__": 134
       }
     ],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 340
@@ -7258,7 +7258,7 @@
     "_priority": 0,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 150,
+      "width": 90,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -7294,7 +7294,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "钱包余额：",
+    "_string": "余额：",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 30,
