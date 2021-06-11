@@ -49,15 +49,15 @@ export class PropsItem extends BaseItem {
     }
 
     onClick(event: Event) {
-        if (this.eventListener.onItemClick) this.eventListener.onItemClick(this);
+        if (!!this.eventListener && !!this.eventListener.onItemClick) this.eventListener.onItemClick(this);
     }
 
     onDoubleClick(event: Event) {
-        if (this.eventListener.onItemDoubleClick) this.eventListener.onItemDoubleClick(this);
+        if (!!this.eventListener && !!this.eventListener.onItemDoubleClick) this.eventListener.onItemDoubleClick(this);
     }
 
     onLongTouch(event: Event) {
-        if (this.eventListener.onItemLongTouch) this.eventListener.onItemLongTouch(this);
+        if (!!this.eventListener && !!this.eventListener.onItemLongTouch) this.eventListener.onItemLongTouch(this);
     }
 
     start() {

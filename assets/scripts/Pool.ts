@@ -107,7 +107,7 @@ export class Pool extends BaseComponent {
     }
 
     onRedeemClick() {
-        ChooseWin.show(this.node, true, "没有可兑换的图腾").then((cw: ChooseWin) => {
+        ChooseWin.show(true, "没有可兑换的图腾").then((cw: ChooseWin) => {
             cw.onChooseEvent = this.onChoose.bind(this);
             cw.setData(this.allTotem);
         });

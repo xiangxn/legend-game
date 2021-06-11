@@ -158,7 +158,71 @@
                     "type": "uint256"
                 }
             ],
+            "name": "outputInfos",
+            "outputs": [
+                {
+                    "internalType": "uint8",
+                    "name": "weight",
+                    "type": "uint8"
+                },
+                {
+                    "internalType": "uint32",
+                    "name": "maxAmount",
+                    "type": "uint32"
+                },
+                {
+                    "internalType": "uint32",
+                    "name": "lastCount",
+                    "type": "uint32"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function",
+            "constant": true
+        },
+        {
+            "inputs": [],
+            "name": "rewardTime",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function",
+            "constant": true
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
             "name": "roleByZone",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function",
+            "constant": true
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "name": "roleCounts",
             "outputs": [
                 {
                     "internalType": "uint256",
@@ -289,6 +353,11 @@
                     "type": "string"
                 },
                 {
+                    "internalType": "uint256",
+                    "name": "consumablesId",
+                    "type": "uint256"
+                },
+                {
                     "internalType": "uint16",
                     "name": "consumablesAmount",
                     "type": "uint16"
@@ -302,11 +371,6 @@
                     "internalType": "uint32",
                     "name": "level",
                     "type": "uint32"
-                },
-                {
-                    "internalType": "uint8",
-                    "name": "fragmentWeight",
-                    "type": "uint8"
                 },
                 {
                     "internalType": "uint32",
@@ -352,6 +416,41 @@
             "inputs": [
                 {
                     "internalType": "uint256",
+                    "name": "zoneId",
+                    "type": "uint256"
+                },
+                {
+                    "components": [
+                        {
+                            "internalType": "uint8",
+                            "name": "weight",
+                            "type": "uint8"
+                        },
+                        {
+                            "internalType": "uint32",
+                            "name": "maxAmount",
+                            "type": "uint32"
+                        },
+                        {
+                            "internalType": "uint32",
+                            "name": "lastCount",
+                            "type": "uint32"
+                        }
+                    ],
+                    "internalType": "struct ZoneMine.FragmentOutInfo",
+                    "name": "info",
+                    "type": "tuple"
+                }
+            ],
+            "name": "setOutputInfo",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
                     "name": "time",
                     "type": "uint256"
                 }
@@ -376,6 +475,11 @@
                             "type": "string"
                         },
                         {
+                            "internalType": "uint256",
+                            "name": "consumablesId",
+                            "type": "uint256"
+                        },
+                        {
                             "internalType": "uint16",
                             "name": "consumablesAmount",
                             "type": "uint16"
@@ -389,11 +493,6 @@
                             "internalType": "uint32",
                             "name": "level",
                             "type": "uint32"
-                        },
-                        {
-                            "internalType": "uint8",
-                            "name": "fragmentWeight",
-                            "type": "uint8"
                         },
                         {
                             "internalType": "uint32",
@@ -484,6 +583,11 @@
                             "type": "string"
                         },
                         {
+                            "internalType": "uint256",
+                            "name": "consumablesId",
+                            "type": "uint256"
+                        },
+                        {
                             "internalType": "uint16",
                             "name": "consumablesAmount",
                             "type": "uint16"
@@ -497,11 +601,6 @@
                             "internalType": "uint32",
                             "name": "level",
                             "type": "uint32"
-                        },
-                        {
-                            "internalType": "uint8",
-                            "name": "fragmentWeight",
-                            "type": "uint8"
                         },
                         {
                             "internalType": "uint32",

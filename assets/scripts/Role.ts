@@ -94,13 +94,14 @@ export class Role extends BaseComponent {
             this.heroAttr = { profession: 0 };
         } else {
             await this._loadEquipments();
-            this.createRole.node.active = false;
+            if (!!this.createRole)
+                this.createRole.node.active = false;
             this.heroAttr = info.attrs;
             this.heroStatus = info.hero;
             for (let i = 0; i < this.heroAttr.equipmentSlot.length; i++) {
                 this.equipmentSlot[i] = this.heroAttr.equipmentSlot[i];
             }
-            console.log("hero info: ", info);
+            // console.log("hero info: ", info);
             this._showRoleData();
         }
     }
@@ -176,7 +177,7 @@ export class Role extends BaseComponent {
         let name = this.currentSolt.name;
         this.equipIndex = parseInt(name);
         this.needSave = true;
-        ChooseWin.show(this.node, true, "储物箱没有符合目前角色等级、部位或职业的装备!").then((cw: ChooseWin) => {
+        ChooseWin.show(true, "储物箱没有符合目前角色等级、部位或职业的装备!").then((cw: ChooseWin) => {
             cw.onChooseEvent = this.onChoose.bind(this);
             let data = this.allEquipment.filter((item: Props) => {
                 // console.log("item.info.isEquip: ", typeof item.info.isEquip)

@@ -412,10 +412,23 @@ export class StorageBox extends BaseComponent {
             this.showAlert("未选择装备");
             return;
         }
-        ChooseWin.show(this.node, false).then((cw: ChooseWin) => {
+        ChooseWin.show(false).then((cw: ChooseWin) => {
             cw.onChooseEvent = this._onChooseEquip.bind(this);
             let data = this.currentList.fixedScrollView.dataSet.filter((item: Props) => {
-                return item.info.number == arr[0].info.number && item.id != arr[0].id && item.info.isEquip == false;
+                let max = parseInt(arr[0].info.level);
+                let min = 0;
+                if (item.info.category == "0") {
+                    min = max - 6;
+                } else {
+                    min = max - 11;
+                }
+                min = min < 0 ? 0 : min;
+                let level = parseInt(item.info.level);
+
+                // return item.info.number == arr[0].info.number && item.id != arr[0].id && item.info.isEquip == false;
+                return item.id != arr[0].id && item.info.isEquip == false
+                    && (arr[0].info.profession == item.info.profession && arr[0].info.category == item.info.category)
+                    && (level <= max && level >= min);
             });
             cw.setData(data);
         });
@@ -455,8 +468,13 @@ export class StorageBox extends BaseComponent {
         if (ids.length > 0) {
             this.sendContract("Box", "open", ids, { from: this.api?.curAccount })
                 .then(result => {
+                    // console.log(result);
                     if (!!result) {
-                        this.showAlert("获得新装备!");
+                        // this.showAlert("获得新装备!");
+                        ChooseWin.show(true, "", "获得新装备!").then((cw: ChooseWin) => {
+                            let data = this.getEventProps(result);
+                            cw.setData(data);
+                        });
                         localStorage.removeItem(BOX_CACHE_KEY);
                         localStorage.removeItem(EQUIPMENT_CACHE_KEY);
                         this._loadBox();
@@ -465,7 +483,6 @@ export class StorageBox extends BaseComponent {
         } else {
             this.showAlert("请选择至少一个箱子!");
         }
-
     }
 
     onMakeClick() {
