@@ -134,7 +134,11 @@ export const Constant = {
             isCalc: false
         }
     ],
-    zones: [{ id: 1001, banner: "zone1banner", bg: "zone1bg", equip: "1-10" },
-    { id: 1002, banner: "zone2banner", bg: "zone2bg", equip: "11-20" },
-    { id: 1003, banner: "zone3banner", bg: "zone3bg", equip: "21-30" }]
+    zones: [{ id: 1000, banner: "zone0banner", bg: "zone0bg", equip: "1-10", stype: 4, weight: 0 },
+    { id: 1001, banner: "zone1banner", bg: "zone1bg", equip: "1-10", stype: 2, weight: 20 },
+    { id: 1002, banner: "zone2banner", bg: "zone2bg", equip: "11-20", stype: 2, weight: 20 },
+    { id: 1003, banner: "zone3banner", bg: "zone3bg", equip: "21-30", stype: 2, weight: 20 },
+    { id: 1004, banner: "zone4banner", bg: "zone4bg", equip: "31-40", stype: 2, weight: 20 },
+    { id: 1005, banner: "zone5banner", bg: "zone5bg", equip: "41-50", stype: 2, weight: 20 }
+    ]
 };
