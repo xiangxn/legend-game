@@ -6,7 +6,7 @@ export const FRIEND_CACHE_KEY = "Legend-friend-cache";
 export const VERSION_CACHE_KEY = "version-cache-key";
 
 export const Constant = {
-    version: "1.3.1",
+    version: "2.0.0",
     chainId: 128,
     // chainId: 256,
     // chainId: 1337,
@@ -24,7 +24,7 @@ export const Constant = {
         LGC: "0xb7A819D170e59D79f6289b91cA1D1a9D0C788A2a",
         StakeMine: "0x6C234aE7E4beaa7816Dfe89efa45094CCDFbA19D",
         RoleMine: "0x672B71f169AbF20448aaC3acA6C0BAaD337C2fF5",
-        ZoneMine: "0x04017C2D0Df0cC296c3EE61d70940F3d04fcbEcb",
+        ZoneMine: "0x6528eB45D88a25dB650953F6986Cde9bbfba9219",
         BonusPool: "0x13368543dc96195Dc564048DFd598F12AbbC7662",
         Fragment: "0x6C5aD71809c8fA3b6dB9dcC02efe825A33869C33",
         Totem: "0x49De5A35ee679Ea1BF9C27a2CFF85AA220be1527",
