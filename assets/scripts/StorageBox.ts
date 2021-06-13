@@ -312,8 +312,8 @@ export class StorageBox extends BaseComponent {
             this.showConfirm("确认要销毁这个" + props.name + "吗?", () => {
                 this.sendContract("Fragment", "safeTransferFrom", this.api?.curAccount, Constant.address.BonusPool, props.id, 1, data, { from: this.api?.curAccount })
                     .then((v) => {
-                        let amount = fromWei(props.info.tokens, "ether");
-                        this.showAlert("销毁碎片你获得了" + amount + "LGC");
+                        // let amount = fromWei(props.info.tokens, "ether");
+                        this.showAlert("销毁碎片你获得了" + props.info.tokens + "LGC");
                         localStorage.removeItem(TOTEM_CACHE_KEY);
                         this._loadTotem();
                     });
