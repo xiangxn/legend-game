@@ -1078,18 +1078,18 @@
     "_enabled": true,
     "__prefab": null,
     "_resizeMode": 0,
-    "_layoutType": 2,
+    "_layoutType": 3,
     "_cellSize": {
       "__type__": "cc.Size",
       "width": 40,
       "height": 40
     },
     "_startAxis": 0,
-    "_paddingLeft": 0,
+    "_paddingLeft": 20,
     "_paddingRight": 0,
     "_paddingTop": 60,
     "_paddingBottom": 0,
-    "_spacingX": 0,
+    "_spacingX": 20,
     "_spacingY": 30,
     "_verticalDirection": 1,
     "_horizontalDirection": 0,
@@ -1282,18 +1282,18 @@
     "_enabled": true,
     "__prefab": null,
     "_resizeMode": 0,
-    "_layoutType": 2,
+    "_layoutType": 3,
     "_cellSize": {
       "__type__": "cc.Size",
       "width": 40,
       "height": 40
     },
     "_startAxis": 0,
-    "_paddingLeft": 0,
+    "_paddingLeft": 20,
     "_paddingRight": 0,
     "_paddingTop": 60,
     "_paddingBottom": 0,
-    "_spacingX": 0,
+    "_spacingX": 20,
     "_spacingY": 30,
     "_verticalDirection": 1,
     "_horizontalDirection": 0,
@@ -7258,7 +7258,7 @@
     "_priority": 0,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 150,
+      "width": 90,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -7294,7 +7294,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "钱包余额：",
+    "_string": "余额：",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 30,

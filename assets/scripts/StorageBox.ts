@@ -34,6 +34,8 @@ export class StorageBox extends BaseComponent {
     @type(PropsList)
     currentList: PropsList;
 
+    bonusPoosNumber: number = 0;
+
     constructor() {
         super();
         this.currentList = new PropsList();
@@ -158,6 +160,8 @@ export class StorageBox extends BaseComponent {
     async _loadTotem() {
         this.currentList.onChooseEvent = this._onTotemClick.bind(this);
         this.currentList.onDoubleEvent = this._onTotemDoubleClick.bind(this);
+        if (this.bonusPoosNumber == 0)
+            this.bonusPoosNumber = await this.callContract("BonusPool", "number");
         //加载收藏品(奖池矿片、艺术品矿片、图腾)
         let data: Props[] = [];
         let cache = localStorage.getItem(TOTEM_CACHE_KEY);
@@ -168,11 +172,10 @@ export class StorageBox extends BaseComponent {
         }
         let allP: Promise<any>[] = [];
         //获取碎片id
-        let curNumber = await this.callContract("BonusPool", "number");
         // let fIds = await this.callContract("Fragment", "tokensOf", this.api?.curAccount, 0, 0); //TODO 新版本合约改用此方法
         let fIds: any[] = [];
-        let minNumber = curNumber >= 3 ? curNumber - 3 : 0;
-        for (let i = curNumber; i > minNumber; i--) {
+        let minNumber = this.bonusPoosNumber >= 3 ? this.bonusPoosNumber - 3 : 0;
+        for (let i = this.bonusPoosNumber; i > minNumber; i--) {
             fIds.push(toBN(padLeft(toHex(1), 2) + padLeft(toHex(1), 16).substr(2) + padLeft(toHex(i), 8).substr(2) + padLeft("0", 38)).toString());
             fIds.push(toBN(padLeft(toHex(1), 2) + padLeft(toHex(2), 16).substr(2) + padLeft(toHex(i), 8).substr(2) + padLeft("0", 38)).toString());
             fIds.push(toBN(padLeft(toHex(1), 2) + padLeft(toHex(3), 16).substr(2) + padLeft(toHex(i), 8).substr(2) + padLeft("0", 38)).toString());
@@ -249,7 +252,7 @@ export class StorageBox extends BaseComponent {
     }
 
     _onEquipClick(item: Props) {
-        console.log(item);
+        // console.log(item);
         // console.log(this.currentList.currentChoose.size)
         let node = this.node.getChildByPath("box/bottom0/BtnIntensify");
         let btnBurn = this.node.getChildByPath("box/bottom0/BtnBurn");
@@ -269,37 +272,54 @@ export class StorageBox extends BaseComponent {
     }
 
     _onTotemClick(item: Props) {
+        // console.log(item,this.bonusPoosNumber);
         let node = this.node.getChildByPath("box/bottom3/BtnMake");
         let nodeBrun = this.node.getChildByPath("box/bottom3/BtnBurn");
         let nodeHandsel = this.node.getChildByPath("box/bottom3/BtnHandsel");
         if (!node || !nodeBrun || !nodeHandsel) return;
-        // console.log(item,item.img?.indexOf("T"));
         if ((item.img?.indexOf("T") ?? -1) > -1) {
             node.active = false;
             nodeBrun.active = true;
             nodeHandsel.active = false;
         } else {
             node.active = true;
-            nodeBrun.active = false;
             nodeHandsel.active = true;
+            if (this.bonusPoosNumber == 0 || this.bonusPoosNumber == item.info.number) {
+                nodeBrun.active = false;
+            } else {
+                nodeBrun.active = true;
+            }
         }
     }
 
-    //销毁图腾
+    //销毁图腾/碎片
     onBrunTotem() {
         let arr = Array.from(this.currentList.currentChoose);
         let props = arr[0];
         // console.log(props);
-        this.showConfirm("确认要销毁这个" + props.name + "吗?", () => {
-            let data = padLeft(toHex(2), 2);
-            this.sendContract("Totem", "safeTransferFrom", this.api?.curAccount, Constant.address.BonusPool, props.id, data, { from: this.api?.curAccount })
-                .then((v) => {
-                    let amount = fromWei(props.info.tokens, "ether");
-                    this.showAlert("销毁图腾你获得了" + amount + "LGC");
-                    localStorage.removeItem(TOTEM_CACHE_KEY);
-                    this._loadTotem();
-                });
-        }, () => { });
+        let data = padLeft(toHex(2), 2);
+        if ((props.img?.indexOf("T") ?? -1) > -1) {
+            this.showConfirm("确认要销毁这个" + props.name + "吗?", () => {
+                this.sendContract("Totem", "safeTransferFrom", this.api?.curAccount, Constant.address.BonusPool, props.id, data, { from: this.api?.curAccount })
+                    .then((v) => {
+                        let amount = fromWei(props.info.tokens, "ether");
+                        this.showAlert("销毁图腾你获得了" + amount + "LGC");
+                        localStorage.removeItem(TOTEM_CACHE_KEY);
+                        this._loadTotem();
+                    });
+            }, () => { });
+        } else {
+            this.showConfirm("确认要销毁这个" + props.name + "吗?", () => {
+                this.sendContract("Fragment", "safeTransferFrom", this.api?.curAccount, Constant.address.BonusPool, props.id, 1, data, { from: this.api?.curAccount })
+                    .then((v) => {
+                        let amount = fromWei(props.info.tokens, "ether");
+                        this.showAlert("销毁碎片你获得了" + amount + "LGC");
+                        localStorage.removeItem(TOTEM_CACHE_KEY);
+                        this._loadTotem();
+                    });
+            }, () => { });
+        }
+
     }
 
     _onEquipDoubleClick(item: Props) {

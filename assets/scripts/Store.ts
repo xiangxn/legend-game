@@ -78,20 +78,26 @@ export class Store extends BaseComponent {
             Constant.store.LGC.forEach(item => {
                 // console.log(item);
                 let btnPre = instantiate(prefab);
-                let btn = btnPre.getComponent(MyButton);
-                let label = btnPre.getComponentInChildren(Label);
+                let btn = btnPre.getComponent(Button);
+                let spriteName = btnPre.getChildByName("SpriteName")?.getComponent(Sprite);
+                let spriteIcon = btnPre.getChildByName("SpriteIcon")?.getComponent(Sprite);
                 btn?.node.on("click", () => { this.onSelect(item); });
-                if (label)
-                    label.string = item.name;
+                if (!!spriteName)
+                    this.loadSpriteUrl(`img/${item.name}`, spriteName);
+                if (!!spriteIcon)
+                    this.loadSpriteUrl(`props/${item.img}`, spriteIcon);
                 this.aBtns.addChild(btnPre);
             });
             Constant.store.USDT.forEach(item => {
                 let btnPre = instantiate(prefab);
                 let btn = btnPre.getComponent(Button);
-                let label = btnPre.getComponentInChildren(Label);
+                let spriteName = btnPre.getChildByName("SpriteName")?.getComponent(Sprite);
+                let spriteIcon = btnPre.getChildByName("SpriteIcon")?.getComponent(Sprite);
                 btn?.node.on("click", () => { this.onSelect(item); });
-                if (label)
-                    label.string = item.name;
+                if (!!spriteName)
+                    this.loadSpriteUrl(`img/${item.name}`, spriteName);
+                if (!!spriteIcon)
+                    this.loadSpriteUrl(`props/${item.img}`, spriteIcon);
                 this.bBtns.addChild(btnPre);
             });
         });
@@ -303,7 +309,7 @@ export class Store extends BaseComponent {
                     this.showAlert("成功购买了" + this.amount + "个[" + this.goodsObj.name + "]", () => {
                         this._loadBalance(this.goodsObj.coin);
                         this._loadGoodsInfo();
-                        if (this.goodsObj.goodsId == 9){
+                        if (this.goodsObj.goodsId == 9) {
                             // console.log("this.goodsObj.goodsId ",typeof(this.goodsObj.goodsId));
                             localStorage.removeItem(CONSUMABLES_CACHE_KEY);
                         }
