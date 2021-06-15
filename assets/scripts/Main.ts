@@ -227,5 +227,9 @@ export class Main extends BaseComponent {
     onTopTenClick() {
         this.viewTopTen.active = true;
     }
+
+    onReferral(){
+        this.loadScene("Referral");
+    }
 }
 
