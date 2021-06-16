@@ -1,7 +1,7 @@
 
 import { _decorator, Component, Node, Sprite, Label } from 'cc';
 import { BaseComponent } from '../BaseComponent';
-import { Constant } from '../Constant';
+import { BOX_CACHE_KEY, Constant } from '../Constant';
 import Web3 from "web3/dist/web3.min.js";
 const { ccclass, type } = _decorator;
 const { toWei, fromWei, toBN } = Web3.utils;
@@ -69,6 +69,7 @@ export class RefUserReward extends BaseComponent {
                 .then(value => {
                     this.data.withdraw.push(this.config.id);
                     this._show();
+                    localStorage.removeItem(BOX_CACHE_KEY);
                     this.showAlert("领取奖励成功!");
                 });
         }
