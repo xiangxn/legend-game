@@ -120,73 +120,12 @@
             "constant": true
         },
         {
-            "inputs": [
-                {
-                    "internalType": "address",
-                    "name": "",
-                    "type": "address"
-                }
-            ],
-            "name": "refParent",
+            "inputs": [],
+            "name": "refConfigCount",
             "outputs": [
                 {
-                    "internalType": "address",
-                    "name": "user",
-                    "type": "address"
-                },
-                {
-                    "internalType": "uint32",
-                    "name": "level",
-                    "type": "uint32"
-                },
-                {
-                    "internalType": "uint32",
-                    "name": "count",
-                    "type": "uint32"
-                },
-                {
-                    "internalType": "uint32",
-                    "name": "validCount",
-                    "type": "uint32"
-                },
-                {
                     "internalType": "uint256",
-                    "name": "amount",
-                    "type": "uint256"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function",
-            "constant": true
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "address",
                     "name": "",
-                    "type": "address"
-                }
-            ],
-            "name": "refUser",
-            "outputs": [
-                {
-                    "internalType": "address",
-                    "name": "parent",
-                    "type": "address"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "parentCode",
-                    "type": "uint256"
-                },
-                {
-                    "internalType": "bool",
-                    "name": "isValid",
-                    "type": "bool"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "consumeAmount",
                     "type": "uint256"
                 }
             ],
@@ -240,6 +179,20 @@
             "constant": true
         },
         {
+            "inputs": [],
+            "name": "refUserConfigCount",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function",
+            "constant": true
+        },
+        {
             "inputs": [
                 {
                     "internalType": "address",
@@ -248,6 +201,248 @@
                 }
             ],
             "name": "setManager",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "validAmount",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function",
+            "constant": true
+        },
+        {
+            "inputs": [],
+            "name": "validLevel",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function",
+            "constant": true
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "addr",
+                    "type": "address"
+                }
+            ],
+            "name": "getReferral",
+            "outputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "address",
+                            "name": "user",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint32",
+                            "name": "level",
+                            "type": "uint32"
+                        },
+                        {
+                            "internalType": "uint32",
+                            "name": "count",
+                            "type": "uint32"
+                        },
+                        {
+                            "internalType": "uint32",
+                            "name": "validCount",
+                            "type": "uint32"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "amount",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint32[]",
+                            "name": "withdraw",
+                            "type": "uint32[]"
+                        }
+                    ],
+                    "internalType": "struct Referral.RefParent",
+                    "name": "ref",
+                    "type": "tuple"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function",
+            "constant": true
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "addr",
+                    "type": "address"
+                }
+            ],
+            "name": "getUser",
+            "outputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "address",
+                            "name": "parent",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "parentCode",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "bool",
+                            "name": "isValid",
+                            "type": "bool"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "consumeAmount",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint32[]",
+                            "name": "withdraw",
+                            "type": "uint32[]"
+                        }
+                    ],
+                    "internalType": "struct Referral.RefUser",
+                    "name": "user",
+                    "type": "tuple"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function",
+            "constant": true
+        },
+        {
+            "inputs": [],
+            "name": "getAllRefConfig",
+            "outputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "uint32",
+                            "name": "id",
+                            "type": "uint32"
+                        },
+                        {
+                            "internalType": "uint32",
+                            "name": "level",
+                            "type": "uint32"
+                        },
+                        {
+                            "internalType": "uint16",
+                            "name": "ratio",
+                            "type": "uint16"
+                        },
+                        {
+                            "internalType": "uint16",
+                            "name": "boxType",
+                            "type": "uint16"
+                        },
+                        {
+                            "internalType": "uint32",
+                            "name": "boxAmount",
+                            "type": "uint32"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "validAmount",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint32",
+                            "name": "validUserCount",
+                            "type": "uint32"
+                        }
+                    ],
+                    "internalType": "struct Referral.RefConfig[]",
+                    "name": "",
+                    "type": "tuple[]"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function",
+            "constant": true
+        },
+        {
+            "inputs": [],
+            "name": "getAllRefUserConfig",
+            "outputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "uint32",
+                            "name": "id",
+                            "type": "uint32"
+                        },
+                        {
+                            "internalType": "uint8",
+                            "name": "condition",
+                            "type": "uint8"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "consumeAmount",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint32",
+                            "name": "level",
+                            "type": "uint32"
+                        },
+                        {
+                            "internalType": "uint16",
+                            "name": "boxType",
+                            "type": "uint16"
+                        },
+                        {
+                            "internalType": "uint32",
+                            "name": "boxAmount",
+                            "type": "uint32"
+                        }
+                    ],
+                    "internalType": "struct Referral.RefUserConfig[]",
+                    "name": "",
+                    "type": "tuple[]"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function",
+            "constant": true
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "level",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "amount",
+                    "type": "uint256"
+                }
+            ],
+            "name": "setValid",
             "outputs": [],
             "stateMutability": "nonpayable",
             "type": "function"

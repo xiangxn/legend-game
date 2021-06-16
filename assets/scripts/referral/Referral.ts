@@ -12,10 +12,14 @@ export class Referral extends BaseComponent {
     @type(Node)
     page2: Node;
 
+    @type(Node)
+    helpWin: Node;
+
     constructor() {
         super();
         this.page1 = new Node();
         this.page2 = new Node();
+        this.helpWin = new Node();
     }
 
     onLoad() {
@@ -58,6 +62,14 @@ export class Referral extends BaseComponent {
                 this.page2.active = true;
                 break;
         }
+    }
+
+    onOpenHelp() {
+        this.helpWin.active = true;
+    }
+
+    onCloseHelp() {
+        this.helpWin.active = false;
     }
 
 }

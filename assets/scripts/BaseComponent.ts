@@ -119,6 +119,7 @@ export class BaseComponent extends Component {
     }
 
     _checkOption(para: any): boolean {
+        if (!para) return false;
         if (Web3.utils.isBN(para)) {
             return false;
         }
