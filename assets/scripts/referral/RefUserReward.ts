@@ -39,7 +39,7 @@ export class RefUserReward extends BaseComponent {
 
     setData(config: any, userData: any) {
         this.config = config;
-        this.data = userData;
+        this.data = this.data = Object.assign({}, userData);
     }
 
     private _show() {
