@@ -118,6 +118,7 @@ export class RefPage extends BaseComponent {
             this.sendContract("Referral", "create", 0, { from: this.api?.curAccount })
                 .then(value => {
                     this.showAlert("成功创建邀请码!");
+                    this.refData = Object.assign({}, this.refData);
                     this.refData.user = this.api?.curAccount;
                     this._showCode();
                 });
