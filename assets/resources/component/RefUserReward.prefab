@@ -1187,7 +1187,9 @@
     "_pressedSprite": {
       "__uuid__": "499b0e3b-b1df-4dc1-ad97-941c4f8d1ff0@f9941"
     },
-    "_disabledSprite": null,
+    "_disabledSprite": {
+      "__uuid__": "499b0e3b-b1df-4dc1-ad97-941c4f8d1ff0@f9941"
+    },
     "_duration": 0.1,
     "_zoomScale": 1.2,
     "_target": {

@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, Layout, EditBox, Label, resources, Prefab, instantiate } from 'cc';
+import { _decorator, Component, Node, Layout, EditBox, Label, resources, Prefab, instantiate, Button } from 'cc';
 import { BaseComponent } from '../BaseComponent';
 import { RefUserReward } from './RefUserReward';
 const { ccclass, type } = _decorator;
@@ -65,6 +65,10 @@ export class RefUserPage extends BaseComponent {
             } else {
                 this.txtCode.string = this.userData.parentCode;
                 this.labBtn.string = "已绑定";
+                let btn = this.labBtn.node.parent?.getComponent(Button);
+                if (!!btn) {
+                    btn.interactable = false;
+                }
             }
         });
     }

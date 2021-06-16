@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, Label, Sprite } from 'cc';
+import { _decorator, Component, Node, Label, Sprite, Button } from 'cc';
 import { BaseComponent } from '../BaseComponent';
 import { BOX_CACHE_KEY, Constant } from '../Constant';
 const { ccclass, type } = _decorator;
@@ -45,8 +45,12 @@ export class RefReward extends BaseComponent {
         this.labRatio.string = `分成比例${parseFloat(this.data.ratio) * 100 / 1000}%`;
         this.labBox.string = `${(Constant.boxs as any)[this.data.boxType]}x${this.data.boxAmount}`;
         this.loadSprite(`box${this.data.boxType}`, this.spriteBox);
-        if (this.data.id in this.refData.withdraw) {
+        if (this.refData.withdraw.indexOf(this.data.id) > -1) {
             this.labBtn.string = "已领取";
+            let btn = this.labBtn.node.parent?.getComponent(Button);
+            if (!!btn) {
+                btn.interactable = false;
+            }
         } else {
             this.labBtn.string = "领取";
         }
@@ -54,18 +58,20 @@ export class RefReward extends BaseComponent {
 
     setData(data: any, refData: any) {
         this.data = data;
-        this.refData = refData;
+        this.refData = Object.assign({}, refData);
     }
 
     onReceive() {
-        if ((this.data.id in this.refData.withdraw) == false) {
+        if (this.refData.withdraw.indexOf(this.data.id) == -1) {
             if (parseInt(this.data.level) > parseInt(this.refData.level)) {
                 this.showAlert("您未达到可领取等级,加油吧!");
                 return;
             }
             this.sendContract("Referral", "refClaim", this.data.id, { from: this.api?.curAccount })
                 .then(value => {
-                    this.refData.withdraw.push(this.data.id);
+                    let arr = Array.from(this.refData.withdraw);
+                    arr.push(this.data.id);
+                    this.refData.withdraw = arr;
                     localStorage.removeItem(BOX_CACHE_KEY);
                     this.showAlert("领取奖励成功!");
                     this._show();

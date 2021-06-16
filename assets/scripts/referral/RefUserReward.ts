@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, Sprite, Label } from 'cc';
+import { _decorator, Component, Node, Sprite, Label, Button } from 'cc';
 import { BaseComponent } from '../BaseComponent';
 import { BOX_CACHE_KEY, Constant } from '../Constant';
 import Web3 from "web3/dist/web3.min.js";
@@ -39,7 +39,7 @@ export class RefUserReward extends BaseComponent {
 
     setData(config: any, userData: any) {
         this.config = config;
-        this.data = this.data = Object.assign({}, userData);
+        this.data = Object.assign({}, userData);
     }
 
     private _show() {
@@ -47,8 +47,12 @@ export class RefUserReward extends BaseComponent {
         this.loadSprite(`box${this.config.boxType}`, this.spriteBox);
         this.labReward.string = `${(Constant.boxs as any)[this.config.boxType]}x${this.config.boxAmount}`;
         this.labCondition.string = `消费满${fromWei(this.config.consumeAmount, "ether")}USDT可领`;
-        if (this.config.id in this.data.withdraw) {
+        if (this.data.withdraw.indexOf(this.config.id) > -1) {
             this.labBtn.string = "已领取";
+            let btn = this.labBtn.node.parent?.getComponent(Button);
+            if (!!btn) {
+                btn.interactable = false;
+            }
         } else {
             this.labBtn.string = "领取";
         }
@@ -64,10 +68,12 @@ export class RefUserReward extends BaseComponent {
             this.showAlert("您尚未达到领取条件!");
             return;
         }
-        if ((this.config.id in this.data.withdraw) == false) {
+        if (this.data.withdraw.indexOf(this.config.id) == -1) {
             this.sendContract("Referral", "userClaim", this.config.id, { from: this.api?.curAccount })
                 .then(value => {
-                    this.data.withdraw.push(this.config.id);
+                    let arr = Array.from(this.data.withdraw);
+                    arr.push(this.config.id);
+                    this.data.withdraw = arr;
                     this._show();
                     localStorage.removeItem(BOX_CACHE_KEY);
                     this.showAlert("领取奖励成功!");
