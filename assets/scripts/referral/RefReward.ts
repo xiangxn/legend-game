@@ -1,7 +1,7 @@
 
 import { _decorator, Component, Node, Label, Sprite } from 'cc';
 import { BaseComponent } from '../BaseComponent';
-import { Constant } from '../Constant';
+import { BOX_CACHE_KEY, Constant } from '../Constant';
 const { ccclass, type } = _decorator;
 
 @ccclass('RefReward')
@@ -66,6 +66,7 @@ export class RefReward extends BaseComponent {
             this.sendContract("Referral", "refClaim", this.data.id, { from: this.api?.curAccount })
                 .then(value => {
                     this.refData.withdraw.push(this.data.id);
+                    localStorage.removeItem(BOX_CACHE_KEY);
                     this.showAlert("领取奖励成功!");
                     this._show();
                 });
