@@ -34,7 +34,7 @@ export const Constant = {
         PreSale: "0x90834f1e7CAcB5200a714d7394BfF482b525353A",
         Friend: "0x022A52330aEBC38735F72c4aE07E5588251494B0",
         Market: "0xFcbD99A497C4ebeC62dA06d8beeB94Be737bb7C3",
-        Referral: "0xC7aa0CE3efd9c3FFE14D4Fc0982703C6168b658A"
+        Referral: "0xDfee62721e078D47777f6b12e2baE320C7930896"
     },
     paymode: {
         "0x51857e3111eEF80429445F32A8cc341B735e2a52": "LGC",
