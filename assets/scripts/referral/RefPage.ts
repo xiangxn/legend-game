@@ -84,11 +84,10 @@ export class RefPage extends BaseComponent {
             });
             //当前等级
             let maxConfig = parseInt(values[2]);
-            this.curLevel.totalLength = maxConfig;
-            this.curLevel.progress = parseInt(this.refData.level) / maxConfig;
+            this.curLevel.progress = parseFloat(this.refData.level) / maxConfig;
             let labLevel = this.curLevel.getComponentInChildren(Label);
             if (!!labLevel) {
-                labLevel.string = `${this.refData.level}/${this.curLevel.totalLength}`;
+                labLevel.string = `${this.refData.level}/${maxConfig}`;
             }
             //绑定情况
             this.labCount.string = this.refData.count;
