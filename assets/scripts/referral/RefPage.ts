@@ -31,8 +31,14 @@ export class RefPage extends BaseComponent {
     @type(PageView)
     levelPageView: PageView;
 
+    @type(Label)
+    labCount: Label;
+    @type(Label)
+    labValidCount: Label;
+
     refData: any = {};
     refCode: string = "";
+    heroData: any;
 
     constructor() {
         super();
@@ -43,6 +49,8 @@ export class RefPage extends BaseComponent {
         this.labCode = new Label();
         this.codeNode = new Node();
         this.levelPageView = new PageView();
+        this.labCount = new Label();
+        this.labValidCount = new Label();
     }
 
     onLoad() {
@@ -56,8 +64,11 @@ export class RefPage extends BaseComponent {
         ps.push(this.callContract("Referral", "getAllRefConfig"));
         ps.push(this.callContract("Referral", "getReferral", this.api?.curAccount));
         ps.push(this.callContract("Referral", "refConfigCount"));
+        ps.push(this.callContract("Hero", "getHeroInfo", this.api?.curAccount))
         Promise.all(ps).then(values => {
             // console.log(values);
+            //角色信息
+            this.heroData = values[3];
             //奖励配置
             let configs = values[0];
             //邀请人数据
@@ -79,6 +90,9 @@ export class RefPage extends BaseComponent {
             if (!!labLevel) {
                 labLevel.string = `${this.refData.level}/${this.curLevel.totalLength}`;
             }
+            //绑定情况
+            this.labCount.string = this.refData.count;
+            this.labValidCount.string = this.refData.validCount;
             //已经获得的佣金
             this.labComm.string = fromWei(this.refData.amount, "ether");
             //邀请码/创建邀请码
@@ -114,6 +128,11 @@ export class RefPage extends BaseComponent {
     }
 
     onCreate() {
+        //检查是否创建了角色
+        if (this.heroData.hero.tokenId == "0") {
+            this.showAlert("您还没有创建角色!");
+            return;
+        }
         if (!this.refData || this.refData.user == "0x0000000000000000000000000000000000000000") {
             this.sendContract("Referral", "create", 0, { from: this.api?.curAccount })
                 .then(value => {
@@ -128,15 +147,13 @@ export class RefPage extends BaseComponent {
 
     onCopyCode() {
         this.refCode = this.labCode.string;
-        document.addEventListener('copy', this.handleCopy.bind(this));
-        document.execCommand('copy');
+        let input = document.createElement("input");
+        input.value = this.refCode;
+        document.body.appendChild(input);
+        input.select();
+        input.setSelectionRange(0, input.value.length), document.execCommand('Copy');
+        document.body.removeChild(input);
         this.showAlert("已复制邀请码!");
     }
-
-    handleCopy(e: ClipboardEvent) {
-        e.clipboardData && e.clipboardData.setData('text/plain', this.refCode);
-        e.preventDefault();
-        document.removeEventListener('copy', this.handleCopy.bind(this));
-    };
 }
 
