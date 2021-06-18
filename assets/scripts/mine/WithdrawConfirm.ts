@@ -1,7 +1,7 @@
 
 import { _decorator, Component, Node, Label, EditBox, find, resources, Prefab, instantiate } from 'cc';
-import { BaseComponent } from './BaseComponent';
-import { Constant } from './Constant';
+import { BaseComponent } from '../BaseComponent';
+import { Constant } from '../Constant';
 import Web3 from "web3/dist/web3.min.js";
 
 const { ccclass, type } = _decorator;
@@ -44,7 +44,11 @@ export class WithdrawConfirm extends BaseComponent {
         } else {
             reward = totalReward.add(totalAdjust);
         }
-        this.reward = reward.mul(amount).div(totalAmount).sub(adjust);
+        if(totalAmount.eqn(0)){
+            this.reward= toBN(0);
+        }else{
+            this.reward = reward.mul(amount).div(totalAmount).sub(adjust);
+        }
         if (this.reward.ltn(0)) this.reward = toBN(0);
         this.labBalance.string = fromWei(this.reward.toString(), "ether");
     }

@@ -1,10 +1,9 @@
 
 import { _decorator, Component, Node, Label, find, sys } from 'cc';
 import { StakeConfirm } from './StakeConfirm';
-import { BaseComponent } from './BaseComponent';
+import { BaseComponent } from '../BaseComponent';
 import Web3 from "web3/dist/web3.min.js";
 import { WithdrawConfirm } from './WithdrawConfirm';
-import { Constant } from './Constant';
 
 
 const { ccclass, type } = _decorator;

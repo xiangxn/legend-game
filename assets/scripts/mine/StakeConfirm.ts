@@ -1,9 +1,9 @@
 
 import { _decorator, Component, Node, Toggle, Label, EditBox, resources, instantiate, Prefab, find, Button } from 'cc';
 import Web3 from "web3/dist/web3.min.js";
-import { BaseComponent } from './BaseComponent';
-import { Constant } from './Constant';
-import { DCButton } from './DCButton';
+import { BaseComponent } from '../BaseComponent';
+import { Constant } from '../Constant';
+import { DCButton } from '../DCButton';
 
 const { ccclass, type } = _decorator;
 const { toWei, fromWei, toBN } = Web3.utils;

@@ -186,6 +186,7 @@ export class BaseComponent extends Component {
                     resolve(result);
                 })
                 .catch(reason => {
+                    console.log(reason);
                     loading.close();
                 });
         });
