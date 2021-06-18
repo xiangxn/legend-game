@@ -59,6 +59,11 @@
                     "type": "address"
                 },
                 {
+                    "internalType": "address",
+                    "name": "_token",
+                    "type": "address"
+                },
+                {
                     "internalType": "uint64",
                     "name": "_startTime",
                     "type": "uint64"
@@ -233,6 +238,40 @@
             "constant": true
         },
         {
+            "inputs": [],
+            "name": "roleCount",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function",
+            "constant": true
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "name": "roleInfo",
+            "outputs": [
+                {
+                    "internalType": "address",
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function",
+            "constant": true
+        },
+        {
             "inputs": [
                 {
                     "internalType": "address",
@@ -277,7 +316,13 @@
             "type": "function"
         },
         {
-            "inputs": [],
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "poolAddr",
+                    "type": "address"
+                }
+            ],
             "name": "withdraw",
             "outputs": [],
             "stateMutability": "nonpayable",

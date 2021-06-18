@@ -19,7 +19,10 @@ export class GoodsItem extends BaseItem {
     sprNameBG: Sprite;
 
     @type(Label)
-    labPrice: Label
+    labPrice: Label;
+
+    @type(Label)
+    labIncrease: Label;
 
     @type(Node)
     btnPullOff: Node;
@@ -37,6 +40,7 @@ export class GoodsItem extends BaseItem {
         this.btnDetail = new Node();
         this.btnBuy = new Node();
         this.sprNameBG = new Sprite();
+        this.labIncrease = new Label();
     }
 
     onLoad() {
@@ -50,13 +54,22 @@ export class GoodsItem extends BaseItem {
     }
 
     private _show() {
+        if (!(this.api?.curAccount)) return;
         switch (this.data.gclass) {
             case 1:
                 this.loadSprite(this.data.content.number, this.img);
                 this.labName.string = (Constant.equipments as any)[this.data.content.number.toString()];
                 this.sprNameBG.color = new Color().fromHEX(Constant.qualityColor[parseInt(this.data.content.quality)]);
+                // console.log(this.data.content)
+                if (this.data.content.increaseCount > 0) {
+                    this.labIncrease.node.active = true;
+                    this.labIncrease.string = `+${this.data.content.increaseCount}`;
+                } else {
+                    this.labIncrease.node.active = false;
+                }
                 break
             case 2:
+                this.labIncrease.node.active = false;
                 let bigType = toBN(this.data.contentId).shrn(248);
                 let smallType = toBN("0x" + padLeft(toHex(this.data.contentId), 64).substr(4, 16)).toNumber();
                 this.loadSprite(bigType + "-" + smallType, this.img);

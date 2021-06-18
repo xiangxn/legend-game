@@ -2226,7 +2226,7 @@
       "__id__": 1
     },
     "component": "",
-    "_componentId": "052b4T7Z95PlKJbgWEuAo2j",
+    "_componentId": "15eaaNjw7hLvLYBA+pjqM3i",
     "handler": "onMax",
     "customEventData": ""
   },
@@ -2778,7 +2778,7 @@
       "__id__": 1
     },
     "component": "",
-    "_componentId": "052b4T7Z95PlKJbgWEuAo2j",
+    "_componentId": "15eaaNjw7hLvLYBA+pjqM3i",
     "handler": "approve",
     "customEventData": ""
   },
@@ -3186,7 +3186,7 @@
       "__id__": 1
     },
     "component": "",
-    "_componentId": "052b4T7Z95PlKJbgWEuAo2j",
+    "_componentId": "15eaaNjw7hLvLYBA+pjqM3i",
     "handler": "stakeing",
     "customEventData": ""
   },
@@ -3528,7 +3528,7 @@
       "__id__": 1
     },
     "component": "",
-    "_componentId": "052b4T7Z95PlKJbgWEuAo2j",
+    "_componentId": "15eaaNjw7hLvLYBA+pjqM3i",
     "handler": "onClose",
     "customEventData": ""
   },
@@ -4595,7 +4595,7 @@
       "__id__": 1
     },
     "component": "",
-    "_componentId": "052b4T7Z95PlKJbgWEuAo2j",
+    "_componentId": "15eaaNjw7hLvLYBA+pjqM3i",
     "handler": "onToggle",
     "customEventData": ""
   },
@@ -4920,7 +4920,7 @@
     "fileId": "c83KvCfbdOTpZxmVDmny+L"
   },
   {
-    "__type__": "052b4T7Z95PlKJbgWEuAo2j",
+    "__type__": "15eaaNjw7hLvLYBA+pjqM3i",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -4952,7 +4952,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "28yIpQs6NLfYCJLeFnm75P"
+    "fileId": "27vacQN+FMhLvxduXVaLXZ"
   },
   {
     "__type__": "cc.PrefabInfo",
