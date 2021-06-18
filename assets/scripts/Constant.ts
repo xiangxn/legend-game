@@ -23,7 +23,8 @@ export const Constant = {
         Equipment: "0xE54851E0EaC0DECccE0F6eeE59AE051c28C89491",
         LGC: "0x33A51564b8Ae4546eAD1673E6CDB2d31518A7e5E",
         StakeMine: "0x9FcfF1AfFc676BE3D085f17DBF4314616c9d172d",
-        RoleMine: "0x96474a61fD54cbCd26497e423Ff4993611b3ab56",
+        RoleMine0: "0x96474a61fD54cbCd26497e423Ff4993611b3ab56",
+        RoleMine: "0x526220d5e4B37065A1784a4C6415B51ca7584F74",
         ZoneMine: "0xFE3dF1c7d1663956968602051ad849eC76231fe5",
         BonusPool: "0x2BA211242bdFd2205e3b6Aae86fa1aa46c3FBa6A",
         Fragment: "0x6A0beaf5aaAe5A66282788f5e44552B3Dd3eB0F9",
@@ -79,7 +80,8 @@ export const Constant = {
         4: "入门甲胄箱",
         5: "普通甲胄箱",
         6: "稀有甲胄箱",
-        7: "预售宝箱"
+        7: "预售宝箱",
+        8: "赤月武器箱"
     },
     equipments: {
         "10001": "黑铁剑", "10002": "斩马刀", "10003": "阿修罗斧", "10004": "凝霜重剑", "10005": "炼狱战斧",
@@ -113,6 +115,18 @@ export const Constant = {
             url: "https://info.mdex.com/#/pair/",
             priceUrl: "https://info.mdex.com",
             isCalc: false
+        }
+    ],
+    rolePool: [
+        {
+            title: "第2期",
+            address: "0x0000000000000000000000000000000000000001",
+            abi: "RoleMine"
+        },
+        {
+            title: "第1期",
+            address: "0x0000000000000000000000000000000000000000",
+            abi: "RoleMine0"
         }
     ],
     zones: [{ id: 1000, banner: "zone0banner", bg: "zone0bg", equip: "1-10", stype: 4, weight: 0 },
