@@ -23,16 +23,18 @@ export const Constant = {
         Equipment: "0xfd52bE427836f31259D8D347AB9410Bf390c8A04",
         LGC: "0xb7A819D170e59D79f6289b91cA1D1a9D0C788A2a",
         StakeMine: "0x6C234aE7E4beaa7816Dfe89efa45094CCDFbA19D",
-        RoleMine: "0x672B71f169AbF20448aaC3acA6C0BAaD337C2fF5",
+        RoleMine: "0x7d8Ad1a124FdcD50248872C3c7B29831aB461F53",
+        RoleMine0: "0x672B71f169AbF20448aaC3acA6C0BAaD337C2fF5",
         ZoneMine: "0x6528eB45D88a25dB650953F6986Cde9bbfba9219",
         BonusPool: "0x13368543dc96195Dc564048DFd598F12AbbC7662",
         Fragment: "0x6C5aD71809c8fA3b6dB9dcC02efe825A33869C33",
         Totem: "0x49De5A35ee679Ea1BF9C27a2CFF85AA220be1527",
-        Store: "0xB4BE2df64ca360F0aA5cf6EDFbB58bF5F39182D1",
+        Store: "0x808E5f3646e599dE5779Fb315DED89F4D8aA2e1C",
         Box: "0xAEe308fAb21D185691Fe4ec7dd503a601383586E",
         PreSale: "0x275eeC0aF74F3c5c0562807E57D4cC4625F9a7b9",
         Friend: "0x8C6492E2d9D5404D2b46ffc9f7E6342ADE4602a1",
-        Market: "0x18Beb70Ec025fdDc084C3c0E6d6cB30615dE3113"
+        Market: "0x18Beb70Ec025fdDc084C3c0E6d6cB30615dE3113",
+        Referral: "0x22Ce93d63C027d93f3b95C589602228B168aE5e4"
     },
     paymode: {
         "0xb7A819D170e59D79f6289b91cA1D1a9D0C788A2a": "LGC",
@@ -78,7 +80,8 @@ export const Constant = {
         4: "入门甲胄箱",
         5: "普通甲胄箱",
         6: "稀有甲胄箱",
-        7: "预售宝箱"
+        7: "预售宝箱",
+        8: "赤月武器箱"
     },
     equipments: {
         "10001": "黑铁剑", "10002": "斩马刀", "10003": "阿修罗斧", "10004": "凝霜重剑", "10005": "炼狱战斧",
@@ -122,6 +125,18 @@ export const Constant = {
             url: "https://info.mdex.com/#/pair/0xc4cc2edb6039b11280b1D09cf49775Da7fA10F71",
             priceUrl: "https://info.mdex.com",
             isCalc: false
+        }
+    ],
+    rolePool: [
+        {
+            title: "第2期",
+            address: "0x0000000000000000000000000000000000000001",
+            abi: "RoleMine"
+        },
+        {
+            title: "第1期",
+            address: "0x0000000000000000000000000000000000000000",
+            abi: "RoleMine0"
         }
     ],
     zones: [{ id: 1000, banner: "zone0banner", bg: "zone0bg", equip: "1-10", stype: 4, weight: 0 },
