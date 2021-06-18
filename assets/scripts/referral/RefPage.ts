@@ -14,9 +14,6 @@ export class RefPage extends BaseComponent {
     @type(PageView)
     rewardList: PageView;
 
-    @type(ProgressBar)
-    curLevel: ProgressBar;
-
     @type(Label)
     labComm: Label;
 
@@ -43,7 +40,6 @@ export class RefPage extends BaseComponent {
     constructor() {
         super();
         this.rewardList = new PageView();
-        this.curLevel = new ProgressBar();
         this.labComm = new Label();
         this.btnCreate = new Node();
         this.labCode = new Label();
@@ -84,11 +80,6 @@ export class RefPage extends BaseComponent {
             });
             //当前等级
             let maxConfig = parseInt(values[2]);
-            this.curLevel.progress = parseFloat(this.refData.level) / maxConfig;
-            let labLevel = this.curLevel.getComponentInChildren(Label);
-            if (!!labLevel) {
-                labLevel.string = `${this.refData.level}/${maxConfig}`;
-            }
             //绑定情况
             this.labCount.string = this.refData.count;
             this.labValidCount.string = this.refData.validCount;
