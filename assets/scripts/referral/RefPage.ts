@@ -138,7 +138,7 @@ export class RefPage extends BaseComponent {
     onCopyCode() {
         this.refCode = this.labCode.string;
         let input = document.createElement("input");
-        input.value = this.refCode;
+        input.value = `https://game.legendnft.com/?ref=${this.refCode}`;
         document.body.appendChild(input);
         input.select();
         input.setSelectionRange(0, input.value.length), document.execCommand('Copy');
