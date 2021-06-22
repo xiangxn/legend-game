@@ -72,7 +72,7 @@ export class RefPage extends BaseComponent {
             resources.load("component/RefReward", Prefab, (err, prefab) => {
                 configs.forEach((config: any) => {
                     let item = instantiate(prefab);
-                    if (!!item) {
+                    if (!!item && parseInt(config.level) < 11) {
                         item.getComponent(RefReward)?.setData(config, this.refData);
                         this.levelPageView.addPage(item);
                     }
