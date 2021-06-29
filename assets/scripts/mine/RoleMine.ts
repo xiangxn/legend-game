@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, ScrollView, instantiate, Prefab } from 'cc';
+import { _decorator, Component, Node, ScrollView, instantiate, Prefab, assetManager, JsonAsset } from 'cc';
 import { BaseComponent } from '../BaseComponent';
 import { Constant } from '../Constant';
 import { RoleMineItem } from './RoleMineItem';
@@ -18,6 +18,7 @@ export class RoleMine extends BaseComponent {
 
     private roleInfo: any;
     private fragmentBalance: number = 0;
+    poolConfig: any;
 
     constructor() {
         super();
@@ -27,7 +28,20 @@ export class RoleMine extends BaseComponent {
 
     onLoad() {
         super.onLoad();
-        this._loadPools();
+        this._loadPoolConfig();
+    }
+
+    private _loadPoolConfig() {
+        let url = Constant.poolUrl + "?t=" + Date.now();
+        assetManager.loadRemote(url, (err, jsonAsset: JsonAsset) => {
+            if (!!err) {
+                return;
+            }
+            if (!!jsonAsset.json) {
+                this.poolConfig = jsonAsset.json;
+                this._loadPools();
+            }
+        });
     }
 
     private _loadPools() {
@@ -35,7 +49,7 @@ export class RoleMine extends BaseComponent {
         let list: Promise<any>[] = [];
         list.push(this.callContract("Hero", "getHeroInfo", this.api?.curAccount));
         list.push(this.callContract("Fragment", "balanceOf", this.api?.curAccount, this.coinId));
-        Constant.rolePool.forEach((config: any) => {
+        this.poolConfig.rolePool.forEach((config: any) => {
             list.push(this.callContract(config.abi, "getMineInfo", config.address, this.api?.curAccount).catch(reason => { this.showErr(reason); }));
         });
         Promise.all(list).then(infos => {
@@ -43,7 +57,7 @@ export class RoleMine extends BaseComponent {
             this.fragmentBalance = parseInt(infos[1].toString());
             for (let i = 2; i < infos.length; i++) {
                 let prefab = instantiate(this.itemPrefab);
-                let config = Constant.rolePool[i - 2];
+                let config = this.poolConfig.rolePool[i - 2];
                 let data = infos[i];
                 if (!!prefab) {
                     let logic = prefab.getComponent(RoleMineItem);

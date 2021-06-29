@@ -1,5 +1,5 @@
 
-import { _decorator, Node, director, Prefab, resources, instantiate, Label } from 'cc';
+import { _decorator, Node, director, Prefab, resources, instantiate, Label, assetManager, JsonAsset } from 'cc';
 import { BaseComponent } from '../BaseComponent';
 import { Constant, CONSUMABLES_CACHE_KEY } from '../Constant';
 import { StakingItem } from './StakingItem';
@@ -31,6 +31,7 @@ export class Mine extends BaseComponent {
     @type(Label)
     labRoleTotalPower: Label;
 
+    @type(Prefab)
     preStakingItem: Prefab;
     stakeTotalReward: any = toBN(0);
     totalValueLocked: any = toBN(0);
@@ -41,6 +42,7 @@ export class Mine extends BaseComponent {
     roleInfo: any;
     roleMineInfo: any;
     roleStatus: number = 0;
+    poolConfig: any;
 
 
     constructor() {
@@ -57,16 +59,26 @@ export class Mine extends BaseComponent {
 
     onLoad() {
         super.onLoad();
-        resources.load("component/StakingItem", Prefab, (err, prefab) => {
-            this.preStakingItem = prefab;
-            this._loadPools();
-            this._loadRolePools();
+        this._loadPoolConfig();
+    }
+
+    private _loadPoolConfig() {
+        let url = Constant.poolUrl + "?t=" + Date.now();
+        assetManager.loadRemote(url, (err, jsonAsset: JsonAsset) => {
+            if (!!err) {
+                return;
+            }
+            if (!!jsonAsset.json) {
+                this.poolConfig = jsonAsset.json;
+                this._loadPools();
+                this._loadRolePools();
+            }
         });
     }
 
     private _loadRolePools() {
         let list: Promise<any>[] = [];
-        Constant.rolePool.forEach((config: any) => {
+        this.poolConfig.rolePool.forEach((config: any) => {
             list.push(this.callContract(config.abi, "getMineInfo", config.address, this.api?.curAccount).catch(reason => { this.showErr(reason); }));
         });
         Promise.all(list).then(infos => {
@@ -84,13 +96,13 @@ export class Mine extends BaseComponent {
     private _loadPools() {
         this.poolList.removeAllChildren();
         let list: Promise<any>[] = [];
-        Constant.stakePool.forEach((config: any) => {
+        this.poolConfig.stakePool.forEach((config: any) => {
             list.push(this.callContract(config.abi, "getMineInfo", config.address, this.api?.curAccount).catch(reason => { this.showErr(reason); }));
         });
         Promise.all(list).then(infos => {
             for (let i = 0; i < infos.length; i++) {
                 let prefab = instantiate(this.preStakingItem);
-                let config = Constant.stakePool[i];
+                let config = this.poolConfig.stakePool[i];
                 let data = infos[i];
                 if (!!prefab) {
                     let logic = prefab.getComponent(StakingItem);
