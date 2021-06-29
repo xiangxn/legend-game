@@ -17,6 +17,7 @@ export const Constant = {
     annUrl: "https://www.legendnft.com/announcement.json",
     rpcUrl: "https://data.legendnft.com/jsonrpc",
     // rpcUrl: "http://localhost:9090/jsonrpc",
+    poolUrl: "https://www.legendnft.com/pools.json",
     address: {
         USDT: "0xa71EdC38d189767582C38A3145b5873052c3e47a",
         Hero: "0xef349B6b61F7BEABB061ae2B0bF50F06c262d718",
@@ -105,50 +106,6 @@ export const Constant = {
         "10091": "法檀木戒", "10092": "蛇眼戒指", "10093": "红玉戒指", "10094": "紫螺戒指", "10095": "法神戒指"
     },
     mainAttrs: { attack: "物理攻击", taoism: "道术攻击", magic: "魔法攻击", defense: "物理防御", magicDefense: "魔法防御", physicalPower: "体力值", magicPower: "魔力值" },
-    stakePool: [
-        {
-            title: "LGC/USDT 5",
-            address: "0x0000000000000000000000000000000000000005",
-            token: "0xc4cc2edb6039b11280b1D09cf49775Da7fA10F71",
-            abi: "StakeMine",
-            decimals: 18,
-            url: "https://info.mdex.com/#/pair/0xc4cc2edb6039b11280b1D09cf49775Da7fA10F71",
-            priceUrl: "https://info.mdex.com",
-            isCalc: false
-        },
-        {
-            title: "LGC/USDT 4",
-            address: "0x0000000000000000000000000000000000000004",
-            token: "0xc4cc2edb6039b11280b1D09cf49775Da7fA10F71",
-            abi: "StakeMine",
-            decimals: 18,
-            url: "https://info.mdex.com/#/pair/0xc4cc2edb6039b11280b1D09cf49775Da7fA10F71",
-            priceUrl: "https://info.mdex.com",
-            isCalc: false
-        },
-        {
-            title: "LGC/USDT 3",
-            address: "0x0000000000000000000000000000000000000003",
-            token: "0xc4cc2edb6039b11280b1D09cf49775Da7fA10F71",
-            abi: "StakeMine",
-            decimals: 18,
-            url: "https://info.mdex.com/#/pair/0xc4cc2edb6039b11280b1D09cf49775Da7fA10F71",
-            priceUrl: "https://info.mdex.com",
-            isCalc: false
-        }
-    ],
-    rolePool: [
-        {
-            title: "第2期",
-            address: "0x0000000000000000000000000000000000000001",
-            abi: "RoleMine"
-        },
-        {
-            title: "第1期",
-            address: "0x0000000000000000000000000000000000000000",
-            abi: "RoleMine0"
-        }
-    ],
     zones: [{ id: 1000, banner: "zone0banner", bg: "zone0bg", equip: "1-10", stype: 4, weight: 0 },
     { id: 1001, banner: "zone1banner", bg: "zone1bg", equip: "1-10", stype: 2, weight: 20 },
     { id: 1002, banner: "zone2banner", bg: "zone2bg", equip: "11-20", stype: 2, weight: 20 },
