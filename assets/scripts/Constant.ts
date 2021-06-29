@@ -17,6 +17,7 @@ export const Constant = {
     annUrl: "https://www.legendnft.com/announcement.json",
     // rpcUrl: "https://data.legendnft.com/jsonrpc",
     rpcUrl: "http://localhost:9090/jsonrpc",
+    poolUrl: "https://www.legendnft.com/pools.json",
     address: {
         USDT: "0x79Cb0Ef35Cb7c1ae503b151aB9881B07Bf4285bd",
         Hero: "0x690dc0C346eC7383d96Bd196a45d512EBFC248B4",
