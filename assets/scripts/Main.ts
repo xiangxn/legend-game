@@ -49,7 +49,12 @@ export class Main extends BaseComponent {
         director.preloadScene("Pool");
         director.preloadScene("Store");
         director.preloadScene("Announcement");
-        this._initAnnouncement();
+        let role = this.getQueryString("role");
+        if (role == "admin") {
+            this.loadScene("Admin");
+        } else {
+            this._initAnnouncement();
+        }
     }
 
     async _initAnnouncement() {
@@ -228,7 +233,7 @@ export class Main extends BaseComponent {
         this.viewTopTen.active = true;
     }
 
-    onReferral(){
+    onReferral() {
         this.loadScene("Referral");
     }
 }
