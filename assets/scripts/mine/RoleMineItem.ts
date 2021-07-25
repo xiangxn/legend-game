@@ -264,10 +264,6 @@ export class RoleMineItem extends BaseComponent {
             }
             let cAddr = Constant.address.RoleMine;
             let data = this.api?.dataApi.eth.abi.encodeParameters(["uint8", "address"], [4, this.config.address]);
-            if (this.config.address == "0x0000000000000000000000000000000000000000") {
-                cAddr = Constant.address.RoleMine0;
-                data = padLeft(toHex(4), 2);
-            }
             this.sendContract("Fragment", "safeTransferFrom", this.api?.curAccount, cAddr, this.coinId, amount, data, { from: this.api?.curAccount })
                 .then(val => {
                     // console.log("val: ", val);

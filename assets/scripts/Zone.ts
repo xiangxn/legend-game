@@ -210,7 +210,7 @@ export class Zone extends BaseComponent {
             return;
         }
         //检查角色战力是否为0
-        if (parseInt(roleInfo.attrs.power) == 0) {
+        if (parseInt(roleInfo.attrs.power) == 0 && parseInt(zoneInfo.minPower) > 0) {
             this.showConfirm("你目前战力为0,进入副本只能获取经验,是否继续?", () => {
                 this.confirmWin.active = true;
             }, () => { });

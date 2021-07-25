@@ -85,8 +85,10 @@ export class Mine extends BaseComponent {
             let totalReward = toBN(0);
             let totalPower = toBN(0);
             for (let i = 0; i < infos.length; i++) {
-                totalReward = totalReward.add(toBN(infos[i].totalReward));
-                totalPower = totalPower.add(toBN(infos[i].totalAmount));
+                if (!!infos[i]) {
+                    totalReward = totalReward.add(toBN(infos[i].totalReward));
+                    totalPower = totalPower.add(toBN(infos[i].totalAmount));
+                }
             }
             this.labRoleTotalReward.string = fromWei(totalReward, "ether");
             this.labRoleTotalPower.string = totalPower.toString();
