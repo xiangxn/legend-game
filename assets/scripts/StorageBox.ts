@@ -398,14 +398,16 @@ export class StorageBox extends BaseComponent {
                 this.showAlert(h + "时" + m + "分" + s + "秒后才能摧毁!");
                 return;
             }
-            this.sendContract("Equipment", "burn", arr[0].id, { from: this.api?.curAccount })
-                .then(result => {
-                    if (!!result) {
-                        localStorage.removeItem(EQUIPMENT_CACHE_KEY);
-                        this._loadEquipments();
-                        this.showAlert("销毁成功,获得了个" + Web3.utils.fromWei(arr[0].info.tokens, "ether") + "LGC");
-                    }
-                });
+            this.showConfirm(`你确定要摧毁[${arr[0].name}]吗?`, () => {
+                this.sendContract("Equipment", "burn", arr[0].id, { from: this.api?.curAccount })
+                    .then(result => {
+                        if (!!result) {
+                            localStorage.removeItem(EQUIPMENT_CACHE_KEY);
+                            this._loadEquipments();
+                            this.showAlert("销毁成功,获得了个" + Web3.utils.fromWei(arr[0].info.tokens, "ether") + "LGC");
+                        }
+                    });
+            }, () => { });
         } else {
             this.showAlert("未选择装备");
         }

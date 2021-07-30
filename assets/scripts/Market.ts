@@ -284,7 +284,7 @@ export class Market extends BaseComponent {
 
     async _loadData(gclass: number = -1, profession: number = -1, category: number = -1, level: number = -1) {
         let result: any = await this.api?.searchGoods(gclass, profession, category, level, this.page, this.pageSize);
-        // console.log(result)
+        // console.log(result.list)
         let list = [];
         if (!!result) {
             this.totalPage = result.totalPage;

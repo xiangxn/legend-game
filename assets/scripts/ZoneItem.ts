@@ -35,6 +35,8 @@ export class ZoneItem extends BaseComponent {
     //0为角色可以进入,1可查看,2为可结束
     status: number = 0;
 
+    currentVer: string = "ZoneMine";
+
     constructor() {
         super();
         this.labTitle = new Label();
@@ -54,7 +56,7 @@ export class ZoneItem extends BaseComponent {
         this.labLevel.string = this.zoneInfo.level;
         this.labWeights.string = this.zoneConfig.weight + "%";
         this.labStatus.string = "";
-        this.callContract("ZoneMine", "getRoleByAddr", this.api?.curAccount)
+        this.callContract(this.currentVer, "getRoleByAddr", this.api?.curAccount)
             .then(info => {
                 this.roleInfo = info;
                 // console.log(this.roleInfo.id,this.zoneInfo.id);

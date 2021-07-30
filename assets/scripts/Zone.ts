@@ -30,6 +30,7 @@ export class Zone extends BaseComponent {
 
     selectedZone: any;
     fragmentBalance: number = 0;
+    currentVer: string = "ZoneMine";
 
     get coinId() {
         return (Constant.consumables as any)[this.selectedZone.config.stype][1];
@@ -82,7 +83,7 @@ export class Zone extends BaseComponent {
     private _loadZones() {
         let list: Promise<any>[] = [];
         Constant.zones.forEach((item) => {
-            list.push(this.callContract("ZoneMine", "getZoneInfo", item.id).catch(reason => { console.log(reason); }));
+            list.push(this.callContract(this.currentVer, "getZoneInfo", item.id).catch(reason => { console.log(reason); }));
         });
         Promise.all(list).then(infos => {
             for (let i = 0; i < infos.length; i++) {
@@ -92,6 +93,7 @@ export class Zone extends BaseComponent {
                     if (!!zi) {
                         zi.zoneConfig = Constant.zones[i];
                         zi.zoneInfo = infos[i];
+                        zi.currentVer = this.currentVer;
                         zi.onItemClick = this.openZone.bind(this);
                         this.zoneList.addChild(win);
                     }
@@ -247,7 +249,7 @@ export class Zone extends BaseComponent {
     private _stopMine() {
         localStorage.removeItem(TOTEM_CACHE_KEY);
         localStorage.removeItem(EQUIPMENT_CACHE_KEY);
-        this.sendContract("ZoneMine", "withdraw", { from: this.api?.curAccount })
+        this.sendContract(this.currentVer, "withdraw", { from: this.api?.curAccount })
             .then(val => {
                 console.log(val);
                 this.onCloseZoneInfo();
@@ -266,6 +268,20 @@ export class Zone extends BaseComponent {
         this.showConfirm("提前结束冒险,多余的[" + this.fragmentName + "]将退还。不满1小时以1小时计算。", () => {
             this._stopMine();
         }, () => { });
+    }
+
+    onCheck(data: any) {
+        // console.log(data.node.name)
+        this.zoneList.removeAllChildren();
+        switch (data.node.name) {
+            case "Toggle2":
+                this.currentVer = "ZoneMine0";
+                break;
+            case "Toggle1":
+                this.currentVer = "ZoneMine";
+                break;
+        }
+        this._loadZones();
     }
 }
 

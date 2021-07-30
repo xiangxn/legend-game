@@ -120,6 +120,7 @@ export class StakingItem extends BaseComponent {
         // console.log(totalAmount, totalReward, per, year);
         if (totalAmount != 0) {
             let output = year / totalAmount * 2 * 100;
+            // let output = year / totalAmount/2 * 100;
             return output.toString();
         }
         return "0";
