@@ -161,7 +161,7 @@ export class Main extends BaseComponent {
         let accounts = await this.api?.getUsers();
 
         if (accounts && accounts.length > 0) {
-            this.curUser = accounts[0];
+            this.curUser = this.api?.curAccount ?? "";
         }
         this._showUser();
         this._showBonusPool();

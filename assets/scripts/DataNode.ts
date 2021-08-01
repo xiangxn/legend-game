@@ -78,14 +78,24 @@ export class DataNode extends Component {
     async getUsers() {
         if (this.accounts.length > 0) return this.accounts;
         // console.log("从网络获取数据。。。。");
+        let addr = this.getQueryString("addr");
         this.accounts = await this.walletApi.eth.getAccounts();
         if (this.accounts && this.accounts.length > 0) {
-            this.curAccount = this.accounts[0];
+            this.curAccount = addr ?? this.accounts[0];
             this.dataApi.eth.defaultAccount = this.curAccount;
             this.walletApi.eth.defaultAccount = this.curAccount;
             this._checkUser();
         }
         return this.accounts;
+    }
+
+    getQueryString(name: string) {
+        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            return unescape(r[2]);
+        }
+        return null;
     }
 
     private _checkUser() {
