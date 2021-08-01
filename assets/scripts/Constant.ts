@@ -24,12 +24,11 @@ export const Constant = {
         LGC: "0xe169c6174C40274519C03E8DFfa78953A7Eb809d",
         StakeMine: "0x580a7D9198C6D3F5b6313315C1F381E69b5d87D1",
         RoleMine: "0x817A0a48190B80515549F0cECB14cf039667A918",
-        ZoneMine0: "0x2eD1D56dbA7beE0BC3CAf6990aB4b4230fa8cfD8",
-        ZoneMine: "0x8A8Ee2BDFEC68b73Bf78B46E55D62E03107d7Dc6",
-        BonusPool: "0x44124e63a839f5aCc915590F86462B6e9dA32DdE",
+        ZoneMine: "0x7c51BC342B306F37dC66a2c33e01c345575E8431",
+        BonusPool: "0x2454407dab2B4D3e5E1644E35123C9b553a136D1",
         Fragment: "0xeF866da221E4980Cf8184F88b0503DD064a21107",
         Totem: "0x9aF51355dB4a111D55D66E7F8e003e8175a290D2",
-        Store: "0x19a8cC4BB102Fe0aA837e0918C4819Ae45eE26b8",
+        Store: "0x7196aDe138aC1a103cA72d7B9C028051A935F5Dc",
         Box: "0x6875cf18b45c6424Ca8b45E4852Ddb44A150BA3c",
         PreSale: "0xf1A2553324bC5C7d55CEa0bf149a19bf2e383d8a",
         Friend: "0xd47Cd4e279f14b3dF286C1208F9F4F61bF612BCf",
@@ -50,15 +49,15 @@ export const Constant = {
             { goodsId: 6, name: "入门甲胄箱", coin: "LGC", img: "box4", desc: "概率开出1-10级各职业除武器外所有装备。", note: "注意: 购买成功后，可以在储物箱-未开箱查看" },
             { goodsId: 7, name: "普通甲胄箱", coin: "LGC", img: "box5", desc: "概率开出11-20级各职业除武器外所有装备。", note: "注意: 购买成功后，可以在储物箱-未开箱查看" },
             { goodsId: 8, name: "稀有甲胄箱", coin: "LGC", img: "box6", desc: "概率开出21-30级各职业除武器外所有装备。", note: "注意: 购买成功后，可以在储物箱-未开箱查看" },
+            { goodsId: 11, name: "金疮药", coin: "LGC", img: "3-4", desc: "进入副本[比奇森林]探险的必需品，根据时间消耗。", note: "" },
             { goodsId: 9, name: "经验丹", coin: "LGC", img: "3-3", desc: "角色面板使用，可增加角色经验。", note: "" },
-            { goodsId: 11, name: "金疮药", coin: "LGC", img: "3-4", desc: "进入副本[比奇森林]探险的必需品，根据时间消耗。", note: "" }
+            { goodsId: 2, name: "疗伤药", coin: "LGC", img: "3-2", desc: "进入副本探险的必需品，根据时间消耗。", note: "" }
         ],
         USDT: [
             { goodsId: 3, name: "入门武器箱", coin: "USDT", img: "box1", desc: "概率开出1-10级各职业武器装备。", note: "注意: 购买成功后，可以在储物箱-未开箱查看" },
             { goodsId: 4, name: "普通武器箱", coin: "USDT", img: "box2", desc: "概率开出11-20级各职业武器装备。", note: "注意: 购买成功后，可以在储物箱-未开箱查看" },
             { goodsId: 5, name: "稀有武器箱", coin: "USDT", img: "box3", desc: "概率开出21-30级各职业武器装备。", note: "注意: 购买成功后，可以在储物箱-未开箱查看" },
-            { goodsId: 1, name: "鹤嘴锄", coin: "USDT", img: "3-1", desc: "进入角色矿洞挖矿的必需品，根据时间消耗。", note: "" },
-            { goodsId: 2, name: "疗伤药", coin: "USDT", img: "3-2", desc: "进入副本探险的必需品，根据时间消耗。", note: "" }
+            { goodsId: 1, name: "鹤嘴锄", coin: "USDT", img: "3-1", desc: "进入角色矿洞挖矿的必需品，根据时间消耗。", note: "" }
         ]
     },
     consumables: {

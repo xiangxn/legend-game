@@ -23,6 +23,12 @@ export class ZoneItem extends BaseComponent {
     labWeights: Label;
 
     @type(Label)
+    labBPower: Label;
+
+    @type(Label)
+    labEndTime: Label;
+
+    @type(Label)
     labBtn: Label;
 
     @type(Label)
@@ -46,6 +52,8 @@ export class ZoneItem extends BaseComponent {
         this.labWeights = new Label();
         this.labBtn = new Label();
         this.labStatus = new Label();
+        this.labBPower = new Label();
+        this.labEndTime = new Label();
     }
 
     onLoad() {
@@ -56,6 +64,8 @@ export class ZoneItem extends BaseComponent {
         this.labLevel.string = this.zoneInfo.level;
         this.labWeights.string = this.zoneConfig.weight + "%";
         this.labStatus.string = "";
+        this.labBPower.string = this.zoneInfo.dropRateBase;
+        this.labEndTime.string = this._getTime(this.zoneInfo.endTime);
         this.callContract(this.currentVer, "getRoleByAddr", this.api?.curAccount)
             .then(info => {
                 this.roleInfo = info;
@@ -82,6 +92,15 @@ export class ZoneItem extends BaseComponent {
 
     onInZoneClick() {
         if (!!this.onItemClick) this.onItemClick(this.zoneInfo, this.roleInfo, this.status, this.zoneConfig);
+    }
+
+    private _getTime(t: any): string {
+        let endtime = parseInt(t.toString());
+        let timespan = Math.floor(Date.now() / 1000 - endtime);
+        let hour = Math.floor(-timespan / 3600);
+        let minute = Math.floor(-timespan % 3600 / 60);
+        let second = -timespan % 3600 - (minute * 60);
+        return hour + ":" + minute + ":" + second;
     }
 }
 

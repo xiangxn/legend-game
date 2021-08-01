@@ -48,8 +48,8 @@ export class Pool extends BaseComponent {
                 if (!!result) {
                     this.data = result;
                     this.labNumber.string = "第" + result[2] + "期奖金";
-                    this.labTotal.string = "$ " + fromWei(result[0], "ether");
-                    this.labCurrent.string = "$ " + fromWei(result[1], "ether");
+                    this.labTotal.string = fromWei(result[0], "ether") + " LGC";
+                    this.labCurrent.string = fromWei(result[1], "ether") + " LGC";
                     this._showTime();
                 }
             })
