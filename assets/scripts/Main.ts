@@ -181,8 +181,8 @@ export class Main extends BaseComponent {
         this.callContract("BonusPool", "getInfo")
             .then(result => {
                 if (!!result && !!this.totalLab && !!this.bonusLab) {
-                    this.totalLab.string = "$ " + fromWei(result[0], "ether");
-                    this.bonusLab.string = "$ " + fromWei(result[1], "ether");
+                    this.totalLab.string = fromWei(result[0], "ether");
+                    this.bonusLab.string = fromWei(result[1], "ether");
                 }
             })
             .catch(reason => { console.log(reason); this.showErr(reason); });
