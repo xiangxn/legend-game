@@ -28,14 +28,20 @@ export class Main extends BaseComponent {
     @type(Node)
     viewTopTen: Node;
 
+    @type(Node)
+    unlockUI: Node;
+
     curUser: string = "选择钱包";
     prevBlock: string = "latest";
+
+    _heroId: string = "";
 
     constructor() {
         super();
         this.totalLab = new Label();
         this.bonusLab = new Label();
         this.viewTopTen = new Node();
+        this.unlockUI = new Node();
         // setDisplayStats(true)
     }
 
@@ -75,8 +81,16 @@ export class Main extends BaseComponent {
                 this.srcollInfo?.pushItem(item);
             }
         });
+        this.checkUI();
         //加载掉落通知
         this._loadGain();
+    }
+
+    checkUI() {
+        let unlock = this.getQueryString("unlock");
+        if (!!unlock) {
+            this.unlockUI.active = true;
+        }
     }
 
     async _loadGain() {
@@ -235,6 +249,30 @@ export class Main extends BaseComponent {
 
     onReferral() {
         this.loadScene("Referral");
+    }
+
+
+    async onPacketHero() {
+        let info = await this.callContract("Hero", "getHeroInfo", this.api?.curAccount).catch(reason => {
+            this.showErr(reason);
+        });
+        this._heroId = info.hero.tokenId;
+        this.sendContract("Hero", "packet", info.hero.tokenId).then(value => {
+            this.showAlert("操作成功！");
+        });
+    }
+
+    async onActiveHero() {
+        if (this._heroId == "" || this._heroId == null) {
+            let info = await this.callContract("Hero", "getHeroInfo", this.api?.curAccount).catch(reason => {
+                this.showErr(reason);
+            });
+            this._heroId = info.hero.tokenId;
+        }
+        console.log(this._heroId);
+        this.sendContract("Hero", "activation", this._heroId).then(value => {
+            this.showAlert("操作成功！");
+        });
     }
 }
 
