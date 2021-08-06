@@ -19,6 +19,9 @@ export class ComboBox extends Component {
     @type(String)
     curTxt: string = "";
 
+    @type(Boolean)
+    changeName: Boolean = true;
+
     data: any[] = [];
 
     selected: any;
@@ -79,11 +82,17 @@ export class ComboBox extends Component {
     onItemClick(event: ComboItemEvent) {
         event.propagationStopped = true;
         this.closeList();
-        this.labCurTxt.string = event.data.name;
-        if (this.selected.value != event.data) {
+        if (this.changeName == true) {
+            this.labCurTxt.string = event.data.name;
+            if (this.selected.value != event.data) {
+                this.selected = event.data;
+                if (!!this.onChanage) this.onChanage(this.selected);
+            }
+        }else{
             this.selected = event.data;
             if (!!this.onChanage) this.onChanage(this.selected);
         }
+
     }
 
     onClick() {

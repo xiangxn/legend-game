@@ -143,6 +143,12 @@ export class Role extends BaseComponent {
                 power += parseInt(equip.info.power);
             }
         });
+        console.log(this.heroAttr.power, power);
+        if (parseInt(this.heroAttr.power) != power) {
+            this.needSave = true;
+        } else {
+            this.needSave = false;
+        }
         this.combatPower.string = "综合战斗力: " + power.toString();
     }
 

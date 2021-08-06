@@ -1,10 +1,11 @@
 
-import { _decorator, Component, Node, director, Toggle, Color, Label, EditBox, Button, resources, instantiate, Prefab, EventHandler, math, Sprite, SpriteFrame, color } from 'cc';
+import { _decorator, Component, Node, director, Toggle, Color, Label, EditBox, Button, resources, instantiate, Prefab, EventHandler, math, Sprite, SpriteFrame, color, sys } from 'cc';
 const { ccclass, type } = _decorator;
 import { BOX_CACHE_KEY, Constant, CONSUMABLES_CACHE_KEY } from "./Constant";
 import { BaseComponent } from './BaseComponent';
 import { MyButton } from './MyButton';
 import Web3 from "web3/dist/web3.min.js";
+import { ComboBox } from './ComboBox';
 
 const { padLeft, toHex, toBN } = Web3.utils;
 
@@ -38,6 +39,9 @@ export class Store extends BaseComponent {
     @type(SpriteFrame)
     btnBG2: SpriteFrame;
 
+    @type(ComboBox)
+    combox: ComboBox;
+
     unitPrice: any = toBN(0);
     userBalance: any = toBN(0);
     goods: any | null = null;
@@ -61,6 +65,7 @@ export class Store extends BaseComponent {
         this.buyCount = new Label();
         this.btnBG1 = new SpriteFrame();
         this.btnBG2 = new SpriteFrame();
+        this.combox = new ComboBox();
     }
 
 
@@ -69,8 +74,28 @@ export class Store extends BaseComponent {
         this.aBtns.active = true;
         this.bBtns.active = false;
         this.confirmWin.active = false;
+        this.combox.onChanage = this.onComboBoxChange.bind(this);
         //加载商品列表
         this._loadGoodsList();
+        //加载买币入口
+        this._loadCoinEnter();
+    }
+
+    onDestroy() {
+        this.combox.onChanage = null;
+    }
+
+    private _loadCoinEnter() {
+        this.combox.data = [];
+        Constant.coinMarket.forEach((item, i) => {
+            this.combox.data.push({ name: item.name, value: item.url });
+        });
+        this.combox.onLoad();
+    }
+
+    onComboBoxChange(data: any) {
+        console.log(data);
+        sys.openURL(data.value);
     }
 
     _loadGoodsList() {

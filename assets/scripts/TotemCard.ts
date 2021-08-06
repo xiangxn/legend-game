@@ -55,7 +55,7 @@ export class TotemCard extends BaseComponent {
         this.callContract("BonusPool", "getInfo").then(result => {
             // console.log(result)
             let info = result[6].awardsInfos.find((item: any) => item.types == this.props.info.smallType)
-            this.labCount.string = fromWei(info.bonus.toString(), "ether") + " USDT";
+            this.labCount.string = fromWei(info.bonus.toString(), "ether") + " LGC";
         }).catch(reason => {
             console.log(reason)
         })

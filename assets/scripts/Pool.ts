@@ -24,6 +24,9 @@ export class Pool extends BaseComponent {
     @type(Label)
     labTime: Label;
 
+    @type(Label)
+    labNext: Label;
+
     allTotem: Props[] = [];
     data: any;
     private startTimes: boolean = false;
@@ -34,6 +37,7 @@ export class Pool extends BaseComponent {
         this.labTotal = new Label();
         this.labCurrent = new Label();
         this.labTime = new Label();
+        this.labNext = new Label();
     }
 
     onLoad() {
@@ -44,12 +48,16 @@ export class Pool extends BaseComponent {
     private _loadPooInfo() {
         this.callContract("BonusPool", "getInfo")
             .then(result => {
-                // console.log("result: ", result);
+                console.log("result: ", result);
                 if (!!result) {
                     this.data = result;
+                    let pool = fromWei(result[0], "ether");
+                    let nowPool = fromWei(result[1], "ether");
                     this.labNumber.string = "第" + result[2] + "期奖金";
-                    this.labTotal.string = fromWei(result[0], "ether") + " LGC";
-                    this.labCurrent.string = fromWei(result[1], "ether") + " LGC";
+                    this.labTotal.string = pool + " LGC";
+                    this.labCurrent.string = nowPool + " LGC";
+                    let nextPool = (parseFloat(pool) + parseFloat(nowPool)) * 0.2;
+                    this.labNext.string = "预计下期奖池：" + nextPool.toFixed(4);
                     this._showTime();
                 }
             })

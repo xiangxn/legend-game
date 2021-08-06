@@ -110,5 +110,15 @@ export const Constant = {
     { id: 1003, banner: "zone3banner", bg: "zone3bg", equip: "21-30", stype: 2, weight: 20 },
     { id: 1004, banner: "zone4banner", bg: "zone4bg", equip: "31-40", stype: 2, weight: 20 },
     { id: 1005, banner: "zone5banner", bg: "zone5bg", equip: "41-50", stype: 2, weight: 20 }
+    ],
+    coinMarket: [
+        {
+            name: "Pancake",
+            url: "https://pancakeswap.finance/swap?inputCurrency=0x55d398326f99059ff775485246999027b3197955&outputCurrency=0xe169c6174c40274519c03e8dffa78953a7eb809d"
+        },
+        {
+            name: "MDEX",
+            url: "https://bsc.mdex.me/#/swap?inputCurrency=0x55d398326f99059ff775485246999027b3197955&outputCurrency=0xe169c6174c40274519c03e8dffa78953a7eb809d"
+        }
     ]
 };
