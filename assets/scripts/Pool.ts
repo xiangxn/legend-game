@@ -54,8 +54,8 @@ export class Pool extends BaseComponent {
                     let pool = fromWei(result[0], "ether");
                     let nowPool = fromWei(result[1], "ether");
                     this.labNumber.string = "第" + result[2] + "期奖金";
-                    this.labTotal.string = pool + " LGC";
-                    this.labCurrent.string = nowPool + " LGC";
+                    this.labTotal.string = parseFloat(pool).toFixed(4) + " LGC";
+                    this.labCurrent.string = parseFloat(nowPool).toFixed(4) + " LGC";
                     let nextPool = (parseFloat(pool) + parseFloat(nowPool)) * 0.2;
                     this.labNext.string = "预计下期奖池：" + nextPool.toFixed(4);
                     this._showTime();
