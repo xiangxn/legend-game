@@ -118,7 +118,7 @@ export const Constant = {
         },
         {
             name: "MDEX",
-            url: "https://bsc.mdex.me/#/swap?inputCurrency=0x55d398326f99059ff775485246999027b3197955&outputCurrency=0xe169c6174c40274519c03e8dffa78953a7eb809d"
+            url: "https://bsc.mdex.co/#/swap?inputCurrency=0x55d398326f99059ff775485246999027b3197955&outputCurrency=0xe169c6174c40274519c03e8dffa78953a7eb809d"
         }
     ]
 };
