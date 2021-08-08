@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, Label, find, resources, Prefab, instantiate } from 'cc';
+import { _decorator, Component, Node, Label, find, resources, Prefab, instantiate, RichText } from 'cc';
 const { ccclass, type } = _decorator;
 
 @ccclass('AnnDetail')
@@ -8,21 +8,21 @@ export class AnnDetail extends Component {
     @type(Label)
     labTitle: Label;
 
-    @type(Label)
-    labDetail: Label;
+    @type(RichText)
+    labDetail: RichText;
 
     info: any;
 
     constructor() {
         super();
         this.labTitle = new Label();
-        this.labDetail = new Label();
+        this.labDetail = new RichText();
     }
 
     onLoad() {
         if (!!this.info) {
             this.labTitle.string = this.info.title;
-            this.labDetail.string = this.info.content
+            this.labDetail.string = this.info.content;
         }
     }
 
