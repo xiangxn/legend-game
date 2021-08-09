@@ -195,14 +195,10 @@ export class Main extends BaseComponent {
         this.callContract("BonusPool", "getInfo")
             .then(result => {
                 if (!!result && !!this.totalLab && !!this.bonusLab) {
-                    this.totalLab.string = fromWei(result[0], "ether");
-                    this.bonusLab.string = fromWei(result[1], "ether");
-                    let arr = this.bonusLab.string.split(".");
-                    if (arr.length > 1) {
-                        if (arr[1].length > 4) {
-                            this.bonusLab.string = arr[0] + "." + arr[1].substr(0, 4);
-                        }
-                    }
+                    let stb = fromWei(result[0], "ether");
+                    let scb = fromWei(result[1], "ether");
+                    this.totalLab.string = parseFloat(stb).toFixed(4);
+                    this.bonusLab.string = parseFloat(scb).toFixed(4);
                 }
             })
             .catch(reason => { console.log(reason); this.showErr(reason); });
