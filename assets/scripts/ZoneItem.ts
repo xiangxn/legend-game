@@ -97,6 +97,7 @@ export class ZoneItem extends BaseComponent {
     private _getTime(t: any): string {
         let endtime = parseInt(t.toString());
         let timespan = Math.floor(Date.now() / 1000 - endtime);
+        if (timespan > 0) return "00:00:00";
         let hour = Math.floor(-timespan / 3600);
         let minute = Math.floor(-timespan % 3600 / 60);
         let second = -timespan % 3600 - (minute * 60);
