@@ -180,7 +180,10 @@ export class RoleMineItem extends BaseComponent {
         }
         reward = reward.mul(amount).div(totalAmount).sub(adjust);
         let rd = fromWei(reward, "ether");
-        return rd.substr(0, rd.indexOf(".") + 5);
+        let rdf = parseFloat(rd);
+        if (rdf < 0) rdf = 0;
+        // return rd.substr(0, rd.indexOf(".") + 5);
+        return rdf.toFixed(8);
     }
 
     onInBtnClick() {
