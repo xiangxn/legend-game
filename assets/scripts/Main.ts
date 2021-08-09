@@ -266,10 +266,15 @@ export class Main extends BaseComponent {
 
     async onActiveHero() {
         if (this._heroId == "" || this._heroId == null) {
-            let info = await this.callContract("Hero", "getHeroInfo", this.api?.curAccount).catch(reason => {
+            let infos = await this.callContract("Hero", "tokensOf", this.api?.curAccount, 0, 0).catch(reason => {
                 this.showErr(reason);
             });
-            this._heroId = info.hero.tokenId;
+            // console.log(infos)
+            if (infos.length > 0) {
+                this._heroId = infos[0];
+            } else {
+                return;
+            }
         }
         console.log(this._heroId);
         this.sendContract("Hero", "activation", this._heroId).then(value => {
