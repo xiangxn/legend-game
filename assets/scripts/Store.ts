@@ -283,6 +283,7 @@ export class Store extends BaseComponent {
     onAmountChange(data: string) {
         if (this._reg.test(data)) {
             this.amount = Number.parseInt(data);
+            if (isNaN(this.amount)) this.amount = 0;
             this._showBuyAmount();
         }
     }

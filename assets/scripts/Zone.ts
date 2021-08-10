@@ -7,6 +7,7 @@ import Web3 from "web3/dist/web3.min.js";
 import { Props } from './entitys/Props';
 import { PropsItem } from './PropsItem';
 import { ChooseWin } from './ChooseWin';
+import { AmountConfirm } from './AmountConfirm';
 
 const { ccclass, property, type } = _decorator;
 const { toBN, padLeft, toHex } = Web3.utils;
@@ -218,7 +219,29 @@ export class Zone extends BaseComponent {
             }, () => { });
             return;
         }
-        this.confirmWin.active = true;
+
+        // this.confirmWin.active = true;
+
+        AmountConfirm.show(this.fragmentBalance, "输入下本时长", (amount: string) => {
+            if (!!amount == false) return;
+            let time = parseInt(amount);
+            let need = parseInt(this.selectedZone.consumablesAmount) * time;
+            if (need > this.fragmentBalance) {
+                this.showAlert("你的[" + this.fragmentName + "]不足,请前往商店购买!");
+                return;
+            }
+            let data = padLeft(toHex(5), 2) + padLeft(toHex(parseInt(this.selectedZone.id)).substr(2), 64);
+            this.sendContract("Fragment", "safeTransferFrom", this.api?.curAccount, Constant.address.ZoneMine, this.coinId, need, data, { from: this.api?.curAccount })
+                .then(val => {
+                    localStorage.removeItem(CONSUMABLES_CACHE_KEY);
+                    this.zoneList.removeAllChildren();
+                    this._loadZones();
+                });
+        }, true, `副本每小时消耗${this.selectedZone.consumablesAmount}个[${this.fragmentName}]`, () => {
+            let per = parseInt(this.selectedZone.consumablesAmount);
+            let time = Math.fround(this.fragmentBalance / per);
+            return Math.min(24, time);
+        }, "输入小时:");
     }
 
     inZone(event: Event, time: number) {

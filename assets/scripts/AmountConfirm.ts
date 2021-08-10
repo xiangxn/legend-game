@@ -15,6 +15,9 @@ export class AmountConfirm extends Component {
     @type(Label)
     labBalance: Label
 
+    @type(Label)
+    labEnter: Label;
+
     @type(EditBox)
     editValue: EditBox;
 
@@ -22,6 +25,8 @@ export class AmountConfirm extends Component {
     btnMax: Node;
 
     onOKCallback: Function | null = null;
+    onMaxCallback: Function | null = null;
+
     balance: number = 0;
     title: string = "请输入数量确认";
 
@@ -32,6 +37,7 @@ export class AmountConfirm extends Component {
         this.editValue = new EditBox();
         this.btnMax = new Node();
         this.labMsg = new Label();
+        this.labEnter = new Label();
     }
 
     onLoad() {
@@ -47,7 +53,11 @@ export class AmountConfirm extends Component {
     }
 
     onMax() {
-        this.editValue.string = this.balance.toString();
+        if (!!this.onMaxCallback) {
+            this.editValue.string = this.onMaxCallback();
+        } else {
+            this.editValue.string = this.balance.toString();
+        }
     }
 
     onOK() {
@@ -85,7 +95,11 @@ export class AmountConfirm extends Component {
         }
     }
 
-    static show(balance: number, title: string | null, onOKCallback: Function | null = null, showMaxBtn: boolean = false, msg: string | null = null): void {
+    setEnterLab(enter: string = "输入:") {
+        this.labEnter.string = enter;
+    }
+
+    static show(balance: number, title: string | null, onOKCallback: Function | null = null, showMaxBtn: boolean = false, msg: string | null = null, onMaxCallback: Function | null = null, enterLab: string = "输入:"): void {
         let node = find("Canvas");
         if (!!node) {
             resources.load("component/AmountConfirm", Prefab, (err, prefab) => {
@@ -94,6 +108,8 @@ export class AmountConfirm extends Component {
                 if (logic) {
                     logic.setConfig(balance, title, showMaxBtn, msg);
                     logic.onOKCallback = onOKCallback;
+                    logic.onMaxCallback = onMaxCallback;
+                    logic.setEnterLab(enterLab);
                     node?.addChild(win);
                 }
             });
