@@ -1597,7 +1597,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -203.34,
+      "x": -156.68,
       "y": 0,
       "z": 0
     },
@@ -1642,7 +1642,7 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5,
+      "x": 1,
       "y": 0.5
     },
     "_id": ""
@@ -1674,7 +1674,7 @@
       "a": 255
     },
     "_string": "输入:",
-    "_horizontalAlign": 1,
+    "_horizontalAlign": 2,
     "_verticalAlign": 1,
     "_actualFontSize": 40,
     "_fontSize": 40,
@@ -1706,10 +1706,10 @@
     "__prefab": {
       "__id__": 76
     },
-    "_alignFlags": 10,
+    "_alignFlags": 34,
     "_target": null,
     "_left": 50,
-    "_right": 0,
+    "_right": 456.68,
     "_top": 280,
     "_bottom": 0,
     "_horizontalCenter": 0,
@@ -2164,8 +2164,8 @@
     "_backgroundImage": {
       "__uuid__": "bd1bcaba-bd7d-4a71-b143-997c882383e4@f9941"
     },
-    "_inputFlag": 5,
-    "_inputMode": 6,
+    "_inputFlag": 1,
+    "_inputMode": 5,
     "_maxLength": 8,
     "_id": ""
   },
@@ -3704,6 +3704,9 @@
     },
     "labBalance": {
       "__id__": 57
+    },
+    "labEnter": {
+      "__id__": 73
     },
     "editValue": {
       "__id__": 95
