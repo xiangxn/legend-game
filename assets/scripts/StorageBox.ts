@@ -31,6 +31,9 @@ export class StorageBox extends BaseComponent {
     @type(Node)
     btn3: Node;
 
+    @type(Label)
+    labLock: Label;
+
     @type(PropsList)
     currentList: PropsList;
 
@@ -43,6 +46,7 @@ export class StorageBox extends BaseComponent {
         this.btn1 = new Node();
         this.btn2 = new Node();
         this.btn3 = new Node();
+        this.labLock = new Label();
     }
 
     onLoad() {
@@ -155,6 +159,17 @@ export class StorageBox extends BaseComponent {
             return y - x;
         });
         this.currentList.setData(data);
+        this._statisticsLGC(data);
+    }
+
+    private _statisticsLGC(data: Props[]) {
+        // console.log(data);
+        let lgc = toBN(0);
+        data.forEach((item) => {
+            lgc = lgc.add(toBN(item.info.tokens));
+        });
+        let lgcStr = parseFloat(fromWei(lgc.toString(), "ether"));
+        this.labLock.string = `装备锁定共 ${lgcStr.toFixed(4)} LGC`;
     }
 
     async _loadTotem() {
