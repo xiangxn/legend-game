@@ -327,7 +327,7 @@ export class Role extends BaseComponent {
         //检查可否升级
         let a = parseInt(this.heroAttr.exp.toString());
         let b = parseInt(this.heroAttr.upExp.toString());
-        if (a > b && a != 0) {
+        if (a >= b && a != 0) {
             this.sendContract("Hero", "upgrade", this.heroStatus.tokenId, { from: this.api?.curAccount })
                 .then(result => {
                     // console.log(result);
