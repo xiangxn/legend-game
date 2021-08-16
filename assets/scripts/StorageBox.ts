@@ -134,6 +134,7 @@ export class StorageBox extends BaseComponent {
                 data.push(e);
             }
         }
+        // console.log("boxs: ", data);
         this.currentList.setData(data);
         localStorage.setItem(BOX_CACHE_KEY, JSON.stringify(data));
     }
