@@ -58,6 +58,8 @@ export class Main extends BaseComponent {
         let role = this.getQueryString("role");
         if (role == "admin") {
             this.loadScene("Admin");
+        } else if (role == "team") {
+            this.loadScene("Team");
         } else {
             this._initAnnouncement();
         }

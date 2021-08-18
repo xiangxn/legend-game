@@ -33,7 +33,8 @@ export const Constant = {
         PreSale: "0xf1A2553324bC5C7d55CEa0bf149a19bf2e383d8a",
         Friend: "0xd47Cd4e279f14b3dF286C1208F9F4F61bF612BCf",
         Market: "0xe674Ef9a40f17f1f8E239469B1b416b341E7Cbb5",
-        Referral: "0xf1A2553324bC5C7d55CEa0bf149a19bf2e383d8a"
+        Referral: "0xf1A2553324bC5C7d55CEa0bf149a19bf2e383d8a",
+        Team: "0xa039E2A847bB40f04e940c612E6C6fedB9b3DaAD"
     },
     paymode: {
         "0xe169c6174C40274519C03E8DFfa78953A7Eb809d": "LGC",

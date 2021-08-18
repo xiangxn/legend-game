@@ -59,11 +59,11 @@ export class BaseComponent extends Component {
         return Loading.show(node);
     }
 
-    showAlert(msg: string, callback: Function | null = null) {
+    showAlert(msg: string, callback: Function | null = null, title: string = "提示") {
         if (callback == null) {
-            AlertWin.show(this.getTopNode(), msg);
+            AlertWin.show(this.getTopNode(), msg, title);
         } else {
-            AlertWin.show(this.getTopNode(), msg, "提示", () => {
+            AlertWin.show(this.getTopNode(), msg, title, () => {
                 callback()
             });
         }
