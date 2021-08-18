@@ -19,11 +19,15 @@ export class Team extends BaseComponent {
     @type(EditBox)
     inputAmount: EditBox;
 
+    @type(EditBox)
+    inputNewAddr: EditBox;
+
     constructor() {
         super();
         this.inputOp = new EditBox();
         this.inputTo = new EditBox();
         this.inputAmount = new EditBox();
+        this.inputNewAddr = new EditBox();
     }
 
     onLoad() {
@@ -34,6 +38,7 @@ export class Team extends BaseComponent {
         let opHash = this.inputOp.string;
         if (opHash.length == 66) {
             this.sendContract("Team", "confirm", opHash, { from: this.api?.curAccount }).then((result: any) => {
+                console.log(result);
                 if ("MultiTransact" in result.events) {
                     this.showAlert("Successful operation!", null, "Prompt");
                 } else {
@@ -62,6 +67,23 @@ export class Team extends BaseComponent {
         // console.log(data);
         this.sendContract("Team", "execute", Constant.address.LGC, data, { from: this.api?.curAccount }).then((result: any) => {
             console.log(result);
+            if ("NeedConfirm" in result.events) {
+                this.inputOp.string = result.events.NeedConfirm.returnValues.operation;
+                this.showAlert("You have confirmed success, waiting for other members to confirm.", null, "Prompt");
+            } else if ("SingleTransact" in result.events) {
+                this.showAlert("Successful operation!", null, "Prompt");
+            }
+        });
+    }
+
+    onAddMember() {
+        let newAddr = this.inputNewAddr.string;
+        if (newAddr.length != 42) {
+            this.showAlert("Invalid member address", null, "Prompt");
+            return;
+        }
+        let data = this.api?.dataApi.eth.abi.encodeFunctionCall({ "inputs": [{ "internalType": "address", "name": "user", "type": "address" }], "name": "addMember", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, [newAddr]);
+        this.sendContract("Team", "execute", Constant.address.Team, data, { from: this.api?.curAccount }).then((result: any) => {
             if ("NeedConfirm" in result.events) {
                 this.inputOp.string = result.events.NeedConfirm.returnValues.operation;
                 this.showAlert("You have confirmed success, waiting for other members to confirm.", null, "Prompt");
