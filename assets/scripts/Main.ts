@@ -1,5 +1,5 @@
 
-import { _decorator, Node, director, Label, game, resources, setDisplayStats, assetManager, JsonAsset, Sprite } from 'cc';
+import { _decorator, Node, director, Label, game, resources, setDisplayStats, assetManager, JsonAsset, Sprite, sys } from 'cc';
 import Web3 from "web3/dist/web3.min.js";
 import { BaseComponent } from './BaseComponent';
 import { Constant } from './Constant';
@@ -282,6 +282,14 @@ export class Main extends BaseComponent {
         this.sendContract("Hero", "activation", this._heroId).then(value => {
             this.showAlert("操作成功！");
         });
+    }
+
+    onStrategy() {
+        sys.openURL(Constant.strategy);
+    }
+
+    onTelegram() {
+        sys.openURL(Constant.telegram);
     }
 }
 

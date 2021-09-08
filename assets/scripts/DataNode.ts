@@ -1,6 +1,6 @@
 
 import { _decorator, Component, resources, game, log } from 'cc';
-const { ccclass, property } = _decorator;
+const { ccclass, type } = _decorator;
 import Web3 from "web3/dist/web3.min.js";
 import { JSONRPC } from "./JSONRPC";
 import { BOX_CACHE_KEY, Constant, CONSUMABLES_CACHE_KEY, EQUIPMENT_CACHE_KEY, FRIEND_CACHE_KEY, TOTEM_CACHE_KEY, VERSION_CACHE_KEY } from "./Constant";
@@ -30,7 +30,7 @@ export class DataNode extends Component {
         console.log("DataNode onLoad......");
         this._checkVersion();
         game.addPersistRootNode(this.node);
-        game.setFrameRate(30);
+        game.frameRate = 30;
         this._initAPI();
     }
 

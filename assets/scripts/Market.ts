@@ -385,7 +385,9 @@ export class Market extends BaseComponent {
         this.txtAmount.string = props.amount;
         this.btnCombo.data = [];
         for (let key in Constant.paymode) {
-            this.btnCombo.data.push({ name: (Constant.paymode as any)[key], value: key });
+            let name = (Constant.paymode as any)[key];
+            if (name == "USDT") //只允许上架USDT
+                this.btnCombo.data.push({ name: name, value: key });
         }
         this.btnCombo.onLoad();
         this.labRate.string = this.marketFee / 10 + " %";

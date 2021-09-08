@@ -71,7 +71,7 @@ export class Mine extends BaseComponent {
             if (!!jsonAsset.json) {
                 this.poolConfig = jsonAsset.json;
                 this._loadPools();
-                this._loadRolePools();
+                // this._loadRolePools();
             }
         });
     }
