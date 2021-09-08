@@ -20,27 +20,27 @@ export const Constant = {
     strategy: "https://steem.buzz/@legendao",
     telegram: "https://t.me/legendao",
     address: {
-        USDT: "0xCbF54d7E4e0223b6D325F5247cCC9814d123B8e9",
-        Hero: "0x927653F44dd59e8a322807390e14F8250b1b1108",
-        Equipment: "0x6551bc3Bdde096Df7caCedc115fC3D426FabDf99",
-        LGC: "0x4C0756fd69FB018bEF7290416AEfbB1850883F2E",
-        StakeMine: "0x880A51d35A2c1eA1a338B8af832c60b37EfB35ee",
-        RoleMine: "0xe1C5c97057fd8edd71eE04398Cc221E180577D21",
-        ZoneMine: "0x4a54468Dd5F7d1FF534b8b98D27D925d1A8c5DF1",
-        BonusPool: "0xeFeCE398289cc86C46913AE087478BCfaF300A54",
-        Fragment: "0x444363f6ce720fb90921087e87AF14Fbae6eb39E",
-        Totem: "0x86e0677d211A11DF67B7b52ac65Ed578381F0b78",
-        Store: "0x6DAe91F4c51DB759EF18Cd557873c480e56982Af",
-        Box: "0x530d817d6153189eB924908c88E8A9f79858Ab5C",
+        USDT: "0x29e64a21C20fd234eBe83De0bc33E6Bc86be08fD",
+        Hero: "0xd539B61685aD53e61815f5B55debCa507463e65a",
+        Equipment: "0xed1Da102B9AfB75F724D7AdD0c757bFc2e4A724C",
+        LGC: "0x0f4DFe0827468C32D811E1C8c2FBfA53957E4ebd",
+        StakeMine: "0x09B472857a432cdc8fd920004E3479f77Ce88971",
+        RoleMine: "0xC0ec6CD8090916aCc0C576514779cBFD12e6766C",
+        ZoneMine: "0xb7f55bEe47cc459FEDC6E9efb12dF1770f52CC6f",
+        BonusPool: "0x8Fc06c75C08EF4f140C2bB2A2f878904bd22eFAC",
+        Fragment: "0x9fd9a1c930902A8BEa1B6D2b8d13a8C6647474d9",
+        Totem: "0x0137CD791733B15d63E83df7379728Ed8363A8e3",
+        Store: "0x95458F6cD87cE97ddf604021B5031155a859eB13",
+        Box: "0xc7df4375b5F296B7e0A338A67650609926FcD7a9",
         PreSale: "0xf1A2553324bC5C7d55CEa0bf149a19bf2e383d8a",
-        Friend: "0xb3cda18C4B37005291631ecC2B6DC929Cf11245A",
-        Market: "0xFddfEF2F43Fa48ca79F182A140e9283A757260AC",
-        Referral: "0xEA5D52B67c74e937E42a44303Ec1dECA63F0fE09",
-        Team: "0x8e337fd137a499F897d7fCA717DA25347E586315"
+        Friend: "0xF96F1bb934b7ba47FfF8E0C893B3b09Fc230aFc3",
+        Market: "0x709fba3a6Dc48d4f9f002Bf8728a63ccBCdBeC17",
+        Referral: "0x6E344EcE4253A36450a1C4206eF286d72aD7C3c8",
+        Team: "0x724a4f56987184699590603e71d115D5aE20b994"
     },
     paymode: {
-        "0x4C0756fd69FB018bEF7290416AEfbB1850883F2E": "LGC",
-        "0xCbF54d7E4e0223b6D325F5247cCC9814d123B8e9": "USDT"
+        "0x0f4DFe0827468C32D811E1C8c2FBfA53957E4ebd": "LGC",
+        "0x29e64a21C20fd234eBe83De0bc33E6Bc86be08fD": "USDT"
     },
     intRegExp: new RegExp("^[0-9]*$"),
     lockDuration: 3600 * 24 * 2,
@@ -52,7 +52,7 @@ export const Constant = {
             { goodsId: 6, name: "入门甲胄箱", coin: "LGC", img: "box4", desc: "概率开出1-10级各职业除武器外所有装备。", note: "注意: 购买成功后，可以在储物箱-未开箱查看" },
             { goodsId: 7, name: "普通甲胄箱", coin: "LGC", img: "box5", desc: "概率开出11-20级各职业除武器外所有装备。", note: "注意: 购买成功后，可以在储物箱-未开箱查看" },
             { goodsId: 8, name: "稀有甲胄箱", coin: "LGC", img: "box6", desc: "概率开出21-30级各职业除武器外所有装备。", note: "注意: 购买成功后，可以在储物箱-未开箱查看" },
-            { goodsId: 11, name: "金疮药", coin: "LGC", img: "3-4", desc: "进入副本[比奇森林]探险的必需品，根据时间消耗。", note: "" },
+            // { goodsId: 11, name: "金疮药", coin: "LGC", img: "3-4", desc: "进入副本[比奇森林]探险的必需品，根据时间消耗。", note: "" },
             { goodsId: 9, name: "经验丹", coin: "LGC", img: "3-3", desc: "角色面板使用，可增加角色经验。", note: "" },
             { goodsId: 2, name: "疗伤药", coin: "LGC", img: "3-2", desc: "进入副本探险的必需品，根据时间消耗。", note: "" }
         ],
@@ -60,7 +60,8 @@ export const Constant = {
             { goodsId: 3, name: "入门武器箱", coin: "USDT", img: "box1", desc: "概率开出1-10级各职业武器装备。", note: "注意: 购买成功后，可以在储物箱-未开箱查看" },
             { goodsId: 4, name: "普通武器箱", coin: "USDT", img: "box2", desc: "概率开出11-20级各职业武器装备。", note: "注意: 购买成功后，可以在储物箱-未开箱查看" },
             { goodsId: 5, name: "稀有武器箱", coin: "USDT", img: "box3", desc: "概率开出21-30级各职业武器装备。", note: "注意: 购买成功后，可以在储物箱-未开箱查看" },
-            { goodsId: 1, name: "鹤嘴锄", coin: "USDT", img: "3-1", desc: "进入角色矿洞挖矿的必需品，根据时间消耗。", note: "" }
+            { goodsId: 1, name: "鹤嘴锄", coin: "USDT", img: "3-1", desc: "进入角色矿洞挖矿的必需品，根据时间消耗。", note: "" },
+            { goodsId: 12, name: "购买LGC", coin: "USDT", img: "3-5", desc: "LGC为游戏内的区块链货币，购买游戏内的物品。", note: "" }
         ]
     },
     consumables: {
@@ -107,7 +108,7 @@ export const Constant = {
         "10091": "法檀木戒", "10092": "蛇眼戒指", "10093": "红玉戒指", "10094": "紫螺戒指", "10095": "法神戒指"
     },
     mainAttrs: { attack: "物理攻击", taoism: "道术攻击", magic: "魔法攻击", defense: "物理防御", magicDefense: "魔法防御", physicalPower: "体力值", magicPower: "魔力值" },
-    zones: [{ id: 1000, banner: "zone0banner", bg: "zone0bg", equip: "1-10", stype: 4, weight: 0 },
+    zones: [{ id: 1000, banner: "zone0banner", bg: "zone0bg", equip: "1-10", stype: 2, weight: 0 },
     { id: 1001, banner: "zone1banner", bg: "zone1bg", equip: "1-10", stype: 2, weight: 20 },
     { id: 1002, banner: "zone2banner", bg: "zone2bg", equip: "11-20", stype: 2, weight: 20 },
     { id: 1003, banner: "zone3banner", bg: "zone3bg", equip: "21-30", stype: 2, weight: 20 },
