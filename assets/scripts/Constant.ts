@@ -6,12 +6,12 @@ export const FRIEND_CACHE_KEY = "Legend-friend-cache";
 export const VERSION_CACHE_KEY = "version-cache-key";
 
 export const Constant = {
-    version: "1.0.0",
-    // chainId: 56,
-    chainId: 1337,
-    apiUrl: "http://127.0.0.1:7545",
+    version: "1.1.0",
+    chainId: 56,
+    // chainId: 1337,
+    // apiUrl: "http://127.0.0.1:7545",
     // apiUrl: "https://http-testnet.hecochain.com",
-    // apiUrl: "https://bsc-dataseed4.binance.org/",
+    apiUrl: "https://bsc-dataseed3.binance.org/",
     // rpcProvider: { "256": "https://http-testnet.hecochain.com" },
     annUrl: "https://www.legendnft.com/announcement.json",
     rpcUrl: "https://data.legendnft.com/jsonrpc",
@@ -20,27 +20,27 @@ export const Constant = {
     strategy: "https://steem.buzz/@legendao",
     telegram: "https://t.me/legendao",
     address: {
-        USDT: "0x29e64a21C20fd234eBe83De0bc33E6Bc86be08fD",
-        Hero: "0xd539B61685aD53e61815f5B55debCa507463e65a",
-        Equipment: "0xed1Da102B9AfB75F724D7AdD0c757bFc2e4A724C",
-        LGC: "0x0f4DFe0827468C32D811E1C8c2FBfA53957E4ebd",
-        StakeMine: "0x09B472857a432cdc8fd920004E3479f77Ce88971",
-        RoleMine: "0xC0ec6CD8090916aCc0C576514779cBFD12e6766C",
-        ZoneMine: "0xb7f55bEe47cc459FEDC6E9efb12dF1770f52CC6f",
-        BonusPool: "0x8Fc06c75C08EF4f140C2bB2A2f878904bd22eFAC",
-        Fragment: "0x9fd9a1c930902A8BEa1B6D2b8d13a8C6647474d9",
-        Totem: "0x0137CD791733B15d63E83df7379728Ed8363A8e3",
-        Store: "0x95458F6cD87cE97ddf604021B5031155a859eB13",
-        Box: "0xc7df4375b5F296B7e0A338A67650609926FcD7a9",
+        USDT: "0x55d398326f99059fF775485246999027B3197955",
+        Hero: "0x9b08fDb2B5B41F5Da4dD7D070d3e558af742a88a",
+        Equipment: "0xEb3e14412A0FCce4CEB7a9e7592f35C6675Bf6B7",
+        LGC: "0xe169c6174C40274519C03E8DFfa78953A7Eb809d",
+        StakeMine: "0x580a7D9198C6D3F5b6313315C1F381E69b5d87D1",
+        RoleMine: "0x817A0a48190B80515549F0cECB14cf039667A918",
+        ZoneMine: "0x209331632C6438B16Bc63530ae9AD99931Cc2978",
+        BonusPool: "0x2454407dab2B4D3e5E1644E35123C9b553a136D1",
+        Fragment: "0xeF866da221E4980Cf8184F88b0503DD064a21107",
+        Totem: "0x9aF51355dB4a111D55D66E7F8e003e8175a290D2",
+        Store: "0x7196aDe138aC1a103cA72d7B9C028051A935F5Dc",
+        Box: "0x6875cf18b45c6424Ca8b45E4852Ddb44A150BA3c",
         PreSale: "0xf1A2553324bC5C7d55CEa0bf149a19bf2e383d8a",
-        Friend: "0xF96F1bb934b7ba47FfF8E0C893B3b09Fc230aFc3",
-        Market: "0x709fba3a6Dc48d4f9f002Bf8728a63ccBCdBeC17",
-        Referral: "0x6E344EcE4253A36450a1C4206eF286d72aD7C3c8",
-        Team: "0x724a4f56987184699590603e71d115D5aE20b994"
+        Friend: "0xd47Cd4e279f14b3dF286C1208F9F4F61bF612BCf",
+        Market: "0xe674Ef9a40f17f1f8E239469B1b416b341E7Cbb5",
+        Referral: "0xf1A2553324bC5C7d55CEa0bf149a19bf2e383d8a",
+        Team: "0xF523A0A94E77630d095DbEcae75e76cd9DF5E3A0"
     },
     paymode: {
-        "0x0f4DFe0827468C32D811E1C8c2FBfA53957E4ebd": "LGC",
-        "0x29e64a21C20fd234eBe83De0bc33E6Bc86be08fD": "USDT"
+        "0xe169c6174C40274519C03E8DFfa78953A7Eb809d": "LGC",
+        "0x55d398326f99059fF775485246999027B3197955": "USDT"
     },
     intRegExp: new RegExp("^[0-9]*$"),
     lockDuration: 3600 * 24 * 2,
@@ -84,7 +84,8 @@ export const Constant = {
         5: "普通甲胄箱",
         6: "稀有甲胄箱",
         7: "预售宝箱",
-        8: "赤月武器箱"
+        8: "赤月武器箱",
+        9: "赤月宝箱"
     },
     equipments: {
         "10001": "黑铁剑", "10002": "斩马刀", "10003": "阿修罗斧", "10004": "凝霜重剑", "10005": "炼狱战斧",
