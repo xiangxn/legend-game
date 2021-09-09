@@ -30,9 +30,27 @@
         "_value": false,
         "_option": "physics-ammo"
       },
+      "physics-ammo": {
+        "_value": false
+      },
+      "physics-cannon": {
+        "_value": false
+      },
+      "physics-physx": {
+        "_value": false
+      },
+      "physics-builtin": {
+        "_value": false
+      },
       "physics-2d": {
         "_value": false,
         "_option": "physics-2d-box2d"
+      },
+      "physics-2d-box2d": {
+        "_value": false
+      },
+      "physics-2d-builtin": {
+        "_value": false
       },
       "intersection-2d": {
         "_value": false
@@ -47,7 +65,7 @@
         "_value": true
       },
       "audio": {
-        "_value": false
+        "_value": true
       },
       "video": {
         "_value": false
@@ -74,6 +92,7 @@
     "includeModules": [
       "base",
       "gfx-webgl",
+      "audio",
       "2d",
       "ui",
       "particle-2d",

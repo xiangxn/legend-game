@@ -1,10 +1,11 @@
 
-import { _decorator, Node, director, Label, game, resources, setDisplayStats, assetManager, JsonAsset, Sprite, sys } from 'cc';
+import { _decorator, Node, director, Label, game, resources, setDisplayStats, assetManager, JsonAsset, Sprite, sys, AudioSource } from 'cc';
 import Web3 from "web3/dist/web3.min.js";
 import { BaseComponent } from './BaseComponent';
 import { Constant } from './Constant';
 import { OpenInfo, Props } from './entitys/Props';
 import { ScrollInfo } from './ScrollInfo';
+import { MUSIC_IS_PLAY } from './Constant';
 
 const { ccclass, type } = _decorator;
 const { fromWei } = Web3.utils;
@@ -31,6 +32,15 @@ export class Main extends BaseComponent {
     @type(Node)
     unlockUI: Node;
 
+    @type(Node)
+    btnON: Node;
+
+    @type(Node)
+    btnOFF: Node;
+
+    @type(AudioSource)
+    music: AudioSource | null = null;
+
     curUser: string = "选择钱包";
     prevBlock: string = "latest";
 
@@ -42,11 +52,14 @@ export class Main extends BaseComponent {
         this.bonusLab = new Label();
         this.viewTopTen = new Node();
         this.unlockUI = new Node();
+        this.btnON = new Node();
+        this.btnOFF = new Node();
         // setDisplayStats(true)
     }
 
     onLoad() {
         super.onLoad();
+        this.btnOFF.active = false;
         this.btnCheckUser?.on(Node.EventType.TOUCH_END, this.selectWallet, this);
         director.preloadScene("Mine");
         director.preloadScene("Zone");
@@ -62,6 +75,20 @@ export class Main extends BaseComponent {
             this.loadScene("Team");
         } else {
             this._initAnnouncement();
+        }
+        this._initMusic();
+    }
+
+    _initMusic() {
+        let isplay = localStorage.getItem(MUSIC_IS_PLAY);
+        if (null == isplay || isplay == "1") {
+            this.music?.play();
+            this.btnOFF.active = false;
+            this.btnON.active = true;
+        } else {
+            this.music?.stop();
+            this.btnOFF.active = true;
+            this.btnON.active = false;
         }
     }
 
@@ -290,6 +317,24 @@ export class Main extends BaseComponent {
 
     onTelegram() {
         sys.openURL(Constant.telegram);
+    }
+
+    onMusicON() {
+        this.btnOFF.active = true;
+        this.btnON.active = false;
+        if (this.music) {
+            this.music.stop();
+            localStorage.setItem(MUSIC_IS_PLAY, "0");
+        }
+    }
+
+    onMusicOFF() {
+        this.btnOFF.active = false;
+        this.btnON.active = true;
+        if (this.music) {
+            this.music.play();
+            localStorage.setItem(MUSIC_IS_PLAY, "1");
+        }
     }
 }
 

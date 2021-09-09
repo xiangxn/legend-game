@@ -4,6 +4,7 @@ export const CONSUMABLES_CACHE_KEY = "Legend-Consumables-cache";
 export const BOX_CACHE_KEY = "Legend-Box-cache";
 export const FRIEND_CACHE_KEY = "Legend-friend-cache";
 export const VERSION_CACHE_KEY = "version-cache-key";
+export const MUSIC_IS_PLAY = "music_is_play";
 
 export const Constant = {
     version: "1.1.0",
@@ -60,7 +61,7 @@ export const Constant = {
             { goodsId: 3, name: "入门武器箱", coin: "USDT", img: "box1", desc: "概率开出1-10级各职业武器装备。", note: "注意: 购买成功后，可以在储物箱-未开箱查看" },
             { goodsId: 4, name: "普通武器箱", coin: "USDT", img: "box2", desc: "概率开出11-20级各职业武器装备。", note: "注意: 购买成功后，可以在储物箱-未开箱查看" },
             { goodsId: 5, name: "稀有武器箱", coin: "USDT", img: "box3", desc: "概率开出21-30级各职业武器装备。", note: "注意: 购买成功后，可以在储物箱-未开箱查看" },
-            { goodsId: 1, name: "鹤嘴锄", coin: "USDT", img: "3-1", desc: "进入角色矿洞挖矿的必需品，根据时间消耗。", note: "" },
+            // { goodsId: 1, name: "鹤嘴锄", coin: "USDT", img: "3-1", desc: "进入角色矿洞挖矿的必需品，根据时间消耗。", note: "" },
             { goodsId: 12, name: "购买LGC", coin: "USDT", img: "3-5", desc: "LGC为游戏内的区块链货币，购买游戏内的物品。", note: "" }
         ]
     },
