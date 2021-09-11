@@ -92,10 +92,10 @@
     "includeModules": [
       "base",
       "gfx-webgl",
-      "audio",
       "2d",
       "ui",
       "particle-2d",
+      "audio",
       "spine"
     ],
     "noDeprecatedFeatures": {
