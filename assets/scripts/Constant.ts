@@ -28,7 +28,7 @@ export const Constant = {
         StakeMine: "0x580a7D9198C6D3F5b6313315C1F381E69b5d87D1",
         RoleMine: "0x817A0a48190B80515549F0cECB14cf039667A918",
         ZoneMine: "0x7e143dE2A984E9726F6C150951722c2eBAef139f",
-        BonusPool: "0x2454407dab2B4D3e5E1644E35123C9b553a136D1",
+        BonusPool: "0x5E097157923B2fFe0D6Cb73AF74F29d35dFC5EE8",
         Fragment: "0xeF866da221E4980Cf8184F88b0503DD064a21107",
         Totem: "0x9aF51355dB4a111D55D66E7F8e003e8175a290D2",
         Store: "0xF163991FC0f4dA2D8BC6D11271aB16df2A76A238",
@@ -36,7 +36,7 @@ export const Constant = {
         PreSale: "0xf1A2553324bC5C7d55CEa0bf149a19bf2e383d8a",
         Friend: "0xd47Cd4e279f14b3dF286C1208F9F4F61bF612BCf",
         Market: "0xe674Ef9a40f17f1f8E239469B1b416b341E7Cbb5",
-        Referral: "0xf1A2553324bC5C7d55CEa0bf149a19bf2e383d8a",
+        Referral: "0x43fc94258BE99d84b89A756a99eb4Ffa9Ee2E2c5",
         Team: "0xF523A0A94E77630d095DbEcae75e76cd9DF5E3A0"
     },
     paymode: {

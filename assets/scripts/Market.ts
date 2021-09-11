@@ -5,7 +5,7 @@ import { AlertWin } from './AlertWin';
 import { BaseComponent } from './BaseComponent';
 import { Card } from './Card';
 import { ComboBox } from './ComboBox';
-import { Constant, EQUIPMENT_CACHE_KEY } from './Constant';
+import { Constant, EQUIPMENT_CACHE_KEY, CONSUMABLES_CACHE_KEY } from './Constant';
 import { Props } from './entitys/Props';
 import { FilterProps } from './FilterProps';
 import { FragmentCard } from './FragmentCard';
@@ -257,6 +257,8 @@ export class Market extends BaseComponent {
             this.sendContract("Market", "pullOff", data._id, { from: this.api?.curAccount }).then((value: any) => {
                 // console.log(value);
                 let goodsId = 0;
+                localStorage.removeItem(EQUIPMENT_CACHE_KEY);
+                localStorage.removeItem(CONSUMABLES_CACHE_KEY);
                 if ("PullOff" in value.events) {
                     goodsId = parseInt(value.events.PullOff.returnValues.goodsId)
                     this.api?.rpcApi.request({ method: "delGoods", params: [goodsId] })
@@ -419,7 +421,7 @@ export class Market extends BaseComponent {
                         goodsId = toBN(value.events["0"].raw.data).toNumber();
                         this.api?.rpcApi.request({ method: "syncGoods", params: [goodsId] })
                             .then(value => {
-                                // console.log(value);
+                                console.log("doPutOn: ",value);
                                 this.showAlert("上架成功!");
                                 this.onPutOnWinClose();
                                 this.onFilterProps(this.filterProps.selected);
@@ -454,6 +456,7 @@ export class Market extends BaseComponent {
                 .then((value: any) => {
                     // console.log(value);
                     let goodsId = 0;
+                    localStorage.removeItem(CONSUMABLES_CACHE_KEY);
                     if ("0" in value.events) {
                         goodsId = toBN(value.events["0"].raw.data).toNumber();
                         this.api?.rpcApi.request({ method: "syncGoods", params: [goodsId] })
