@@ -80,6 +80,9 @@ export class Main extends BaseComponent {
     }
 
     _initMusic() {
+        if(!!this.music){
+            this.music.volume = 0.2;
+        }
         let isplay = localStorage.getItem(MUSIC_IS_PLAY);
         if (null == isplay || isplay == "1") {
             this.music?.play();
