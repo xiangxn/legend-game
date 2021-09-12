@@ -61,15 +61,15 @@ export class PropsChooseWin extends BaseComponent {
         this._loadProps(data);
     }
 
-    async _loadProps(data: any[] = [{ value: -1 }, { value: -1 }, { value: -1 }]) {
+    async _loadProps(data: any[] = [{ value: -1 }, { value: -1 }, { value: -1 }, { value: -1 }]) {
         // console.log(data);
         let list: Props[] = [];
         if (data[0].value == 1) {   //加载装备
-            list = await this.loadEquips(data[1].value, data[2].value);
+            list = await this.loadEquips(data[1].value, data[2].value, data[3].value);
         } else if (data[0].value == 2) {    //加载碎片
             list = await this.getFragment();
         } else if (data[0].value == 2) {    //加载艺术品
-        } else if (data[0].value == -1) {
+        } else if (data[0].value == -1) {   //加载碎片与装备
             //加载碎片
             let fragments = await this.getFragment();
             list = list.concat(fragments);
@@ -80,15 +80,40 @@ export class PropsChooseWin extends BaseComponent {
         this.propsList.setData(list);
     }
 
-    async loadEquips(profession: number = -1, category: number = -1) {
+    async loadEquips(profession: number = -1, category: number = -1, level: number = -1) {
         let list: Props[] = await this.loadEquipments();
         list = list.filter((item) => {
+            // console.log(item);
             return (profession == -1 || parseInt(item.info.profession) == profession) &&
                 (category == -1 || parseInt(item.info.category) == category) &&
+                (level == -1 || this._checkLevel(level, item.info.level)) &&
                 item.info.isEquip == false &&
                 item.info.locked == false;
         });
         return list;
+    }
+
+    _checkLevel(value: number, level: any): boolean {
+        let l = parseInt(level);
+        let result = false;
+        switch (value) {
+            case 0:
+                result = level <= 10;
+                break;
+            case 1:
+                result = level >= 11 && level <= 20;
+                break;
+            case 2:
+                result = level >= 21 && level <= 30;
+                break;
+            case 3:
+                result = level >= 31 && level <= 40;
+                break;
+            case 4:
+                result = level >= 41;
+                break;
+        }
+        return result;
     }
 
     static show(): Promise<PropsChooseWin> {

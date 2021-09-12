@@ -1,5 +1,5 @@
 
-import { _decorator, Component, Node, director, Label, EditBox, ScrollView, find } from 'cc';
+import { _decorator, Component, Node, director, Label, EditBox, ScrollView, find, Vec2 } from 'cc';
 import Web3 from "web3/dist/web3.min.js";
 import { AlertWin } from './AlertWin';
 import { BaseComponent } from './BaseComponent';
@@ -306,6 +306,7 @@ export class Market extends BaseComponent {
     async loadData(gclass: number = -1, profession: number = -1, category: number = -1, level: number = -1) {
         let list = await this._loadData(gclass, profession, category, level);
         this.fixedScrollView.setData(list);
+        this.fixedScrollView.scrollView.scrollToTop();
         if (list.length > 0)
             this._showNoData("");
         else
