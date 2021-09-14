@@ -295,7 +295,8 @@ export class BaseComponent extends Component {
         let cache = localStorage.getItem(EQUIPMENT_CACHE_KEY);
         if (!!cache) {
             data = JSON.parse(cache);
-            return data;
+            if (data.length > 0)
+                return data;
         }
         let es = await this.callContract("Equipment", "tokensOf", this.api?.curAccount, 0, 0).catch((reason) => {
             this.showErr(reason);

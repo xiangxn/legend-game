@@ -83,8 +83,10 @@ export class StorageBox extends BaseComponent {
 
         if (!!cache) {
             data = JSON.parse(cache);
-            this.currentList.setData(data);
-            return;
+            if (data.length > 0) {
+                this.currentList.setData(data);
+                return;
+            }
         }
         for (let id in Constant.consumables) {
             // console.log(id, Constant.consumables[id]);
@@ -114,10 +116,13 @@ export class StorageBox extends BaseComponent {
         this.currentList.onChooseEvent = null;
         let data: Props[] = [];
         let cache = localStorage.getItem(BOX_CACHE_KEY);
+        // console.log(cache);
         if (!!cache) {
             data = JSON.parse(cache);
-            this.currentList.setData(data);
-            return;
+            if (data.length > 0) {
+                this.currentList.setData(data);
+                return;
+            }
         }
         let boxs = await this.callContract("Box", "tokensOf", this.api?.curAccount, 0, 0).catch((reason) => { this.showErr(reason); });
         if (!!boxs) {
@@ -183,8 +188,10 @@ export class StorageBox extends BaseComponent {
         let cache = localStorage.getItem(TOTEM_CACHE_KEY);
         if (!!cache) {
             data = JSON.parse(cache);
-            this.currentList.setData(data);
-            return;
+            if (data.length > 0) {
+                this.currentList.setData(data);
+                return;
+            }
         }
         let allP: Promise<any>[] = [];
         //获取碎片id

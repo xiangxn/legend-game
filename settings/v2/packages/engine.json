@@ -12,7 +12,7 @@
         "_value": true
       },
       "gfx-webgl2": {
-        "_value": false
+        "_value": true
       },
       "3d": {
         "_value": false
@@ -83,7 +83,7 @@
         "_value": false
       },
       "spine": {
-        "_value": true
+        "_value": false
       },
       "dragon-bones": {
         "_value": false
@@ -92,11 +92,11 @@
     "includeModules": [
       "base",
       "gfx-webgl",
+      "gfx-webgl2",
       "2d",
       "ui",
       "particle-2d",
-      "audio",
-      "spine"
+      "audio"
     ],
     "noDeprecatedFeatures": {
       "value": false,
