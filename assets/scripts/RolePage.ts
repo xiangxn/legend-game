@@ -12,8 +12,8 @@ const { padLeft, toHex } = Web3.utils;
 
 import { Props } from './entitys/Props';
 
-@ccclass('Role')
-export class Role extends BaseComponent {
+@ccclass('RolePage')
+export class RolePage extends BaseComponent {
 
     @type(Node)
     bottom1: Node;

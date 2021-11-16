@@ -277,6 +277,10 @@ export class Main extends BaseComponent {
         this.loadScene("Market");
     }
 
+    onPVP(){
+        this.loadScene("PVP");
+    }
+
     onTopTenClick() {
         this.viewTopTen.active = true;
     }

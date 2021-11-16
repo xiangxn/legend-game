@@ -126,5 +126,19 @@ export const Constant = {
             name: "MDEX",
             url: "https://bsc.mdex.co/#/swap?inputCurrency=0x55d398326f99059ff775485246999027b3197955&outputCurrency=0xe169c6174c40274519c03e8dffa78953a7eb809d"
         }
+    ],
+    pvpList:[
+        {
+            name:"初级场",
+            memo:"说明：进入要求角色30级，质押10LGC",
+            fee:10,
+            background:"pvp_bg"
+        },
+        {
+            name: "高级场",
+            memo: "说明：进入要求角色30级，质押50LGC",
+            fee: 50,
+            background: "pvp_bg2"
+        }
     ]
 };
