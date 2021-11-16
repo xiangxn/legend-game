@@ -8,11 +8,11 @@ export const MUSIC_IS_PLAY = "music_is_play";
 
 export const Constant = {
     version: "1.1.0",
-    chainId: 56,
-    // chainId: 1337,
-    // apiUrl: "http://127.0.0.1:7545",
+    // chainId: 56,
+    chainId: 1337,
+    apiUrl: "http://127.0.0.1:7545",
     // apiUrl: "https://http-testnet.hecochain.com",
-    apiUrl: "https://bsc-dataseed3.binance.org/",
+    // apiUrl: "https://bsc-dataseed3.binance.org/",
     // rpcProvider: { "256": "https://http-testnet.hecochain.com" },
     annUrl: "https://www.legendnft.com/announcement.json",
     rpcUrl: "https://data.legendnft.com/jsonrpc",
