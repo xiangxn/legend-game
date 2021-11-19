@@ -21,27 +21,28 @@ export const Constant = {
     strategy: "https://steem.buzz/@legendao",
     telegram: "https://t.me/legendao",
     address: {
-        USDT: "0x55d398326f99059fF775485246999027B3197955",
-        Hero: "0x9b08fDb2B5B41F5Da4dD7D070d3e558af742a88a",
-        Equipment: "0xEb3e14412A0FCce4CEB7a9e7592f35C6675Bf6B7",
-        LGC: "0xe169c6174C40274519C03E8DFfa78953A7Eb809d",
-        StakeMine: "0x580a7D9198C6D3F5b6313315C1F381E69b5d87D1",
-        RoleMine: "0x817A0a48190B80515549F0cECB14cf039667A918",
-        ZoneMine: "0x7e143dE2A984E9726F6C150951722c2eBAef139f",
-        BonusPool: "0x5E097157923B2fFe0D6Cb73AF74F29d35dFC5EE8",
-        Fragment: "0xeF866da221E4980Cf8184F88b0503DD064a21107",
-        Totem: "0x9aF51355dB4a111D55D66E7F8e003e8175a290D2",
-        Store: "0xF163991FC0f4dA2D8BC6D11271aB16df2A76A238",
-        Box: "0x6875cf18b45c6424Ca8b45E4852Ddb44A150BA3c",
+        USDT: "0x034f3a08312d2d736044918eEDab0fD925dac7A3",
+        Hero: "0x59E9FD99caBc23BC4931384f40f293183AD3Ee40",
+        Equipment: "0xe05FD0A46a841965651f2377E91b269C67EE8709",
+        LGC: "0x3c8Bb35D390fceec37EF51eC5124B71d6316681e",
+        StakeMine: "0x33E7D93CaA32aA759a54754E830E13c0c081e5F6",
+        RoleMine: "0x5392fd54dE19c06e1063f0eCC404d2e8C9996FeC",
+        ZoneMine: "0x298ef2a5Dff8d3C7dae40FEA8Eb4b3fBC9716c29",
+        BonusPool: "0x79FF60bD4a9652c7167197F4302152B120621b74",
+        Fragment: "0x8F84c405e828DF17BA6901Fda000023b8a812B0a",
+        Totem: "0xB3Ae9D9D1689C3668bb8226730DC72C65bd4189b",
+        Store: "0x0affF914896531E36CcfA0B1110AFa61A64C5Fab",
+        Box: "0x21C91F3D0B80986fF23061cB7262ee068508C9c3",
         PreSale: "0xf1A2553324bC5C7d55CEa0bf149a19bf2e383d8a",
-        Friend: "0xd47Cd4e279f14b3dF286C1208F9F4F61bF612BCf",
-        Market: "0xe674Ef9a40f17f1f8E239469B1b416b341E7Cbb5",
-        Referral: "0x43fc94258BE99d84b89A756a99eb4Ffa9Ee2E2c5",
-        Team: "0xF523A0A94E77630d095DbEcae75e76cd9DF5E3A0"
+        Friend: "0x729F64F9428C0E2eD6E0AD012E3160221ff2d6a5",
+        Market: "0x10EBb3b54ECa355f256F4Ae48D4D765074eB8490",
+        Referral: "0x6Bc4de7c94900552316e5e97b9115861D36EEc2A",
+        Team: "0x9b633a55E4c6d2D6217EA9BEbDDc282511377b6D",
+        PVP: "0xB07335B3d5177134357218AA1991AbcC6e5FfD03"
     },
     paymode: {
-        "0xe169c6174C40274519C03E8DFfa78953A7Eb809d": "LGC",
-        "0x55d398326f99059fF775485246999027B3197955": "USDT"
+        "0x3c8Bb35D390fceec37EF51eC5124B71d6316681e": "LGC",
+        "0x034f3a08312d2d736044918eEDab0fD925dac7A3": "USDT"
     },
     intRegExp: new RegExp("^[0-9]*$"),
     lockDuration: 3600 * 24 * 2,
@@ -127,18 +128,36 @@ export const Constant = {
             url: "https://bsc.mdex.co/#/swap?inputCurrency=0x55d398326f99059ff775485246999027b3197955&outputCurrency=0xe169c6174c40274519c03e8dffa78953a7eb809d"
         }
     ],
-    pvpList:[
+    pvpList: [
         {
-            name:"初级场",
-            memo:"说明：进入要求角色30级，质押10LGC",
-            fee:10,
-            background:"pvp_bg"
+            id: 1,
+            name: "初级场",
+            memo: "说明：进入要求角色30级,战力20000-50000,质押10LGC",
+            level: 30,
+            minPower: 20000,
+            maxPower: 50000,
+            fee: 10,
+            background: "pvp_bg"
         },
         {
-            name: "高级场",
-            memo: "说明：进入要求角色30级，质押50LGC",
+            id: 2,
+            name: "中级场",
+            memo: "说明：进入要求角色30级,战力50000-100000,质押50LGC",
+            level: 30,
+            minPower: 50000,
+            maxPower: 100000,
             fee: 50,
             background: "pvp_bg2"
+        },
+        {
+            id: 3,
+            name: "高级场",
+            memo: "说明：进入要求角色40级,战力100000以上,质押100LGC",
+            level: 30,
+            minPower: 100000,
+            maxPower: 0,
+            fee: 100,
+            background: "pvp_bg3"
         }
     ]
 };

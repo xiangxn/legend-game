@@ -1,5 +1,6 @@
 
 import { _decorator, Component, Node, AudioSource } from 'cc';
+import { PVPEvent } from '../events/PVPItemEvent';
 const { ccclass, property } = _decorator;
 
 @ccclass('People')
@@ -21,11 +22,11 @@ export class People extends Component {
     }
 
     public onAttackEnd() {
-        this.node.emit("onAttackEnd");
+        this.node.dispatchEvent(new PVPEvent("onAttackEnd",null,true));
     }
 
     public onAttacked() {
-        this.node.emit("onAttacked");
+        this.node.dispatchEvent(new PVPEvent("onAttacked", null, true));
     }
 
 }

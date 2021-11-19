@@ -1,5 +1,6 @@
 
 import { _decorator, Component, Node, Animation, math, Label, Color } from 'cc';
+import { PVPEvent } from '../events/PVPItemEvent';
 import { People } from './people';
 const { ccclass, type, property } = _decorator;
 
@@ -7,13 +8,13 @@ const { ccclass, type, property } = _decorator;
 export class Role extends Component {
 
     @type(Node)
-    people: Node | null = null;
+    people: Node;
 
     @type(Node)
-    weapon: Node | null = null;
+    weapon: Node;
 
     @type(Node)
-    effect: Node | null = null;
+    effect: Node;
 
     @type(Label)
     deduction: Label;
@@ -55,8 +56,8 @@ export class Role extends Component {
 
     onLoad() {
         // console.log('onLoad')
-        this.people.on("onAttackEnd", this._onAttackEnd.bind(this));
-        this.people.on("onAttacked", this._onAttacked, this);
+        this.node.on("onAttackEnd", this._onAttackEnd.bind(this));
+        this.node.on("onAttacked", this._onAttacked, this);
         this.animPeople = this.people.getComponent(Animation);
         this.animWeapon = this.weapon.getComponent(Animation);
         this.animEffect = this.effect.getComponent(Animation);
@@ -67,18 +68,20 @@ export class Role extends Component {
     }
 
     onDestroy() {
-        this.people.off("onAttackEnd", this._onAttackEnd.bind(this));
-        this.people.off("onAttacked", this._onAttacked, this);
+        this.node.off("onAttackEnd", this._onAttackEnd.bind(this));
+        this.node.off("onAttacked", this._onAttacked, this);
     }
 
-    _onAttacked() {
-        // console.log("onAttacked");
+    _onAttacked(event: PVPEvent) {
+        event.propagationStopped = true;
         if (!!this.attackTarget) {
             this.attackTarget.underAttack(this.deductionValue, this.attackStatus);
         }
     }
 
-    _onAttackEnd() {
+    _onAttackEnd(event: PVPEvent) {
+        event.propagationStopped = true;
+        this.node.dispatchEvent(new PVPEvent("AttackEnd", this.deductionValue, true));
         if (this.isGroup == false) {
             return;
         }
@@ -167,7 +170,7 @@ export class Role extends Component {
             this.deduction.node.setRotationFromEuler(0, 0);
         }
         let people = this.people.getComponent(People);
-        switch (attackStatus){
+        switch (attackStatus) {
             case 0:
                 this.deduction.string = `${value}`;
                 this.deduction.color = (new Color()).fromHEX("#ffffff");
@@ -221,6 +224,8 @@ export class Role extends Component {
 
     public onRunBack() {
         this.stand();
+        // console.log("onRunBack")
+        this.node.dispatchEvent(new PVPEvent("RunBack", true, true));
     }
 
 

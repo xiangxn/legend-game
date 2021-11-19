@@ -143,7 +143,7 @@ export class RolePage extends BaseComponent {
                 power += parseInt(equip.info.power);
             }
         });
-        console.log(this.heroAttr.power, power);
+        // console.log(this.heroAttr.power, power);
         if (parseInt(this.heroAttr.power) != power) {
             this.needSave = true;
         } else {

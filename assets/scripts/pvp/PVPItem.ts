@@ -32,21 +32,43 @@ export class PVPItem extends BaseComponent {
     }
 
     onLoad() {
-        //TODO:加载角色状态 labStatus
-        this.labStatus.string = "";
+        super.onLoad();
+        this.callContract("PVP", "checkQueue", this.data.id, this.api?.curAccount)
+            .then(isIn => {
+                if (isIn) {
+                    this.showStatus();
+                } else {
+                    this.hideStatus();
+                }
+            });
     }
 
     setData(data: any) {
         this.data = data;
         this.labMemo.string = this.data.memo;
         this.labName.string = this.data.name;
-        this.fee = this.data.fee;
         this.loadSpriteUrl("img/" + this.data.background, this.background);
     }
 
     onClick() {
-        // console.log(this.fee)
-        this.node.dispatchEvent(new PVPItemEvent("onInPVP", this.data, true));
+        if (this.labStatus.node.active) {
+            this.showConfirm("你确定要退出匹配队列吗?", () => {
+                this.sendContract("PVP", "quitQueue", this.data.id)
+                    .then(result => {
+                        this.hideStatus();
+                    });
+            });
+
+        } else {
+            this.node.dispatchEvent(new PVPItemEvent("onInPVP", this.data, true));
+        }
+    }
+
+    showStatus() {
+        this.labStatus.node.active = true;
+    }
+    hideStatus() {
+        this.labStatus.node.active = false;
     }
 }
 
