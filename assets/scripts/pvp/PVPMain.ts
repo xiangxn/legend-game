@@ -4,6 +4,7 @@ import { BaseComponent } from '../BaseComponent';
 import { PVPEvent } from '../events/PVPItemEvent';
 import { PlayPage } from './PlayPage';
 import Web3 from "web3/dist/web3.min.js";
+import { FixedScrollView } from '../SpuerScrollView/FixedScrollView';
 
 const { ccclass, type } = _decorator;
 const { fromWei } = Web3.utils;
@@ -32,6 +33,11 @@ export class PVPMain extends BaseComponent {
 
     @type(Label)
     labPool: Label;
+    @type(Label)
+    labEndTime: Label;
+
+    @type(FixedScrollView)
+    fixedScrollView: FixedScrollView;
 
     constructor() {
         super();
@@ -43,6 +49,7 @@ export class PVPMain extends BaseComponent {
         this.node.on("InQueue", this._onInQueue.bind(this));
         this.node.on("Battle", this._onBattle.bind(this));
         this._loadPool();
+        this._getTop();
     }
 
     private _loadPool() {
@@ -51,6 +58,24 @@ export class PVPMain extends BaseComponent {
                 // console.log(result);
                 this.labPeriod.string = `第 ${result.period} 赛季`;
                 this.labPool.string = `${fromWei(result.pool, "ether")} LGC`;
+                this.labEndTime.string = (new Date(parseInt(result.endTime) * 1000)).toISOString().split(".")[0].replace("T", " ");
+            });
+    }
+
+    private _getTop() {
+        this.callContract("PVP", "getTop")
+            .then(result => {
+                // console.log(result);
+                let list = result.map((item: any, index: number) => {
+                    return {
+                        number: index + 1,
+                        addr: item.addr,
+                        name: item.name,
+                        profession: item.profession,
+                        count: item.count
+                    }
+                });
+                this.fixedScrollView.setData(list);
             });
     }
 

@@ -70,7 +70,6 @@ export class PVPTopItem extends BaseItem {
 
     private _show() {
         // console.log(this.data);
-        //TODO
         this.topIcon.node.active = true;
         this.labNum.node.active = false;
         switch (this.data.number) {
@@ -90,21 +89,13 @@ export class PVPTopItem extends BaseItem {
                 break;
         }
         this.labName.string = this.data.name;
-        this.labAddress.string = this.data.address.substr(0, 4) + "..." + this.data.address.substr(-4);
-        this.labCount.string = this.data.power;
-        if (this.data.isMe) {
-            this.loadSpriteUrl(`img/top_${this.data.profession}_me`, this.sprPro);
-            this.labName.color = new Color().fromHEX("#000000");
-            this.labAddress.color = new Color().fromHEX("#ffffff");
-            this.labCount.color = new Color().fromHEX("#000000");
-            this.topBg.spriteFrame = this.itembgme;
-        } else {
-            this.loadSpriteUrl(`img/top_${this.data.profession}`, this.sprPro);
-            this.labName.color = new Color().fromHEX("#a4b767");
-            this.labAddress.color = new Color().fromHEX("#a4a4a4");
-            this.labCount.color = new Color().fromHEX("#d8d8d8");
-            this.topBg.spriteFrame = this.itembg;
-        }
+        this.labAddress.string = this.data.addr.substr(0, 4) + "..." + this.data.addr.substr(-4);
+        this.labCount.string = this.data.count;
+        this.loadSpriteUrl(`img/top_${this.data.profession}`, this.sprPro);
+        this.labName.color = new Color().fromHEX("#a4b767");
+        this.labAddress.color = new Color().fromHEX("#a4a4a4");
+        this.labCount.color = new Color().fromHEX("#ECB157");
+        this.topBg.spriteFrame = this.itembg;
         this.labNum.color = this.labAddress.color;
     }
 }
